@@ -1,10 +1,9 @@
-﻿using System;
+﻿namespace RaspiRobot;
+
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-
-namespace RaspiRobot;
-
-using System.Diagnostics;
 using System.Reflection;
 
 internal static class DirectoryProvider

@@ -1,12 +1,11 @@
-﻿using System;
+﻿namespace RaspiRobot.Logging;
+
+using System;
 using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-
-namespace RaspiRobot.Logging;
-
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Serilog;
 
 public class RequestLoggingMiddleware
@@ -38,7 +37,9 @@ public class RequestLoggingMiddleware
                 httpContext.Request.Path.Value,
                 !httpContext.Request.Path.Value.Contains(
                     "Login",
-                    StringComparison.InvariantCultureIgnoreCase) ? payload : "[login data]");
+                    StringComparison.InvariantCultureIgnoreCase)
+                    ? payload
+                    : "[login data]");
         }
 
         await this.next(httpContext);
