@@ -19,10 +19,10 @@ internal class GrabItMagazine : IMagazine
     public int Number => this.settings.Number;
 
     public async Task SubscribeForStateChangedAsync(
-        IMagazineStateNotifier magazineStateNotifier,
+        IStorageStateNotifier magazineStateNotifier,
         CancellationToken cancellationToken)
     {
-        await magazineStateNotifier.NotifyAsync(RobotControl.Devices.Magazine.State.Ready);
+        await magazineStateNotifier.NotifyAsync(State.Ready);
         cancellationToken.WaitHandle.WaitOne();
     }
 

@@ -1,8 +1,5 @@
 ﻿namespace RaspiRobot.RobotControl.Devices.Magazine;
 
-using System.Threading.Tasks;
-
-public interface IMagazineStateNotifier
+public interface IMagazineStateNotifier : IStorageStateNotifier
 {
-    Task NotifyAsync(RobotControl.Devices.Magazine.State state);
 }

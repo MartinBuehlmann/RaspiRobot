@@ -11,7 +11,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
             Machines = { new MachineSettings("M1", new Position()) },
             Magazines =
             {
-                new MagazineSettings(1, "P1", new Position())
+                new MagazineSettings(1, "LS", new Position())
+                {
+                    Places =
+                    {
+                        new PlaceSettings(1, new Position()),
+                    },
+                },
+                new MagazineSettings(2, "Mag", new Position())
                 {
                     Places =
                     {
