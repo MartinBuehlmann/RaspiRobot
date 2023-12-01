@@ -46,43 +46,28 @@ public class Pca9685Driver : IDisposable
         this.device = CreateI2cDevice(DeviceAddress);
 
         this.SetAllPwm(0, 0);
+        var readBuffer = new byte[1];
+        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        byte mode1 = readBuffer[0];
+        this.device!.Write(new byte[] {MODE2, OUTDRV});
+        this.device!.Write(new byte[] {MODE1, ALLCALL});
+        Thread.Sleep(5);
+        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        mode1 = (byte) (readBuffer[0] & ~SLEEP);
+        this.device.Write(new byte[] {MODE1, mode1});
+        mode1 = (byte) (mode1 | SLEEP);
+        this.device!.Write(new byte[] {MODE1, mode1});
+        Thread.Sleep(5);
+        mode1 = (byte) (mode1 | EXTOSC);
+        this.device!.Write(new byte[] {MODE1, mode1});
+        Thread.Sleep(5);
+        mode1 = (byte) (mode1 & ~SLEEP);
+        this.device!.Write(new byte[] {MODE1, mode1});
+        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        Thread.Sleep(5);
     }
-
-    /*
- def __init__(self, address=PCA9685_ADDRESS, i2c=None, **kwargs):
-        """Initialize the PCA9685."""
-        # Setup I2C interface for the device.
-        if i2c is None:
-            import smbus
-            self.i2c = smbus.SMBus(1)
-        self.i2caddress = address
-        self.set_all_pwm(0, 0)
-        logger.debug('Save old mode1')
-        mode1 = self.i2c.read_byte_data(self.i2caddress,MODE1)
-        logger.debug('Write OUTDRV')
-        self.i2c.write_byte_data(self.i2caddress,MODE2, OUTDRV)
-        logger.debug('Write Allcall')
-        self.i2c.write_byte_data(self.i2caddress,MODE1, ALLCALL)
-        time.sleep(0.005)  # wait for oscillator
-        logger.debug('Save new mode1')
-        mode1 = self.i2c.read_byte_data(self.i2caddress,MODE1)
-        logger.debug('Write SLEEP')
-        mode1 = mode1 & ~SLEEP  # wake up (reset sleep)
-        self.i2c.write_byte_data(self.i2caddress,MODE1, mode1)
-        logger.debug('Write NOT SLEEP')
-        mode1 = mode1 | SLEEP  # wake up (reset sleep)
-        self.i2c.write_byte_data(self.i2caddress,MODE1, mode1)
-        time.sleep(0.005)
-        mode1 = mode1 | EXTOSC  # wake up (reset sleep)
-        self.i2c.write_byte_data(self.i2caddress,MODE1, mode1)
-        time.sleep(0.005)
-        mode1 = mode1 & ~SLEEP  # wake up (reset sleep)
-        self.i2c.write_byte_data(self.i2caddress,MODE1, mode1)
-        mode1 = self.i2c.read_byte_data(self.i2caddress,MODE1)
-        mode1 = self.i2c.read_byte_data(self.i2caddress,MODE1)
-        mode1 = self.i2c.read_byte_data(self.i2caddress,MODE1)
-        time.sleep(0.005)  # wait for oscillator
-     */
 
     public void SoftwareReset()
     {
