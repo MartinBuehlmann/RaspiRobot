@@ -47,32 +47,32 @@ public class Pca9685Driver : IDisposable
 
         this.SetAllPwm(0, 0);
         var readBuffer = new byte[1];
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
         byte mode1 = readBuffer[0];
-        this.device!.Write(new byte[] {MODE2, OUTDRV});
-        this.device!.Write(new byte[] {MODE1, ALLCALL});
+        this.device!.Write(new byte[] { MODE2, OUTDRV });
+        this.device!.Write(new byte[] { MODE1, ALLCALL });
         Thread.Sleep(5);
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
-        mode1 = (byte) (readBuffer[0] & ~SLEEP);
-        this.device.Write(new byte[] {MODE1, mode1});
-        mode1 = (byte) (mode1 | SLEEP);
-        this.device!.Write(new byte[] {MODE1, mode1});
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
+        mode1 = (byte)(readBuffer[0] & ~SLEEP);
+        this.device.Write(new byte[] { MODE1, mode1 });
+        mode1 = (byte)(mode1 | SLEEP);
+        this.device!.Write(new byte[] { MODE1, mode1 });
         Thread.Sleep(5);
-        mode1 = (byte) (mode1 | EXTOSC);
-        this.device!.Write(new byte[] {MODE1, mode1});
+        mode1 = (byte)(mode1 | EXTOSC);
+        this.device!.Write(new byte[] { MODE1, mode1 });
         Thread.Sleep(5);
-        mode1 = (byte) (mode1 & ~SLEEP);
-        this.device!.Write(new byte[] {MODE1, mode1});
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        mode1 = (byte)(mode1 & ~SLEEP);
+        this.device!.Write(new byte[] { MODE1, mode1 });
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
         Thread.Sleep(5);
     }
 
     public void SoftwareReset()
     {
-        using I2cDevice device = CreateI2cDevice(0x00);
-        device.WriteByte(0x06);
+        using I2cDevice device = CreateI2cDevice(0x01);
+        device.Write(new byte[] { 0x00, 0x06 });
     }
 
     public void SetPwmFrequency(int frequency)
@@ -81,39 +81,39 @@ public class Pca9685Driver : IDisposable
 
         double preScaleValue = 25000000.0;
         preScaleValue /= 4096.0;
-        preScaleValue /= (double) frequency;
+        preScaleValue /= (double)frequency;
         preScaleValue -= 1.0;
-        byte preScale = (byte) Math.Floor(preScaleValue + 0.5);
+        byte preScale = (byte)Math.Floor(preScaleValue + 0.5);
         var readBuffer = new byte[1];
-        this.device!.WriteRead(new byte[] {MODE1}, readBuffer);
+        this.device!.WriteRead(new byte[] { MODE1 }, readBuffer);
         byte oldMode = readBuffer[0];
-        byte newMode = (byte) ((oldMode & 0x7F) | 0x10);
-        this.device.Write(new byte[] {MODE1, newMode});
-        this.device.Write(new byte[] {PRESCALE, preScale});
-        this.device.WriteRead(new byte[] {PRESCALE}, new byte[1]);
-        this.device.Write(new byte[] {MODE1, oldMode});
+        byte newMode = (byte)((oldMode & 0x7F) | 0x10);
+        this.device.Write(new byte[] { MODE1, newMode });
+        this.device.Write(new byte[] { PRESCALE, preScale });
+        this.device.WriteRead(new byte[] { PRESCALE }, new byte[1]);
+        this.device.Write(new byte[] { MODE1, oldMode });
         Thread.Sleep(5);
-        this.device.Write(new byte[] {MODE1, (byte) (oldMode | 0x80)});
+        this.device.Write(new byte[] { MODE1, (byte)(oldMode | 0x80) });
     }
 
     public void SetPwm(byte channel, int on, int off)
     {
         this.AssertInitialized();
 
-        this.device!.Write(new byte[] {(byte) (LED0_ON_L + 4 * channel), (byte) (on & 0xFF)});
-        this.device!.Write(new byte[] {(byte) (LED0_ON_H + 4 * channel), (byte) (on >> 8)});
-        this.device!.Write(new byte[] {(byte) (LED0_OFF_L + 4 * channel), (byte) (off & 0xFF)});
-        this.device!.Write(new byte[] {(byte) (LED0_OFF_H + 4 * channel), (byte) (off >> 8)});
+        this.device!.Write(new byte[] { (byte)(LED0_ON_L + 4 * channel), (byte)(on & 0xFF) });
+        this.device!.Write(new byte[] { (byte)(LED0_ON_H + 4 * channel), (byte)(on >> 8) });
+        this.device!.Write(new byte[] { (byte)(LED0_OFF_L + 4 * channel), (byte)(off & 0xFF) });
+        this.device!.Write(new byte[] { (byte)(LED0_OFF_H + 4 * channel), (byte)(off >> 8) });
     }
 
     public void SetAllPwm(int on, int off)
     {
         this.AssertInitialized();
 
-        this.device!.Write(new byte[] {ALL_LED_ON_L, (byte) (on & 0xFF)});
-        this.device!.Write(new byte[] {ALL_LED_ON_H, (byte) (on >> 8)});
-        this.device!.Write(new byte[] {ALL_LED_OFF_L, (byte) (off & 0xFF)});
-        this.device!.Write(new byte[] {ALL_LED_OFF_H, (byte) (off >> 8)});
+        this.device!.Write(new byte[] { ALL_LED_ON_L, (byte)(on & 0xFF) });
+        this.device!.Write(new byte[] { ALL_LED_ON_H, (byte)(on >> 8) });
+        this.device!.Write(new byte[] { ALL_LED_OFF_L, (byte)(off & 0xFF) });
+        this.device!.Write(new byte[] { ALL_LED_OFF_H, (byte)(off >> 8) });
     }
 
     public void Dispose()
