@@ -2,13 +2,16 @@ namespace RaspiRobot.RobotControl.Settings;
 
 public class PlaceSettings
 {
-    public PlaceSettings(int number, Position position)
+    public PlaceSettings(int number, Sequence pickSequence, Sequence placeSequence)
     {
         this.Number = number;
-        this.Position = position;
+        this.PickSequence = pickSequence;
+        this.PlaceSequence = placeSequence;
     }
 
     public int Number { get; }
 
-    public Position Position { get; }
+    public Sequence PickSequence { get; }
+
+    public Sequence PlaceSequence { get; }
 }

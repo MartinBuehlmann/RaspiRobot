@@ -14,15 +14,20 @@ using RaspiRobot.RobotControl.Settings;
 // TODO: Implement
 internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
+    private readonly IGrabItDriver driver;
     private readonly RobotSettings settings;
 
-    public GrabItRobot(RobotSettings settings)
+    public GrabItRobot(
+        RobotSettings settings,
+        IGrabItDriver driver)
     {
         this.settings = settings;
+        this.driver = driver;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        this.driver.Initialize();
         return Task.CompletedTask;
     }
 
