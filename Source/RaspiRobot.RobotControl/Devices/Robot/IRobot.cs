@@ -21,9 +21,9 @@ public interface IRobot : IDevice
         IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken);
 
-    ICommandResponse LoadChuck(StoragePlace sourcePlace, MachineChuck chuck, StoragePlace? destinationPlaceForPalletOnChuck);
+    Task<ICommandResponse> LoadChuckAsync(StoragePlace sourcePlace, MachineChuck chuck, StoragePlace? destinationPlaceForPalletOnChuck);
 
-    ICommandResponse UnloadChuck(MachineChuck chuck, StoragePlace destinationPlace);
+    Task<ICommandResponse> UnloadChuckAsync(MachineChuck chuck, StoragePlace destinationPlace);
 
-    ICommandResponse MovePallet(StoragePlace sourcePlace, StoragePlace destinationPlace);
+    Task<ICommandResponse> MovePalletAsync(StoragePlace sourcePlace, StoragePlace destinationPlace);
 }

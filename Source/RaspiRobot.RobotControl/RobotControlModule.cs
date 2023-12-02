@@ -12,6 +12,7 @@ public class RobotControlModule : Module
             .As<IBackgroundService>()
             .As<IDeviceService>()
             .SingleInstance();
+        builder.RegisterType<SettingsRetriever>().As<ISettingsRetriever>();
         builder.RegisterType<CellSettingsLoader>();
         builder.RegisterType<DeviceCreator>();
         builder.RegisterType<DeviceRegistry>();

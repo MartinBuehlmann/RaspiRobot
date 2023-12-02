@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using DocumentStorage;
 using RaspiRobot.RobotControl.Settings;
 
-public class CellSettingsLoader
+internal class CellSettingsLoader
 {
     private readonly IDocumentStorage documentStorage;
     private readonly IDefaultCellSettingsProvider defaultCellSettingsProvider;
@@ -28,7 +28,7 @@ public class CellSettingsLoader
 
     private async Task<CellSettings> CreateAsync(string cellSettingsFileName)
     {
-        var defaultCellSettings = this.defaultCellSettingsProvider.DefaultCellSettings;
+        CellSettings defaultCellSettings = this.defaultCellSettingsProvider.DefaultCellSettings;
         await this.documentStorage.WriteAsync(defaultCellSettings, cellSettingsFileName);
         return defaultCellSettings;
     }

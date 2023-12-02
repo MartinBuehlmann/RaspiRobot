@@ -1,5 +1,6 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.Common;
@@ -9,6 +10,7 @@ using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Magazine;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.Settings;
 
 // TODO: Implement
@@ -16,12 +18,18 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
     private readonly IGrabItDriver driver;
     private readonly RobotSettings settings;
+    private readonly ISettingsRetriever settingsRetriever;
+    private readonly TransportSequenceBuilder transportSequenceBuilder;
 
     public GrabItRobot(
         RobotSettings settings,
+        ISettingsRetriever settingsRetriever,
+        TransportSequenceBuilder transportSequenceBuilder,
         IGrabItDriver driver)
     {
         this.settings = settings;
+        this.settingsRetriever = settingsRetriever;
+        this.transportSequenceBuilder = transportSequenceBuilder;
         this.driver = driver;
     }
 
@@ -63,28 +71,67 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         cancellationToken.WaitHandle.WaitOne();
     }
 
-    public ICommandResponse LoadChuck(
+    public async Task<ICommandResponse> LoadChuckAsync(
         StoragePlace sourcePlace,
         MachineChuck chuck,
         StoragePlace? destinationPlaceForPalletOnChuck)
     {
-        // TODO: Fake with State busy - Wait 5s - State ready =>too many state transitions if unload is part of load
+        // TODO:
+        //  - State busy
+        //  - Retrieve place and chuck settings
+        //  - Use TransportSequenceBuilder to create required sequence(s)
+        //  - State ready
+        var sequences = new List<Sequence>();
+        ChuckSettings chuckSettings = await this.settingsRetriever.RetrieveByAsync(chuck);
+        RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
+        if (destinationPlaceForPalletOnChuck is not null)
+        {
+            sequences.AddRange(
+                this.transportSequenceBuilder.UnloadChuckSequence(
+                    chuckSettings,
+                    await this.settingsRetriever.RetrieveByAsync(destinationPlaceForPalletOnChuck),
+                    robotSettings));
+        }
+
+        sequences.AddRange(
+            this.transportSequenceBuilder.LoadChuckSequence(
+                await this.settingsRetriever.RetrieveByAsync(sourcePlace),
+                chuckSettings,
+                robotSettings));
+
+        this.driver.Execute(sequences);
+
         return new SuccessResponse();
     }
 
-    public ICommandResponse UnloadChuck(
+    public async Task<ICommandResponse> UnloadChuckAsync(
         MachineChuck chuck,
         StoragePlace destinationPlace)
     {
-        // TODO: Fake with State busy - Wait 5s - State ready
+        // TODO:
+        //  - State busy
+        //  - Retrieve place and chuck settings
+        //  - Use TransportSequenceBuilder to create required sequence(s)
+        //  - State ready
+        IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.UnloadChuckSequence(
+            await this.settingsRetriever.RetrieveByAsync(chuck),
+            await this.settingsRetriever.RetrieveByAsync(destinationPlace),
+            await this.settingsRetriever.RetrieveRobotSettingsAsync());
+
+        this.driver.Execute(sequences);
+
         return new SuccessResponse();
     }
 
-    public ICommandResponse MovePallet(
+    public async Task<ICommandResponse> MovePalletAsync(
         StoragePlace sourcePlace,
         StoragePlace destinationPlace)
     {
-        // TODO: Fake with State busy - Wait 5s - State ready
-        return new SuccessResponse();
+        // TODO:
+        //  - State busy
+        //  - Retrieve place settings
+        //  - Use TransportSequenceBuilder to create required sequence(s)
+        //  - State ready
+        return await Task.FromResult(new SuccessResponse());
     }
 }
