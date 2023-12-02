@@ -1,5 +1,6 @@
 ﻿namespace RaspiRobot.RobotControl.Devices;
 
+using System.Linq;
 using System.Threading.Tasks;
 using DocumentStorage;
 using RaspiRobot.RobotControl.Settings;
@@ -11,15 +12,24 @@ public class CellSettingsLoader
 
     public CellSettingsLoader(
         IDocumentStorage documentStorage,
+        IJsonConverterProvider jsonConverterProvider,
         IDefaultCellSettingsProvider defaultCellSettingsProvider)
     {
         this.documentStorage = documentStorage;
+        this.documentStorage.RegisterConverter(jsonConverterProvider.JsonConverters.ToArray());
         this.defaultCellSettingsProvider = defaultCellSettingsProvider;
     }
 
     public async Task<CellSettings> RetrieveOrCreateAsync(string cellSettingsFileName)
     {
         return await this.documentStorage.ReadAsync<CellSettings>(cellSettingsFileName) ??
-               this.defaultCellSettingsProvider.DefaultCellSettings;
+               await this.CreateAsync(cellSettingsFileName);
+    }
+
+    private async Task<CellSettings> CreateAsync(string cellSettingsFileName)
+    {
+        var defaultCellSettings = this.defaultCellSettingsProvider.DefaultCellSettings;
+        await this.documentStorage.WriteAsync(defaultCellSettings, cellSettingsFileName);
+        return defaultCellSettings;
     }
 }

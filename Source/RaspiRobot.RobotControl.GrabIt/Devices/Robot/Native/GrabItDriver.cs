@@ -1,6 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
 
 using System;
+using System.Collections.Generic;
 using RaspiRobot.RobotControl.Settings;
 
 public class GrabItDriver : IGrabItDriver, IDisposable
@@ -17,7 +18,7 @@ public class GrabItDriver : IGrabItDriver, IDisposable
         this.driver.Initialize();
     }
 
-    public void ExecuteSequence(Sequence sequence)
+    public void Execute(IReadOnlyList<Sequence> sequences)
     {
         // TODO: Implement sequence execution
     }

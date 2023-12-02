@@ -19,6 +19,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterType<GrabItMagazine>().As<IMagazine>();
         builder.RegisterType<GrabItRobot>().As<IRobot>();
         builder.RegisterType<DefaultCellSettingsProvider>().As<IDefaultCellSettingsProvider>();
+        builder.RegisterType<GrabItJsonConverterProvider>().As<IJsonConverterProvider>();
 
         builder.RegisterType<Pca9685Driver>();
         builder.RegisterType<GrabItDriver>().As<IGrabItDriver>(); // TODO: Create simulation for local testing

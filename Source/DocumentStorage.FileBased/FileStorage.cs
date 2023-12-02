@@ -10,14 +10,24 @@ using Newtonsoft.Json;
 
 public class FileStorage : IDocumentStorage
 {
+    private readonly JsonSerializerSettings settings;
     private readonly string directory;
     private readonly ConcurrentDictionary<string, SemaphoreSlim> fileLocks;
 
     public FileStorage()
     {
+        this.settings = new JsonSerializerSettings();
         this.fileLocks = new ConcurrentDictionary<string, SemaphoreSlim>();
         this.directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "../Data");
         this.EnsureDataDirectoryExists();
+    }
+
+    public void RegisterConverter(params JsonConverter[] jsonConverters)
+    {
+        foreach (JsonConverter jsonConverter in jsonConverters)
+        {
+            this.settings.Converters.Add(jsonConverter);
+        }
     }
 
     public async Task<T?> ReadAsync<T>(string file)
@@ -33,7 +43,7 @@ public class FileStorage : IDocumentStorage
             }
 
             string jsonResult = await File.ReadAllTextAsync(filePath);
-            return JsonConvert.DeserializeObject<T>(jsonResult);
+            return JsonConvert.DeserializeObject<T>(jsonResult, this.settings);
         }
         finally
         {
@@ -48,7 +58,7 @@ public class FileStorage : IDocumentStorage
         await semaphore.WaitAsync();
         try
         {
-            string jsonResult = JsonConvert.SerializeObject(data);
+            string jsonResult = JsonConvert.SerializeObject(data, this.settings);
             await File.WriteAllTextAsync(filePath, jsonResult);
         }
         finally
