@@ -4,13 +4,13 @@ using RaspiRobot.RobotControl.Settings;
 
 public class GrabItPosition : IPosition
 {
-    public GrabItPosition(int drive, int value)
+    public GrabItPosition(byte drive, int value)
     {
         this.Drive = drive;
         this.Value = value;
     }
 
-    public int Drive { get; }
+    public byte Drive { get; }
 
     public int Value { get; }
 }

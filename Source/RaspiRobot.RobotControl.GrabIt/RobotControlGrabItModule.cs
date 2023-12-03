@@ -9,6 +9,7 @@ using RaspiRobot.RobotControl.GrabIt.Devices.Machines;
 using RaspiRobot.RobotControl.GrabIt.Devices.Magazine;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
@@ -25,6 +26,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterType<GrabItJsonConverterProvider>().As<IJsonConverterProvider>();
 
         builder.RegisterType<Pca9685Driver>();
-        builder.RegisterType<GrabItDriver>().As<IGrabItDriver>(); // TODO: Create simulation for local testing
+        //builder.RegisterType<GrabItDriver>().As<IGrabItDriver>();
+        builder.RegisterType<SimulationDriver>().As<IGrabItDriver>();
     }
 }
