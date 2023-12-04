@@ -126,7 +126,7 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     Places =
                     {
                         new PlaceSettings(
-                            1,
+                            2,
                             new Sequence
                             {
                                 Steps =
@@ -164,7 +164,7 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            2,
+                            3,
                             new Sequence
                             {
                                 Steps =
@@ -202,7 +202,7 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            3,
+                            4,
                             new Sequence
                             {
                                 Steps =
@@ -240,7 +240,7 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            4,
+                            5,
                             new Sequence
                             {
                                 Steps =
