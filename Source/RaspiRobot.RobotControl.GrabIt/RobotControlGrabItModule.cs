@@ -26,7 +26,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterType<GrabItJsonConverterProvider>().As<IJsonConverterProvider>();
 
         builder.RegisterType<Pca9685Driver>();
-        //builder.RegisterType<GrabItDriver>().As<IGrabItDriver>();
-        builder.RegisterType<SimulationDriver>().As<IGrabItDriver>();
+        builder.RegisterType<GrabItDriver>().As<IGrabItDriver>();
+        //builder.RegisterType<SimulationDriver>().As<IGrabItDriver>();
     }
 }
