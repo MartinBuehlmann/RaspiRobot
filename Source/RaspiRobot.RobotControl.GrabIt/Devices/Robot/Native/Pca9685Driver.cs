@@ -4,6 +4,9 @@ using System;
 using System.Device.I2c;
 using System.Threading;
 
+/// <summary>
+/// PCA9685 PWM LED/servo controller.
+/// </summary>
 public class Pca9685Driver : IDisposable
 {
     private const int BusId = 1;
@@ -36,6 +39,10 @@ public class Pca9685Driver : IDisposable
 
     private I2cDevice? device;
 
+    /// <summary>
+    /// Setup I2C interface for the device.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">thrown when driver already initialized.</exception>
     public void Initialize()
     {
         if (this.device is not null)
@@ -50,35 +57,45 @@ public class Pca9685Driver : IDisposable
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         this.device!.Write(new byte[] { Mode2, OutDrv });
         this.device!.Write(new byte[] { Mode1, AllCall });
-        Thread.Sleep(5);
+        WaitForOscillator();
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         byte mode1 = (byte)(readBuffer[0] & ~Sleep);
         this.device.Write(new byte[] { Mode1, mode1 });
         mode1 = (byte)(mode1 | Sleep);
         this.device!.Write(new byte[] { Mode1, mode1 });
-        Thread.Sleep(5);
+        WaitForOscillator();
         mode1 = (byte)(mode1 | Extosc);
         this.device!.Write(new byte[] { Mode1, mode1 });
-        Thread.Sleep(5);
+        WaitForOscillator();
         mode1 = (byte)(mode1 & ~Sleep);
         this.device!.Write(new byte[] { Mode1, mode1 });
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
-        Thread.Sleep(5);
+        WaitForOscillator();
     }
 
+    /// <summary>
+    /// Sends a software reset (SWRST) command to all servo drivers on the bus.
+    /// </summary>
     public void SoftwareReset()
     {
         using I2cDevice i2CDevice = CreateI2CDevice(0x01);
         i2CDevice.Write(new byte[] { 0x00, 0x06 });
     }
 
+    /// <summary>
+    /// Set the PWM frequency to the provided value in hertz.
+    /// </summary>
+    /// <param name="frequency"></param>
     public void SetPwmFrequency(int frequency)
     {
         this.AssertInitialized();
 
+        // 25 MHz
         double preScaleValue = 25000000.0;
+
+        // 12-bit
         preScaleValue /= 4096.0;
         preScaleValue /= (double)frequency;
         preScaleValue -= 1.0;
@@ -91,10 +108,16 @@ public class Pca9685Driver : IDisposable
         this.device.Write(new byte[] { PreScale, preScale });
         this.device.WriteRead(new byte[] { PreScale }, new byte[1]);
         this.device.Write(new byte[] { Mode1, oldMode });
-        Thread.Sleep(5);
+        WaitForOscillator();
         this.device.Write(new byte[] { Mode1, (byte)(oldMode | 0x80) });
     }
 
+    /// <summary>
+    /// Sets a single PWM channel.
+    /// </summary>
+    /// <param name="channel"></param>
+    /// <param name="on"></param>
+    /// <param name="off"></param>
     public void SetPwm(byte channel, int on, int off)
     {
         this.AssertInitialized();
@@ -105,6 +128,11 @@ public class Pca9685Driver : IDisposable
         this.device!.Write(new byte[] { (byte)(Led0OffH + (4 * channel)), (byte)(off >> 8) });
     }
 
+    /// <summary>
+    /// Sets all PWM channels.
+    /// </summary>
+    /// <param name="on"></param>
+    /// <param name="off"></param>
     public void SetAllPwm(int on, int off)
     {
         this.AssertInitialized();
@@ -124,6 +152,11 @@ public class Pca9685Driver : IDisposable
     private static I2cDevice CreateI2CDevice(int deviceAddress)
     {
         return I2cDevice.Create(new I2cConnectionSettings(BusId, deviceAddress));
+    }
+
+    private static void WaitForOscillator()
+    {
+        Thread.Sleep(5);
     }
 
     private void AssertInitialized()

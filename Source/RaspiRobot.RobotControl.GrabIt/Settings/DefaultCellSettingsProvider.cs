@@ -6,25 +6,27 @@ using RaspiRobot.RobotControl.Settings;
 public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
 {
     public CellSettings DefaultCellSettings { get; } =
-        new CellSettings(new RobotSettings("GrabIt",
-            new Sequence
-            {
-                Steps =
+        new CellSettings(
+            new RobotSettings(
+                "GrabIt",
+                new Sequence
                 {
-                    new Step
+                    Steps =
                     {
-                        Positions =
+                        new Step
                         {
-                            new GrabItPosition(0, 112),
-                            new GrabItPosition(1, 112),
-                            new GrabItPosition(2, 112),
-                            new GrabItPosition(3, 112),
-                            new GrabItPosition(4, 112),
-                            new GrabItPosition(5, 112),
+                            Positions =
+                            {
+                                new GrabItPosition(0, 112),
+                                new GrabItPosition(1, 112),
+                                new GrabItPosition(2, 112),
+                                new GrabItPosition(3, 112),
+                                new GrabItPosition(4, 112),
+                                new GrabItPosition(5, 112),
+                            },
                         },
                     },
-                },
-            }))
+                }))
         {
             Machines =
             {
