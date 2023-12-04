@@ -98,4 +98,15 @@ public class RobotService : Erowa.OpenAPI.Robot.Robot.RobotBase
 
         return response.ToCommandResponse();
     }
+
+    public override async Task<CommandResponse> ExchangePlace(ExchangePlaceRequest request, ServerCallContext context)
+    {
+        IRobot robot = this.deviceService.RetrieveRobot();
+
+        ICommandResponse response = await robot.ExchangePlaceAsync(
+            new StoragePlace(request.SourcePlace.Number),
+            new StoragePlace(request.DestinationPlace.Number));
+
+        return response.ToCommandResponse();
+    }
 }

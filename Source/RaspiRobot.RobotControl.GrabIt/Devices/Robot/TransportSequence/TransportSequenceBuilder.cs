@@ -25,7 +25,7 @@ public class TransportSequenceBuilder
         return sequence;
     }
 
-    public IReadOnlyList<Sequence> MoveStoragePlaceSequence(PlaceSettings sourcePlace, PlaceSettings destinationPlace, RobotSettings robot)
+    public IReadOnlyList<Sequence> ExchangePlaceSequence(PlaceSettings sourcePlace, PlaceSettings destinationPlace, RobotSettings robot)
     {
         var sequence = new List<Sequence>();
         sequence.Add(sourcePlace.PickSequence);

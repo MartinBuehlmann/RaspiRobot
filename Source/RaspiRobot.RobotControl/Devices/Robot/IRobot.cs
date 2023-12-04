@@ -25,5 +25,5 @@ public interface IRobot : IDevice
 
     Task<ICommandResponse> UnloadChuckAsync(MachineChuck chuck, StoragePlace destinationPlace);
 
-    Task<ICommandResponse> MovePalletAsync(StoragePlace sourcePlace, StoragePlace destinationPlace);
+    Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace);
 }

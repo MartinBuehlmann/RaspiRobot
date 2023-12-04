@@ -123,15 +123,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         return new SuccessResponse();
     }
 
-    public async Task<ICommandResponse> MovePalletAsync(
-        StoragePlace sourcePlace,
-        StoragePlace destinationPlace)
+    public async Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
     {
         // TODO:
         //  - State busy
         //  - Retrieve place settings
         //  - Use TransportSequenceBuilder to create required sequence(s)
         //  - State ready
+        IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.ExchangePlaceSequence(
+            await this.settingsRetriever.RetrieveByAsync(sourcePlace),
+            await this.settingsRetriever.RetrieveByAsync(destinationPlace),
+            await this.settingsRetriever.RetrieveRobotSettingsAsync());
+
+        this.driver.Execute(sequences);
+
         return await Task.FromResult(new SuccessResponse());
     }
 }
