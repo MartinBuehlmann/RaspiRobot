@@ -12,14 +12,15 @@ using RaspiRobot.RobotControl.Devices.Magazine;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.Settings;
+using State = RaspiRobot.RobotControl.Devices.Robot.State;
 
-// TODO: Implement
 internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
     private readonly IGrabItDriver driver;
     private readonly RobotSettings settings;
     private readonly ISettingsRetriever settingsRetriever;
     private readonly TransportSequenceBuilder transportSequenceBuilder;
+    private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
         RobotSettings settings,
@@ -31,6 +32,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.settingsRetriever = settingsRetriever;
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.driver = driver;
+        this.robotStateNotifiers = new();
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -48,16 +50,16 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IRobotStateNotifier robotStateNotifier,
         CancellationToken cancellationToken)
     {
-        // TODO: Replace with real implementation
+        this.robotStateNotifiers.Add(robotStateNotifier);
         await robotStateNotifier.NotifyAsync(RobotControl.Devices.Robot.State.Ready);
         cancellationToken.WaitHandle.WaitOne();
+        this.robotStateNotifiers.Remove(robotStateNotifier);
     }
 
     public async Task SubscribeForAlarmsChangedAsync(
         IAlarmsNotifier alarmsNotifier,
         CancellationToken cancellationToken)
     {
-        // TODO: Replace with real implementation
         await alarmsNotifier.NotifyAsync(ReadOnlyList.Empty<Alarm>());
         cancellationToken.WaitHandle.WaitOne();
     }
@@ -76,11 +78,6 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         MachineChuck chuck,
         StoragePlace? destinationPlaceForPalletOnChuck)
     {
-        // TODO:
-        //  - State busy
-        //  - Retrieve place and chuck settings
-        //  - Use TransportSequenceBuilder to create required sequence(s)
-        //  - State ready
         var sequences = new List<Sequence>();
         ChuckSettings chuckSettings = await this.settingsRetriever.RetrieveByAsync(chuck);
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
@@ -99,7 +96,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                 chuckSettings,
                 robotSettings));
 
-        this.driver.Execute(sequences);
+        await this.ExecuteSequencesAsync(sequences);
 
         return new SuccessResponse();
     }
@@ -108,35 +105,40 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         MachineChuck chuck,
         StoragePlace destinationPlace)
     {
-        // TODO:
-        //  - State busy
-        //  - Retrieve place and chuck settings
-        //  - Use TransportSequenceBuilder to create required sequence(s)
-        //  - State ready
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.UnloadChuckSequence(
             await this.settingsRetriever.RetrieveByAsync(chuck),
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        this.driver.Execute(sequences);
+        await this.ExecuteSequencesAsync(sequences);
 
         return new SuccessResponse();
     }
 
     public async Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
     {
-        // TODO:
-        //  - State busy
-        //  - Retrieve place settings
-        //  - Use TransportSequenceBuilder to create required sequence(s)
-        //  - State ready
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.ExchangePlaceSequence(
             await this.settingsRetriever.RetrieveByAsync(sourcePlace),
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        this.driver.Execute(sequences);
+        await this.ExecuteSequencesAsync(sequences);
 
         return await Task.FromResult(new SuccessResponse());
+    }
+
+    private async Task ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
+    {
+        await this.NotifyStateAsync(State.Busy);
+        this.driver.Execute(sequences);
+        await this.NotifyStateAsync(State.Ready);
+    }
+
+    private async Task NotifyStateAsync(State state)
+    {
+        foreach (IRobotStateNotifier robotStateNotifier in this.robotStateNotifiers)
+        {
+            await robotStateNotifier.NotifyAsync(state);
+        }
     }
 }
