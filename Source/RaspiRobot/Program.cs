@@ -2,15 +2,11 @@ namespace RaspiRobot;
 
 using System;
 using System.IO;
-using System.Net;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DocumentStorage.FileBased;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.BackgroundServices;
