@@ -59,43 +59,9 @@ public class Program
             .UseSerilog()
             .ConfigureServices((_, services) => services.AddHostedService<BackgroundServiceHost>())
             .ConfigureWebHostDefaults(webBuilder => webBuilder
+                .UseSetting(WebHostDefaults.ApplicationKey, typeof(Startup).Assembly.GetName().Name)
                 .UseStartup<Startup>()
-                .UseKestrel(
-                    kestrel =>
-                    {
-                        HostingConfiguration hostingConfiguration = RetrieveHostingConfiguration(kestrel);
-                        kestrel.Listen(
-                            IPAddress.Any,
-                            hostingConfiguration.Port,
-                            listenOptions =>
-                            {
-                                if (hostingConfiguration.UseHttps)
-                                {
-                                    string executingAssemblyDirectory =
-                                        Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) !;
-                                    string certificateFilePath = Path.Combine(executingAssemblyDirectory!,
-                                        hostingConfiguration.CertificateFile!);
-                                    listenOptions.UseHttps(new X509Certificate2(certificateFilePath,
-                                        hostingConfiguration.CertificatePassword));
-                                }
-                            });
-                    })
                 .UseWebRoot(contentDirectory));
-    }
-
-    private static HostingConfiguration RetrieveHostingConfiguration(KestrelServerOptions kestrel)
-    {
-        IConfigurationSection endpointConfiguration = kestrel.ApplicationServices
-            .GetService<IConfiguration>() !
-            .GetSection("Kestrel")
-            .GetSection("EndpointDefaults");
-        IConfigurationSection certificateConfiguration = endpointConfiguration.GetSection("CertificateSettings");
-
-        return new HostingConfiguration(
-            endpointConfiguration.GetValue<bool>("UseHttps"),
-            endpointConfiguration.GetValue<int>("Port"),
-            certificateConfiguration.GetValue<string>("FileName"),
-            certificateConfiguration.GetValue<string>("Password"));
     }
 
     private static void RegisterModules(ContainerBuilder builder)
