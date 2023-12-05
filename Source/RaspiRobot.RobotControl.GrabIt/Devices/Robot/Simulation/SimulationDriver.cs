@@ -8,6 +8,10 @@ using RaspiRobot.RobotControl.Settings;
 
 public class SimulationDriver : IGrabItDriver
 {
+    private readonly Dictionary<byte, int> currentDrivePositions = new();
+
+    public IReadOnlyDictionary<byte, int> CurrentDrivePositions => this.currentDrivePositions;
+
     public void Initialize()
     {
     }
@@ -34,6 +38,7 @@ public class SimulationDriver : IGrabItDriver
         {
             var grabItPosition = (GrabItPosition)position;
             Console.WriteLine($"Setting drive {grabItPosition.Drive} to value {grabItPosition.Value}.");
+            this.currentDrivePositions[grabItPosition.Drive] = grabItPosition.Value;
         }
 
         Thread.Sleep(500);

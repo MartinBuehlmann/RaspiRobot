@@ -9,9 +9,9 @@ public class TransportSequenceBuilder
     {
         var sequence = new List<Sequence>();
         sequence.Add(place.PickSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         sequence.Add(chuck.PlaceSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         return sequence;
     }
 
@@ -19,9 +19,9 @@ public class TransportSequenceBuilder
     {
         var sequence = new List<Sequence>();
         sequence.Add(chuck.PickSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         sequence.Add(place.PlaceSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         return sequence;
     }
 
@@ -29,9 +29,9 @@ public class TransportSequenceBuilder
     {
         var sequence = new List<Sequence>();
         sequence.Add(sourcePlace.PickSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         sequence.Add(destinationPlace.PlaceSequence);
-        sequence.Add(robot.Sequence);
+        sequence.Add(robot.TransferSequence);
         return sequence;
     }
 }

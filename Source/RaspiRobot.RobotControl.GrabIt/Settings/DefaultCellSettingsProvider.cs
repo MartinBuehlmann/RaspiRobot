@@ -22,6 +22,23 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 new GrabItPosition(2, 300),
                                 new GrabItPosition(3, 200),
                                 new GrabItPosition(4, 300),
+                                new GrabItPosition(5, 320),
+                            },
+                        },
+                    },
+                },
+                new Sequence
+                {
+                    Steps =
+                    {
+                        new Step
+                        {
+                            Positions =
+                            {
+                                new GrabItPosition(1, 300),
+                                new GrabItPosition(2, 300),
+                                new GrabItPosition(3, 200),
+                                new GrabItPosition(4, 300),
                             },
                         },
                     },

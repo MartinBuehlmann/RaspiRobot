@@ -9,11 +9,14 @@ using RaspiRobot.RobotControl.Settings;
 public class GrabItDriver : IGrabItDriver, IDisposable
 {
     private readonly Pca9685Driver driver;
+    private readonly Dictionary<byte, int> currentDrivePositions = new();
 
     public GrabItDriver(Pca9685Driver driver)
     {
         this.driver = driver;
     }
+
+    public IReadOnlyDictionary<byte, int> CurrentDrivePositions => this.currentDrivePositions;
 
     public void Initialize()
     {
@@ -47,6 +50,7 @@ public class GrabItDriver : IGrabItDriver, IDisposable
         {
             var grabItPosition = (GrabItPosition)position;
             this.driver.SetPwm(grabItPosition.Drive, 0, grabItPosition.Value);
+            this.currentDrivePositions[grabItPosition.Drive] = grabItPosition.Value;
         }
 
         Thread.Sleep(500);

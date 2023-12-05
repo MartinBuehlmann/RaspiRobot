@@ -1,5 +1,5 @@
 SET address=192.168.1.25
-SET password=raspberry
+SET password=pocketpc2002
 SET product=RaspiRobot
 CD ..
 CD source
