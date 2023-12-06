@@ -17,12 +17,12 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                         {
                             Positions =
                             {
-                                new GrabItPosition(0, 300),
-                                new GrabItPosition(1, 300),
                                 new GrabItPosition(2, 300),
-                                new GrabItPosition(3, 200),
                                 new GrabItPosition(4, 300),
                                 new GrabItPosition(5, 320),
+                                new GrabItPosition(0, 300),
+                                new GrabItPosition(1, 300),
+                                new GrabItPosition(3, 200),
                             },
                         },
                     },
