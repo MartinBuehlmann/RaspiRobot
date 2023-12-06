@@ -72,23 +72,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -96,12 +87,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -126,23 +113,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -150,12 +128,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -191,23 +165,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -215,12 +180,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -245,23 +206,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -269,12 +221,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -307,23 +255,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -331,12 +270,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -361,23 +296,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -385,12 +311,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -417,23 +339,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -441,12 +354,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -471,23 +380,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -495,12 +395,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -527,23 +423,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -551,12 +438,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -581,23 +464,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -605,12 +479,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -637,23 +507,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 280),
                                         },
                                     },
@@ -661,12 +522,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },
@@ -691,23 +548,14 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
                                             new GrabItPosition(1, 250),
                                             new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
                                             new GrabItPosition(5, 320),
                                         },
                                     },
@@ -715,12 +563,8 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 300),
                                             new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new GrabItPosition(1, 300),
                                         },
                                     },
                                 },

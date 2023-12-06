@@ -51,8 +51,9 @@ public class GrabItDriver : IGrabItDriver, IDisposable
             var grabItPosition = (GrabItPosition)position;
             this.driver.SetPwm(grabItPosition.Drive, 0, grabItPosition.Value);
             this.currentDrivePositions[grabItPosition.Drive] = grabItPosition.Value;
+            Thread.Sleep(50);
         }
 
-        Thread.Sleep(500);
+        Thread.Sleep(750);
     }
 }

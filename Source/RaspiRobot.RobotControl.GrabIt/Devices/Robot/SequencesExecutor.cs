@@ -16,7 +16,7 @@ internal class SequencesExecutor
                 // TODO: Interpolate movements
             }
         }
-        
+
         driver.Execute(sequences);
     }
 }

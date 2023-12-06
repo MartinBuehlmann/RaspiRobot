@@ -55,7 +55,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         CancellationToken cancellationToken)
     {
         this.robotStateNotifiers.Add(robotStateNotifier);
-        await robotStateNotifier.NotifyAsync(RobotControl.Devices.Robot.State.Ready);
+        await robotStateNotifier.NotifyAsync(State.Ready);
         cancellationToken.WaitHandle.WaitOne();
         this.robotStateNotifiers.Remove(robotStateNotifier);
     }

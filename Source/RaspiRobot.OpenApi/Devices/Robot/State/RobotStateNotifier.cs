@@ -18,9 +18,9 @@ public class RobotStateNotifier : IRobotStateNotifier
         this.responseStream = responseStream;
     }
 
-    public async Task NotifyAsync(RobotControl.Devices.Robot.State state)
+    public async Task NotifyAsync(State state)
     {
-        var robotState = this.robotStateConverter.Convert(state);
+        RobotState robotState = this.robotStateConverter.Convert(state);
         await this.responseStream.WriteAsync(
             new StateResponse
             {
