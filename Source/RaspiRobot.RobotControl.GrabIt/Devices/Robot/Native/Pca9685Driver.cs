@@ -52,7 +52,6 @@ public class Pca9685Driver : IDisposable
 
         this.device = CreateI2CDevice(DeviceAddress);
 
-        this.SetAllPwm(0, 0);
         var readBuffer = new byte[1];
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         this.device!.Write(new byte[] { Mode2, OutDrv });
