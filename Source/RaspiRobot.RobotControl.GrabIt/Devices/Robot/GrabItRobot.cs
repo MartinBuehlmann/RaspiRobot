@@ -35,7 +35,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.sequenceExecutor = sequenceExecutor;
         this.driver = driver;
-        this.robotStateNotifiers = new();
+        this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken)
     {
-        // TODO: Replace with real implementation
+        // As long as there is no real tracking, we just return an empty chuck loading and wait.
         await chuckLoadingsNotifier.NotifyAsync(ReadOnlyList.Empty<ChuckLoading>());
         cancellationToken.WaitHandle.WaitOne();
     }

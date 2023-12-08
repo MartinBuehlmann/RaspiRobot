@@ -3,17 +3,22 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using RaspiRobot.Common.Logging;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 using RaspiRobot.RobotControl.Settings;
 
 public class GrabItDriver : IGrabItDriver, IDisposable
 {
     private readonly Pca9685Driver driver;
+    private readonly Log log;
     private readonly Dictionary<byte, int> currentDrivePositions = new();
 
-    public GrabItDriver(Pca9685Driver driver)
+    public GrabItDriver(
+        Pca9685Driver driver,
+        Log log)
     {
         this.driver = driver;
+        this.log = log;
     }
 
     public IReadOnlyDictionary<byte, int> CurrentDrivePositions => this.currentDrivePositions;
@@ -21,39 +26,29 @@ public class GrabItDriver : IGrabItDriver, IDisposable
     public void Initialize()
     {
         this.driver.Initialize();
+        this.driver.SetPwmFrequency(50);
     }
 
-    public void Execute(IReadOnlyList<Sequence> sequences)
+    public void Execute(IReadOnlyList<GrabItPosition> positions)
     {
-        foreach (Sequence sequence in sequences)
+        foreach (GrabItPosition position in positions)
         {
-            this.Execute(sequence);
+            if (!this.currentDrivePositions.ContainsKey(position.Drive) || this.currentDrivePositions[position.Drive] != position.Drive)
+            {
+                this.log.Verbose("Moving drive '{Drive}' to value '{Value}'", position.Drive, position.Value);
+                this.driver.SetPwm(position.Drive, 0, position.Value);
+                this.currentDrivePositions[position.Drive] = position.Value;
+
+                if (position.Drive != 0)
+                {
+                    Thread.Sleep(5);
+                }
+            }
         }
     }
 
     public void Dispose()
     {
         this.driver?.Dispose();
-    }
-
-    private void Execute(Sequence sequence)
-    {
-        foreach (Step step in sequence.Steps)
-        {
-            this.Execute(step);
-        }
-    }
-
-    private void Execute(Step step)
-    {
-        foreach (IPosition position in step.Positions)
-        {
-            var grabItPosition = (GrabItPosition)position;
-            this.driver.SetPwm(grabItPosition.Drive, 0, grabItPosition.Value);
-            this.currentDrivePositions[grabItPosition.Drive] = grabItPosition.Value;
-            Thread.Sleep(50);
-        }
-
-        Thread.Sleep(750);
     }
 }

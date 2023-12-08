@@ -27,6 +27,9 @@ public class RobotControlGrabItModule : Module
         builder.RegisterType<GrabItJsonConverterProvider>().As<IJsonConverterProvider>();
 
         builder.RegisterType<Pca9685Driver>();
+
+        // Depending on if the software is running on the Raspberry PI or on the Computer,
+        // on of the binding needs to be active.
         builder.RegisterType<GrabItDriver>().As<IGrabItDriver>();
         //builder.RegisterType<SimulationDriver>().As<IGrabItDriver>();
     }
