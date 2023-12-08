@@ -9,7 +9,7 @@ public interface IMagazine : IDevice
     int Number { get; }
 
     Task SubscribeForStateChangedAsync(
-        IMagazineStateNotifier magazineStateNotifier,
+        IStorageStateNotifier storageStateNotifier,
         CancellationToken cancellationToken);
 
     Task SubscribeForAlarmsChangedAsync(

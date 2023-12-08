@@ -73,31 +73,40 @@ public class RobotService : Erowa.OpenAPI.Robot.Robot.RobotBase
         await robot.SubscribeForChuckLoadingsChangedAsync(chuckLoadingsNotifier, cancellationTokenSource.Token);
     }
 
-    public override Task<CommandResponse> LoadChuck(LoadChuckRequest request, ServerCallContext context)
+    public override async Task<CommandResponse> LoadChuck(LoadChuckRequest request, ServerCallContext context)
     {
         IRobot robot = this.deviceService.RetrieveRobot();
 
         StoragePlace? destinationPlaceForPalletOnChuck = request.PlaceToUnloadPalletOnChuck is not null
             ? new StoragePlace(request.PlaceToUnloadPalletOnChuck.Number)
             : null;
-        ICommandResponse response = robot.LoadChuck(
+        ICommandResponse response = await robot.LoadChuckAsync(
             new StoragePlace(request.PlaceToLoad.Number),
             new MachineChuck(request.Chuck.Number),
             destinationPlaceForPalletOnChuck);
 
-        return Task.FromResult(
-            response.ToCommandResponse());
+        return response.ToCommandResponse();
     }
 
-    public override Task<CommandResponse> UnloadChuck(UnloadChuckRequest request, ServerCallContext context)
+    public override async Task<CommandResponse> UnloadChuck(UnloadChuckRequest request, ServerCallContext context)
     {
         IRobot robot = this.deviceService.RetrieveRobot();
 
-        ICommandResponse response = robot.UnloadChuck(
+        ICommandResponse response = await robot.UnloadChuckAsync(
             new MachineChuck(request.Chuck.Number),
             new StoragePlace(request.PlaceToUnload.Number));
 
-        return Task.FromResult(
-            response.ToCommandResponse());
+        return response.ToCommandResponse();
+    }
+
+    public override async Task<CommandResponse> ExchangePlace(ExchangePlaceRequest request, ServerCallContext context)
+    {
+        IRobot robot = this.deviceService.RetrieveRobot();
+
+        ICommandResponse response = await robot.ExchangePlaceAsync(
+            new StoragePlace(request.SourcePlace.Number),
+            new StoragePlace(request.DestinationPlace.Number));
+
+        return response.ToCommandResponse();
     }
 }

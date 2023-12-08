@@ -1,4 +1,4 @@
-namespace RaspiRobot.OpenApi.Devices.Magazine;
+namespace RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,13 +11,13 @@ using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Magazine;
 
-public class MagazineService : Erowa.OpenAPI.Storage.MagazineService.MagazineServiceBase
+public class AutoLinkMagazineService : Erowa.OpenAPI.Storage.AutoLinkMagazineService.AutoLinkMagazineServiceBase
 {
     private readonly IDeviceService deviceService;
     private readonly IHostApplicationLifetime hostApplicationLifetime;
     private readonly Factory factory;
 
-    public MagazineService(
+    public AutoLinkMagazineService(
         IDeviceService deviceService,
         IHostApplicationLifetime hostApplicationLifetime,
         Factory factory)
@@ -29,14 +29,14 @@ public class MagazineService : Erowa.OpenAPI.Storage.MagazineService.MagazineSer
 
     public override async Task RetrieveStateAndStateChanged(
         StorageRequest request,
-        IServerStreamWriter<MagazineStateResponse> responseStream,
+        IServerStreamWriter<AutoLinkMagazineStateResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var magazineStateNotifier = this.factory.Create<IMagazineStateNotifier>(responseStream);
+        var magazineStateNotifier = this.factory.Create<IAutoLinkMagazineStateNotifier>(responseStream);
         IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
         await magazine.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
     }

@@ -4,15 +4,12 @@ using System.Collections.Generic;
 
 public class MachineSettings
 {
-    public MachineSettings(string name, Position position)
+    public MachineSettings(string name)
     {
         this.Name = name;
-        this.Position = position;
     }
 
     public string Name { get; }
-
-    public Position Position { get; }
 
     public List<ChuckSettings> Chucks { get; } = new();
 }

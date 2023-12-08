@@ -1,4 +1,4 @@
-namespace RaspiRobot.OpenApi.Devices.Magazine.State;
+namespace RaspiRobot.OpenApi.Devices.Storages.Magazine.State;
 
 using System;
 using Erowa.OpenAPI.Storage;

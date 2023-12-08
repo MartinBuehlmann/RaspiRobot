@@ -1,17 +1,17 @@
-using System;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 namespace RaspiRobot;
 
+using System;
+using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DocumentStorage.FileBased;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RaspiRobot.BackgroundServices;
 using RaspiRobot.Common;
+using RaspiRobot.OpenApi;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.GrabIt;
 using Serilog;
@@ -29,7 +29,8 @@ public class Program
             .WriteTo.File(
                 "./../logs/RaspiRobot-.log",
                 rollingInterval: RollingInterval.Day,
-                outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {CorrelationId} {Level:u3}] {Username} {Message:lj}{NewLine}{Exception}",
+                outputTemplate:
+                "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {CorrelationId} {Level:u3}] {Username} {Message:lj}{NewLine}{Exception}",
                 fileSizeLimitBytes: 10 * 1024 * 1024,
                 retainedFileCountLimit: 10,
                 rollOnFileSizeLimit: true,
@@ -54,8 +55,7 @@ public class Program
             .UseSerilog()
             .ConfigureServices((_, services) => services.AddHostedService<BackgroundServiceHost>())
             .ConfigureWebHostDefaults(webBuilder => webBuilder
-                .UseKestrel()
-                .UseUrls("http://*:5000")
+                .UseSetting(WebHostDefaults.ApplicationKey, typeof(Startup).Assembly.GetName().Name)
                 .UseStartup<Startup>()
                 .UseWebRoot(contentDirectory));
     }
@@ -64,6 +64,7 @@ public class Program
     {
         builder.RegisterModule<CommonModule>();
         builder.RegisterModule<DocumentStorageFileBasedModule>();
+        builder.RegisterModule<OpenApiModule>();
         builder.RegisterModule<RobotControlGrabItModule>();
         builder.RegisterModule<RobotControlModule>();
     }

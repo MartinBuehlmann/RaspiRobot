@@ -2,13 +2,16 @@
 
 public class RobotSettings
 {
-    public RobotSettings(string name, Position position)
+    public RobotSettings(string name, Sequence homingSequence, Sequence transferSequence)
     {
         this.Name = name;
-        this.Position = position;
+        this.HomingSequence = homingSequence;
+        this.TransferSequence = transferSequence;
     }
 
     public string Name { get; }
 
-    public Position Position { get; }
+    public Sequence HomingSequence { get; }
+
+    public Sequence TransferSequence { get; }
 }

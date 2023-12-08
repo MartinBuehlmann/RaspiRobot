@@ -1,11 +1,10 @@
+namespace RaspiRobot.BackgroundServices;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-
-namespace RaspiRobot.BackgroundServices;
-
 using RaspiRobot.Common;
 
 public class BackgroundServiceHost : IHostedService
