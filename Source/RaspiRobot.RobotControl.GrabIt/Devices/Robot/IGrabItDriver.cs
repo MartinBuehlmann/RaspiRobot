@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using RaspiRobot.RobotControl.GrabIt.Settings;
-using RaspiRobot.RobotControl.Settings;
 
 public interface IGrabItDriver
 {

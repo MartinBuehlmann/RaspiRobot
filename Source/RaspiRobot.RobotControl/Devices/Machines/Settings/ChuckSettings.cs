@@ -1,8 +1,10 @@
-namespace RaspiRobot.RobotControl.Settings;
+namespace RaspiRobot.RobotControl.Devices.Machines.Settings;
 
-public class PlaceSettings
+using RaspiRobot.RobotControl.Settings;
+
+public class ChuckSettings
 {
-    public PlaceSettings(int number, Sequence pickSequence, Sequence placeSequence)
+    public ChuckSettings(int number, Sequence pickSequence, Sequence placeSequence)
     {
         this.Number = number;
         this.PickSequence = pickSequence;

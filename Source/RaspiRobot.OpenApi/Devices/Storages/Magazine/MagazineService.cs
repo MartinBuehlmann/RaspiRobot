@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using RaspiRobot.Common.DependencyInjection;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
 public class MagazineService : Erowa.OpenAPI.Storage.MagazineService.MagazineServiceBase
 {

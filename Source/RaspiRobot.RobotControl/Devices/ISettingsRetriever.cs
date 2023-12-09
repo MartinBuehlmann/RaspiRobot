@@ -2,8 +2,10 @@
 
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Devices.Magazine;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Machines.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Settings;
+using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.Settings;
 
 public interface ISettingsRetriever
 {

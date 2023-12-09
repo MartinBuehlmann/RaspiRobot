@@ -19,4 +19,7 @@
     <ItemGroup>
         <Content Include="wwwroot\**\*" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
     </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot" />
+    </ItemGroup>
 </Project>

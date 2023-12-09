@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.Settings;
+namespace RaspiRobot.RobotControl.Devices.Machines.Settings;
 
 using System.Collections.Generic;
 

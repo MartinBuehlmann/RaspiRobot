@@ -1,7 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Machines;
 
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Machines.Settings;
 
 internal class GrabItMachine : IMachine
 {

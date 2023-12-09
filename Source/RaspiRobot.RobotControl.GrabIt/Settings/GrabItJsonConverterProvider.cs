@@ -6,5 +6,9 @@ using RaspiRobot.RobotControl.Devices;
 
 public class GrabItJsonConverterProvider : IJsonConverterProvider
 {
-    public IReadOnlyList<JsonConverter> JsonConverters { get; } = new[] { new GrabItPositionConverter() };
+    public IReadOnlyList<JsonConverter> JsonConverters { get; }
+        = new[]
+        {
+            new GrabItPositionConverter(),
+        };
 }

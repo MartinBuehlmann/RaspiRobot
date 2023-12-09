@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using RaspiRobot.Common;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Magazine;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
 
 internal class GrabItMagazine : IMagazine
 {
