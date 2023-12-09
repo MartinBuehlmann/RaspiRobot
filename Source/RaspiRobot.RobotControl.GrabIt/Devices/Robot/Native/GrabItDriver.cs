@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Threading;
 using RaspiRobot.Common.Logging;
 using RaspiRobot.RobotControl.GrabIt.Settings;
-using RaspiRobot.RobotControl.Settings;
 
 public class GrabItDriver : IGrabItDriver, IDisposable
 {

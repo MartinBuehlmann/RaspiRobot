@@ -1,4 +1,6 @@
-﻿namespace RaspiRobot.RobotControl.Settings;
+﻿namespace RaspiRobot.RobotControl.Devices.Robot.Settings;
+
+using RaspiRobot.RobotControl.Settings;
 
 public class RobotSettings
 {

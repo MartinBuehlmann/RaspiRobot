@@ -7,8 +7,10 @@ using RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine.State;
 using RaspiRobot.OpenApi.Devices.Storages.LoadingStation.State;
 using RaspiRobot.OpenApi.Devices.Storages.Magazine.State;
 using RaspiRobot.RobotControl.Devices.Alarms;
-using RaspiRobot.RobotControl.Devices.Magazine;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
+using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
 public class OpenApiModule : Module
 {

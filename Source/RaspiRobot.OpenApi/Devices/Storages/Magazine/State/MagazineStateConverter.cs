@@ -2,17 +2,18 @@ namespace RaspiRobot.OpenApi.Devices.Storages.Magazine.State;
 
 using System;
 using Erowa.OpenAPI.Storage;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public class MagazineStateConverter
 {
-    public MagazineState Convert(RobotControl.Devices.Magazine.State state)
+    public MagazineState Convert(State state)
     {
         return state switch
         {
-            RobotControl.Devices.Magazine.State.Disconnected => MagazineState.Disconnected,
-            RobotControl.Devices.Magazine.State.NotReady => MagazineState.NotReady,
-            RobotControl.Devices.Magazine.State.Ready => MagazineState.Ready,
-            RobotControl.Devices.Magazine.State.Error => MagazineState.Error,
+            State.Disconnected => MagazineState.Disconnected,
+            State.NotReady => MagazineState.NotReady,
+            State.Ready => MagazineState.Ready,
+            State.Error => MagazineState.Error,
             _ => throw new NotSupportedException($"Invalid magazine state '{state}' detected."),
         };
     }

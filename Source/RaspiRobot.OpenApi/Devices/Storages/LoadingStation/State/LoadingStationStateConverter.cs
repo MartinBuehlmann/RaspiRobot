@@ -2,17 +2,18 @@ namespace RaspiRobot.OpenApi.Devices.Storages.LoadingStation.State;
 
 using System;
 using Erowa.OpenAPI.Storage;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public class LoadingStationStateConverter
 {
-    public LoadingStationState Convert(RobotControl.Devices.Magazine.State state)
+    public LoadingStationState Convert(State state)
     {
         return state switch
         {
-            RobotControl.Devices.Magazine.State.Disconnected => LoadingStationState.Disconnected,
-            RobotControl.Devices.Magazine.State.NotReady => LoadingStationState.NotReady,
-            RobotControl.Devices.Magazine.State.Ready => LoadingStationState.Ready,
-            RobotControl.Devices.Magazine.State.Error => LoadingStationState.Error,
+            State.Disconnected => LoadingStationState.Disconnected,
+            State.NotReady => LoadingStationState.NotReady,
+            State.Ready => LoadingStationState.Ready,
+            State.Error => LoadingStationState.Error,
             _ => throw new NotSupportedException($"Invalid loading station state '{state}' detected."),
         };
     }

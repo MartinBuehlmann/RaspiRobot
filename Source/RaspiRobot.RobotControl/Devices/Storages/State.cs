@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.Devices.Magazine;
+namespace RaspiRobot.RobotControl.Devices.Storages;
 
 public enum State
 {

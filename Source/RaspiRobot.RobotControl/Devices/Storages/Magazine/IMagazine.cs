@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.Devices.Magazine;
+﻿namespace RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
 using System.Threading;
 using System.Threading.Tasks;

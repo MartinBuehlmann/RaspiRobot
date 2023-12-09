@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public interface IRobot : IDevice
 {

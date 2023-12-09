@@ -28,9 +28,9 @@ public class GrabItPositionConverter : JsonConverter<IPosition>
         bool hasExistingValue,
         JsonSerializer serializer)
     {
-        var jsonObject = JObject.Load(reader);
-        byte drive = jsonObject["Drive"]!.Value<byte>();
-        int value = jsonObject["Value"]!.Value<int>();
+        JObject jsonObject = JObject.Load(reader);
+        var drive = jsonObject["Drive"]!.Value<byte>();
+        var value = jsonObject["Value"]!.Value<int>();
 
         return new GrabItPosition(drive, value);
     }

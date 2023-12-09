@@ -3,7 +3,8 @@
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Storage;
 using Grpc.Core;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
 
 public class LoadingStationStateNotifier : ILoadingStationStateNotifier
 {
@@ -18,7 +19,7 @@ public class LoadingStationStateNotifier : ILoadingStationStateNotifier
         this.responseStream = responseStream;
     }
 
-    public async Task NotifyAsync(RobotControl.Devices.Magazine.State state)
+    public async Task NotifyAsync(State state)
     {
         LoadingStationState loadingStationState = this.loadingStationStateConverter.Convert(state);
         await this.responseStream.WriteAsync(

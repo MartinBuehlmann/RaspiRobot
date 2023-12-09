@@ -1,6 +1,7 @@
-namespace RaspiRobot.RobotControl.Settings;
+namespace RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
 
 using System.Collections.Generic;
+using RaspiRobot.RobotControl.Devices.Storages.Settings;
 
 public class MagazineSettings
 {

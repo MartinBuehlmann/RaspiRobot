@@ -1,6 +1,11 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Settings;
 
 using RaspiRobot.RobotControl.Devices;
+using RaspiRobot.RobotControl.Devices.Machines.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.LoadingStation.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.Settings;
 using RaspiRobot.RobotControl.Settings;
 
 public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
@@ -137,9 +142,9 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     },
                 },
             },
-            Magazines =
+            LoadingStations =
             {
-                new MagazineSettings(1, "LS")
+                new LoadingStationSettings(1, "LS")
                 {
                     Places =
                     {
@@ -229,6 +234,9 @@ public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                             }),
                     },
                 },
+            },
+            Magazines =
+            {
                 new MagazineSettings(2, "Mag")
                 {
                     Places =

@@ -3,7 +3,8 @@
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Storage;
 using Grpc.Core;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
 
 public class AutoLinkMagazineStateNotifier : IAutoLinkMagazineStateNotifier
 {
@@ -18,7 +19,7 @@ public class AutoLinkMagazineStateNotifier : IAutoLinkMagazineStateNotifier
         this.responseStream = responseStream;
     }
 
-    public async Task NotifyAsync(RobotControl.Devices.Magazine.State state)
+    public async Task NotifyAsync(State state)
     {
         AutoLinkMagazineState magazineState = this.autoLinkMagazineStateConverter.Convert(state);
         await this.responseStream.WriteAsync(

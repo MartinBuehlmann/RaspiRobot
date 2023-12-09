@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using RaspiRobot.Common.DependencyInjection;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
 
 public class AutoLinkMagazineService : Erowa.OpenAPI.Storage.AutoLinkMagazineService.AutoLinkMagazineServiceBase
 {
@@ -37,8 +37,8 @@ public class AutoLinkMagazineService : Erowa.OpenAPI.Storage.AutoLinkMagazineSer
             this.hostApplicationLifetime.ApplicationStopping);
 
         var magazineStateNotifier = this.factory.Create<IAutoLinkMagazineStateNotifier>(responseStream);
-        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
-        await magazine.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
+        IAutoLinkMagazine autoLinkMagazine = this.deviceService.RetrieveAutoLinkMagazine(request.Number);
+        await autoLinkMagazine.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
     }
 
     public override async Task RetrieveAlarmsAndAlarmsChanged(
@@ -51,7 +51,7 @@ public class AutoLinkMagazineService : Erowa.OpenAPI.Storage.AutoLinkMagazineSer
             this.hostApplicationLifetime.ApplicationStopping);
 
         var alarmsNotifier = this.factory.Create<IAlarmsNotifier>(responseStream);
-        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
-        await magazine.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
+        IAutoLinkMagazine autoLinkMagazine = this.deviceService.RetrieveAutoLinkMagazine(request.Number);
+        await autoLinkMagazine.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
     }
 }

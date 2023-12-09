@@ -3,7 +3,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Devices.Magazine;
+using RaspiRobot.RobotControl.Devices.Machines.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Settings;
+using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.Settings;
 using RaspiRobot.RobotControl.Settings;
 
 internal class SettingsRetriever : ISettingsRetriever
@@ -33,8 +36,9 @@ internal class SettingsRetriever : ISettingsRetriever
     public async Task<PlaceSettings> RetrieveByAsync(StoragePlace place)
     {
         await this.EnsureCellSettingsLoadedAsync();
-        return this.cellSettings!.Magazines
-            .SelectMany(m => m.Places)
+        return this.cellSettings!.AutoLinkMagazines.SelectMany(x => x.Places)
+            .Concat(this.cellSettings!.LoadingStations.SelectMany(x => x.Places))
+            .Concat(this.cellSettings!.Magazines.SelectMany(x => x.Places))
             .Single(p => p.Number == place.Number);
     }
 

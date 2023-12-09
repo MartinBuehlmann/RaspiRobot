@@ -12,8 +12,8 @@ using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Devices.Magazine;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public class RobotService : Erowa.OpenAPI.Robot.Robot.RobotBase
 {
