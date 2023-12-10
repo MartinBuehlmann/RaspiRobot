@@ -6,7 +6,7 @@ using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
-public class MagazineStateNotifier : IMagazineStateNotifier
+internal class MagazineStateNotifier : IMagazineStateNotifier
 {
     private readonly MagazineStateConverter magazineStateConverter;
     private readonly IServerStreamWriter<MagazineStateResponse> responseStream;

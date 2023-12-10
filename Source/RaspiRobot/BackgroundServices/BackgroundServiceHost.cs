@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.Common;
 
-public class BackgroundServiceHost : IHostedService
+internal class BackgroundServiceHost : IHostedService
 {
     private readonly IReadOnlyList<IBackgroundService> backgroundServices;
 

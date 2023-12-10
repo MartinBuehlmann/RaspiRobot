@@ -3,7 +3,7 @@ namespace RaspiRobot.OpenApi.Devices.Robot.State;
 using System;
 using Erowa.OpenAPI.Robot;
 
-public class RobotStateConverter
+internal class RobotStateConverter
 {
     public RobotState Convert(RobotControl.Devices.Robot.State state)
     {

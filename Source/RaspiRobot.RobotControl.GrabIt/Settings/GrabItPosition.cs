@@ -2,7 +2,7 @@
 
 using RaspiRobot.RobotControl.Settings;
 
-public class GrabItPosition(byte drive, int value) : IPosition
+internal class GrabItPosition(byte drive, int value) : IPosition
 {
     public byte Drive { get; } = drive;
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
-public class RequestLoggingMiddleware
+internal class RequestLoggingMiddleware
 {
     private readonly RequestDelegate next;
 

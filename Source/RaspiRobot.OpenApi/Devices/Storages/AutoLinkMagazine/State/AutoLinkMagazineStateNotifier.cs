@@ -6,7 +6,7 @@ using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
 
-public class AutoLinkMagazineStateNotifier : IAutoLinkMagazineStateNotifier
+internal class AutoLinkMagazineStateNotifier : IAutoLinkMagazineStateNotifier
 {
     private readonly AutoLinkMagazineStateConverter autoLinkMagazineStateConverter;
     private readonly IServerStreamWriter<AutoLinkMagazineStateResponse> responseStream;

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RaspiRobot.RobotControl.Settings;
 
-public class GrabItPositionConverter : JsonConverter<IPosition>
+internal class GrabItPositionConverter : JsonConverter<IPosition>
 {
     public override void WriteJson(
         JsonWriter writer,

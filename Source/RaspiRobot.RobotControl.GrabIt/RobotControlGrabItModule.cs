@@ -10,6 +10,7 @@ using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 using RaspiRobot.RobotControl.GrabIt.Devices.Machines;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.GrabIt.Devices.Storages.AutoLinkMagazine;
 using RaspiRobot.RobotControl.GrabIt.Devices.Storages.LoadingStation;
@@ -26,7 +27,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterType<GrabItMagazine>().As<IMagazine>();
         builder.RegisterType<GrabItRobot>().As<IRobot>();
         builder.RegisterType<TransportSequenceBuilder>();
-        builder.RegisterType<SequencesExecutor>();
+        builder.RegisterType<TransportSequenceExecutor>();
 
         builder.RegisterType<DefaultCellSettingsProvider>().As<IDefaultCellSettingsProvider>();
         builder.RegisterType<GrabItJsonConverterProvider>().As<IJsonConverterProvider>();

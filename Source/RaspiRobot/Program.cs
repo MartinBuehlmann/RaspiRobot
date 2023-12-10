@@ -1,12 +1,12 @@
 namespace RaspiRobot;
 
-using System;
 using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DocumentStorage.FileBased;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.BackgroundServices;
@@ -15,27 +15,18 @@ using RaspiRobot.OpenApi;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.GrabIt;
 using Serilog;
-using Serilog.Events;
 
 public class Program
 {
     public static void Main(string[] args)
     {
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(path: "appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .WriteTo.File(
-                "./../logs/RaspiRobot-.log",
-                rollingInterval: RollingInterval.Day,
-                outputTemplate:
-                "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {CorrelationId} {Level:u3}] {Username} {Message:lj}{NewLine}{Exception}",
-                fileSizeLimitBytes: 10 * 1024 * 1024,
-                retainedFileCountLimit: 10,
-                rollOnFileSizeLimit: true,
-                shared: true,
-                flushToDiskInterval: TimeSpan.FromSeconds(1))
+            .ReadFrom.Configuration(configuration)
             .CreateLogger();
 
         string? currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

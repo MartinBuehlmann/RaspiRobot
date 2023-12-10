@@ -5,7 +5,7 @@ using Erowa.OpenAPI.Robot;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Robot;
 
-public class RobotStateNotifier : IRobotStateNotifier
+internal class RobotStateNotifier : IRobotStateNotifier
 {
     private readonly RobotStateConverter robotStateConverter;
     private readonly IServerStreamWriter<StateResponse> responseStream;

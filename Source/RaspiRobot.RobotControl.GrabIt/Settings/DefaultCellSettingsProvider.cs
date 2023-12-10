@@ -8,7 +8,7 @@ using RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
 using RaspiRobot.RobotControl.Devices.Storages.Settings;
 using RaspiRobot.RobotControl.Settings;
 
-public class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
+internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
 {
     public CellSettings DefaultCellSettings { get; } =
         new CellSettings(

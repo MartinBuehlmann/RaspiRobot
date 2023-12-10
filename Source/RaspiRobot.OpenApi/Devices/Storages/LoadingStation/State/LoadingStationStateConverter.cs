@@ -4,7 +4,7 @@ using System;
 using Erowa.OpenAPI.Storage;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-public class LoadingStationStateConverter
+internal class LoadingStationStateConverter
 {
     public LoadingStationState Convert(State state)
     {

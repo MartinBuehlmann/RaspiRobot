@@ -30,11 +30,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentStorage", "Document
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentStorage.FileBased", "DocumentStorage.FileBased\DocumentStorage.FileBased.csproj", "{A7A98799-5D1D-408E-9E86-785664DBCD39}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E3EF9C7E-A49E-4076-82CE-5D0336DF1090}"
-	ProjectSection(SolutionItems) = preProject
-		Documentation\Introduction.md = Documentation\Introduction.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
