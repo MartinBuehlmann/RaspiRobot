@@ -6,7 +6,7 @@ using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
 
-public class LoadingStationStateNotifier : ILoadingStationStateNotifier
+internal class LoadingStationStateNotifier : ILoadingStationStateNotifier
 {
     private readonly LoadingStationStateConverter loadingStationStateConverter;
     private readonly IServerStreamWriter<LoadingStationStateResponse> responseStream;

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
-public class SimulationDriver : IGrabItDriver
+internal class SimulationDriver : IGrabItDriver
 {
     private readonly Dictionary<byte, int> currentDrivePositions = new();
 

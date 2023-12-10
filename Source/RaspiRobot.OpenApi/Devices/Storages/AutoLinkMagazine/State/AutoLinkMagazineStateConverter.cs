@@ -4,7 +4,7 @@ using System;
 using Erowa.OpenAPI.Storage;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-public class AutoLinkMagazineStateConverter
+internal class AutoLinkMagazineStateConverter
 {
     public AutoLinkMagazineState Convert(State state)
     {

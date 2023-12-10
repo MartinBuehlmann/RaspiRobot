@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
+﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Threading;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 using RaspiRobot.RobotControl.Settings;
 
-internal class SequencesExecutor
+internal class TransportSequenceExecutor
 {
     public void Execute(IReadOnlyList<Sequence> sequences, IGrabItDriver driver)
     {

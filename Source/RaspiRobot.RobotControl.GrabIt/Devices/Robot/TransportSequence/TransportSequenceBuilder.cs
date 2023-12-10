@@ -6,7 +6,7 @@ using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages.Settings;
 using RaspiRobot.RobotControl.Settings;
 
-public class TransportSequenceBuilder
+internal class TransportSequenceBuilder
 {
     public IReadOnlyList<Sequence> LoadChuckSequence(
         PlaceSettings place,

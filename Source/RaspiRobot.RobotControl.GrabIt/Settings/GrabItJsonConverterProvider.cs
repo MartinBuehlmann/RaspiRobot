@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using RaspiRobot.RobotControl.Devices;
 
-public class GrabItJsonConverterProvider : IJsonConverterProvider
+internal class GrabItJsonConverterProvider : IJsonConverterProvider
 {
     public IReadOnlyList<JsonConverter> JsonConverters { get; }
         = new[]

@@ -6,7 +6,7 @@ using System.Threading;
 using RaspiRobot.Common.Logging;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
-public class GrabItDriver : IGrabItDriver, IDisposable
+internal class GrabItDriver : IGrabItDriver, IDisposable
 {
     private readonly Pca9685Driver driver;
     private readonly Log log;

@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
-public interface IGrabItDriver
+internal interface IGrabItDriver
 {
     IReadOnlyDictionary<byte, int> CurrentDrivePositions { get; }
 

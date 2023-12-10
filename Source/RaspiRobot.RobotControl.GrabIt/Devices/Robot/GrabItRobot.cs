@@ -22,20 +22,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly RobotSettings settings;
     private readonly ISettingsRetriever settingsRetriever;
     private readonly TransportSequenceBuilder transportSequenceBuilder;
-    private readonly SequencesExecutor sequenceExecutor;
+    private readonly TransportSequenceExecutor transportSequenceExecutor;
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
         RobotSettings settings,
         ISettingsRetriever settingsRetriever,
         TransportSequenceBuilder transportSequenceBuilder,
-        SequencesExecutor sequenceExecutor,
+        TransportSequenceExecutor transportSequenceExecutor,
         IGrabItDriver driver)
     {
         this.settings = settings;
         this.settingsRetriever = settingsRetriever;
         this.transportSequenceBuilder = transportSequenceBuilder;
-        this.sequenceExecutor = sequenceExecutor;
+        this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
@@ -136,7 +136,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private async Task ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
     {
         await this.NotifyStateAsync(State.Busy);
-        this.sequenceExecutor.Execute(sequences, this.driver);
+        this.transportSequenceExecutor.Execute(sequences, this.driver);
         await this.NotifyStateAsync(State.Ready);
     }
 

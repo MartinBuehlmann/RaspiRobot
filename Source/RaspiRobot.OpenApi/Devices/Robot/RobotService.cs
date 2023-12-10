@@ -15,7 +15,7 @@ using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-public class RobotService : Erowa.OpenAPI.Robot.Robot.RobotBase
+public class RobotService : Robot.RobotBase
 {
     private readonly IDeviceService deviceService;
     private readonly IHostApplicationLifetime hostApplicationLifetime;

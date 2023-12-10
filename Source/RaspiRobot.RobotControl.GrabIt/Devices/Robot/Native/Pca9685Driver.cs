@@ -7,7 +7,7 @@ using System.Threading;
 /// <summary>
 /// PCA9685 PWM LED/servo controller.
 /// </summary>
-public class Pca9685Driver : IDisposable
+internal class Pca9685Driver : IDisposable
 {
     private const int BusId = 1;
     private const int DeviceAddress = 0x41;
