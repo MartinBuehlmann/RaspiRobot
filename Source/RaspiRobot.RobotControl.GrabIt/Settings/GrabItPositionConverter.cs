@@ -21,7 +21,7 @@ internal class GrabItPositionConverter : JsonConverter<IPosition>
         writer.WriteEndObject();
     }
 
-    public override IPosition? ReadJson(
+    public override IPosition ReadJson(
         JsonReader reader,
         Type objectType,
         IPosition? existingValue,

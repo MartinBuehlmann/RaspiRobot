@@ -17,8 +17,7 @@ public interface IRobot : IDevice
         IAlarmsNotifier alarmsNotifier,
         CancellationToken cancellationToken);
 
-    Task SubscribeForChuckLoadingsChangedAsync(
-        IChuckLoadingsNotifier chuckLoadingsNotifier,
+    Task SubscribeForChuckLoadingsChangedAsync(int[] chuckNumbers, IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken);
 
     Task<ICommandResponse> LoadChuckAsync(StoragePlace sourcePlace, MachineChuck chuck, StoragePlace? destinationPlaceForPalletOnChuck);

@@ -33,7 +33,7 @@ internal class RobotControlDeviceService : IBackgroundService, IDeviceService
 
     public IRobot RetrieveRobot()
     {
-        return this.deviceRegistry.Retrieve((IRobot robot) => true);
+        return this.deviceRegistry.Retrieve((IRobot _) => true);
     }
 
     public IAutoLinkMagazine RetrieveAutoLinkMagazine(int number)

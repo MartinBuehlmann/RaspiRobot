@@ -97,7 +97,7 @@ internal class Pca9685Driver : IDisposable
 
         // 12-bit
         preScaleValue /= 4096.0;
-        preScaleValue /= (double)frequency;
+        preScaleValue /= frequency;
         preScaleValue -= 1.0;
         byte preScale = (byte)Math.Floor(preScaleValue + 0.5);
         var readBuffer = new byte[1];
@@ -122,10 +122,10 @@ internal class Pca9685Driver : IDisposable
     {
         this.AssertInitialized();
 
-        this.device!.Write(new byte[] { (byte)(Led0OnL + (4 * channel)), (byte)(on & 0xFF) });
-        this.device!.Write(new byte[] { (byte)(Led0OnH + (4 * channel)), (byte)(on >> 8) });
-        this.device!.Write(new byte[] { (byte)(Led0OffL + (4 * channel)), (byte)(off & 0xFF) });
-        this.device!.Write(new byte[] { (byte)(Led0OffH + (4 * channel)), (byte)(off >> 8) });
+        this.device!.Write(new[] { (byte)(Led0OnL + (4 * channel)), (byte)(on & 0xFF) });
+        this.device!.Write(new[] { (byte)(Led0OnH + (4 * channel)), (byte)(on >> 8) });
+        this.device!.Write(new[] { (byte)(Led0OffL + (4 * channel)), (byte)(off & 0xFF) });
+        this.device!.Write(new[] { (byte)(Led0OffH + (4 * channel)), (byte)(off >> 8) });
     }
 
     /// <summary>

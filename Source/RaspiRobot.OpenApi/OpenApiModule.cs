@@ -1,6 +1,7 @@
 namespace RaspiRobot.OpenApi;
 
 using Autofac;
+using RaspiRobot.OpenApi.Devices.Robot.ChuckLoading;
 using RaspiRobot.OpenApi.Devices.Robot.State;
 using RaspiRobot.OpenApi.Devices.Shared.Alarms;
 using RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine.State;
@@ -28,5 +29,8 @@ public class OpenApiModule : Module
 
         builder.RegisterType<RobotStateConverter>();
         builder.RegisterType<RobotStateNotifier>().As<IRobotStateNotifier>();
+
+        builder.RegisterType<ChuckLoadingConverter>();
+        builder.RegisterType<ChuckLoadingsNotifier>().As<IChuckLoadingsNotifier>();
     }
 }
