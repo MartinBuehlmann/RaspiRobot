@@ -1,6 +1,7 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.Common;
@@ -71,6 +72,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     }
 
     public async Task SubscribeForChuckLoadingsChangedAsync(
+        int[] chuckNumbers,
         IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken)
     {

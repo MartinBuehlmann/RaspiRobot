@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.8.14">
@@ -14,9 +13,12 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+        <EnableDefaultContentItems>true</EnableDefaultContentItems>
     </PropertyGroup>
     <ItemGroup>
         <Content Include="wwwroot\**\*" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot" />
     </ItemGroup>
 </Project>

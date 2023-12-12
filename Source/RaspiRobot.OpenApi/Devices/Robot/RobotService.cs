@@ -1,5 +1,6 @@
 namespace RaspiRobot.OpenApi.Devices.Robot;
 
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Erowa.OpenAPI;
@@ -70,7 +71,8 @@ public class RobotService : Robot.RobotBase
 
         var chuckLoadingsNotifier = this.factory.Create<IChuckLoadingsNotifier>(responseStream);
         IRobot robot = this.deviceService.RetrieveRobot();
-        await robot.SubscribeForChuckLoadingsChangedAsync(chuckLoadingsNotifier, cancellationTokenSource.Token);
+        int[] chuckNumbers = request.Chucks.Select(x => x.Number).ToArray();
+        await robot.SubscribeForChuckLoadingsChangedAsync(chuckNumbers, chuckLoadingsNotifier, cancellationTokenSource.Token);
     }
 
     public override async Task<CommandResponse> LoadChuck(LoadChuckRequest request, ServerCallContext context)

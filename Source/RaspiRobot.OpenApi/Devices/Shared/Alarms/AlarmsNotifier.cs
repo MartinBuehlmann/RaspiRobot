@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Erowa.OpenAPI;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Alarms;
+using Alarm = Erowa.OpenAPI.Alarm;
 
 internal class AlarmsNotifier : IAlarmsNotifier
 {
@@ -22,7 +23,7 @@ internal class AlarmsNotifier : IAlarmsNotifier
 
     public async Task NotifyAsync(IReadOnlyList<RobotControl.Devices.Alarms.Alarm> alarms)
     {
-        var deviceAlarms = alarms.Select(x => this.alarmConverter.Convert(x)).ToList();
+        IReadOnlyList<Alarm> deviceAlarms = alarms.Select(x => this.alarmConverter.Convert(x)).ToList();
         await this.responseStream.WriteAsync(
             new AlarmResponse
             {
