@@ -1,9 +1,9 @@
-﻿namespace RaspiRobot.RobotControl.Devices;
+﻿namespace RaspiRobot.RobotControl.Settings;
 
 using System.Linq;
 using System.Threading.Tasks;
 using DocumentStorage;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices;
 
 internal class CellSettingsLoader
 {

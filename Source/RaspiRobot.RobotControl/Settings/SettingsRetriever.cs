@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.Devices;
+﻿namespace RaspiRobot.RobotControl.Settings;
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +7,6 @@ using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.Settings;
-using RaspiRobot.RobotControl.Settings;
 
 internal class SettingsRetriever : ISettingsRetriever
 {

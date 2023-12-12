@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.Devices;
+﻿namespace RaspiRobot.RobotControl.Settings;
 
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Machines;
