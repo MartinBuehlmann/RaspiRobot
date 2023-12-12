@@ -1,5 +1,6 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.ChuckLoading;
 
+using System;
 using Erowa.OpenAPI.Robot;
 
 internal class ChuckLoadingConverter
@@ -21,5 +22,6 @@ internal class ChuckLoadingConverter
                     TagId = palletChuckLoading.TagId,
                 },
             },
+            _ => throw new ArgumentOutOfRangeException($"Chuck loading of type '{chuckLoading.Loading}' is not supported."),
         };
 }
