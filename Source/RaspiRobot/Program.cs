@@ -1,5 +1,6 @@
 namespace RaspiRobot;
 
+using System;
 using System.IO;
 using System.Reflection;
 using Autofac;
@@ -20,9 +21,13 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        string? environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        string appSettingsFileName =
+            string.IsNullOrEmpty(environment) ? "appsettings.json" : $"appsettings.{environment}.json";
+
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile(path: "appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile(path: appSettingsFileName, optional: false, reloadOnChange: true)
             .Build();
 
         Log.Logger = new LoggerConfiguration()

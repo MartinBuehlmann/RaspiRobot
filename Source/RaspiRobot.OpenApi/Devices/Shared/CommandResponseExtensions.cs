@@ -3,7 +3,7 @@
 using Erowa.OpenAPI.Robot;
 using RaspiRobot.RobotControl.Devices.Commands;
 
-public static class CommandResponseExtensions
+internal static class CommandResponseExtensions
 {
     public static CommandResponse ToCommandResponse(this ICommandResponse response)
     {

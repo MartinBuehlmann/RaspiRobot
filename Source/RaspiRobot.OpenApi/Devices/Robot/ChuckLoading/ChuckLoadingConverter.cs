@@ -10,15 +10,15 @@ internal class ChuckLoadingConverter
         {
             RobotControl.Devices.Robot.EmptyChuckLoading => new ChuckLoading
             {
-                Chuck = new Chuck {Number = chuckLoading.Chuck.Number},
+                Chuck = new Chuck { Number = chuckLoading.Chuck.Number },
                 Empty = new EmptyChuckLoading(),
             },
             RobotControl.Devices.Robot.PalletChuckLoading palletChuckLoading => new ChuckLoading
             {
-                Chuck = new Chuck {Number = chuckLoading.Chuck.Number},
+                Chuck = new Chuck { Number = chuckLoading.Chuck.Number },
                 Pallet = new PalletChuckLoading
                 {
-                    PalletOnChuckHomePlace = new Place {Number = palletChuckLoading.Place.Number},
+                    PalletOnChuckHomePlace = new Place { Number = palletChuckLoading.Place.Number },
                     TagId = palletChuckLoading.TagId,
                 },
             },

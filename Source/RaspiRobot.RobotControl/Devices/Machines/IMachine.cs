@@ -1,5 +1,3 @@
 ﻿namespace RaspiRobot.RobotControl.Devices.Machines;
 
-public interface IMachine : IDevice
-{
-}
+public interface IMachine : IDevice;

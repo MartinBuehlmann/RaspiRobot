@@ -1,5 +1,3 @@
 ﻿namespace RaspiRobot.RobotControl.Settings;
 
-public interface IPosition
-{
-}
+public interface IPosition;
