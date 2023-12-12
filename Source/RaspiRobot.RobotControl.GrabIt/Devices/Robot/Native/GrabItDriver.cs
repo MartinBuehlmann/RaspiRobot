@@ -48,6 +48,6 @@ internal class GrabItDriver : IGrabItDriver, IDisposable
 
     public void Dispose()
     {
-        this.driver?.Dispose();
+        this.driver.Dispose();
     }
 }

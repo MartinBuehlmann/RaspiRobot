@@ -24,7 +24,7 @@ internal class SimulationDriver : IGrabItDriver
     {
         foreach (GrabItPosition position in positions)
         {
-            this.log.Debug("Setting drive {Drive} to value {Value}.", position.Drive, position.Value);
+            this.log.Debug("Setting drive {Drive} to value {Value}", position.Drive, position.Value);
             this.currentDrivePositions[position.Drive] = position.Value;
         }
     }

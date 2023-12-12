@@ -1,3 +1,3 @@
 namespace RaspiRobot.RobotControl.Devices.Commands;
 
-public record SuccessResponse() : ICommandResponse;
+public record SuccessResponse : ICommandResponse;
