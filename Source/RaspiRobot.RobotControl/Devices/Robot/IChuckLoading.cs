@@ -1,5 +1,3 @@
 namespace RaspiRobot.RobotControl.Devices.Robot;
 
-public interface IChuckLoading
-{
-}
+public interface IChuckLoading;

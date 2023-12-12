@@ -17,12 +17,21 @@ public interface IRobot : IDevice
         IAlarmsNotifier alarmsNotifier,
         CancellationToken cancellationToken);
 
-    Task SubscribeForChuckLoadingsChangedAsync(int[] chuckNumbers, IChuckLoadingsNotifier chuckLoadingsNotifier,
+    Task SubscribeForChuckLoadingsChangedAsync(
+        int[] chuckNumbers,
+        IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken);
 
-    Task<ICommandResponse> LoadChuckAsync(StoragePlace sourcePlace, MachineChuck chuck, StoragePlace? destinationPlaceForPalletOnChuck);
+    Task<ICommandResponse> LoadChuckAsync(
+        StoragePlace sourcePlace,
+        MachineChuck chuck,
+        StoragePlace? destinationPlaceForPalletOnChuck);
 
-    Task<ICommandResponse> UnloadChuckAsync(MachineChuck chuck, StoragePlace destinationPlace);
+    Task<ICommandResponse> UnloadChuckAsync(
+        MachineChuck chuck,
+        StoragePlace destinationPlace);
 
-    Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace);
+    Task<ICommandResponse> ExchangePlaceAsync(
+        StoragePlace sourcePlace,
+        StoragePlace destinationPlace);
 }

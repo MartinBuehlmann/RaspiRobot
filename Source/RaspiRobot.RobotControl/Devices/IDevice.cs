@@ -1,5 +1,3 @@
 ﻿namespace RaspiRobot.RobotControl.Devices;
 
-public interface IDevice
-{
-}
+public interface IDevice;
