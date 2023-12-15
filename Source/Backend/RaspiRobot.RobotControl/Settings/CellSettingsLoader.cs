@@ -3,7 +3,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DocumentStorage;
-using RaspiRobot.RobotControl.Devices;
 
 internal class CellSettingsLoader
 {

@@ -1,6 +1,5 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Settings;
 
-using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation.Settings;

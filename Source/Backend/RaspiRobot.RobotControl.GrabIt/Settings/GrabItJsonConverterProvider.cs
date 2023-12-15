@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItJsonConverterProvider : IJsonConverterProvider
