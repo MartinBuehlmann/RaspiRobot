@@ -1,16 +1,17 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.Common;
+using RaspiRobot.Common.DependencyInjection;
 using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
@@ -31,15 +32,19 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         ISettingsRetriever settingsRetriever,
         TransportSequenceBuilder transportSequenceBuilder,
         TransportSequenceExecutor transportSequenceExecutor,
-        IGrabItDriver driver)
+        IGrabItDriver driver,
+        Factory factory)
     {
         this.settings = settings;
         this.settingsRetriever = settingsRetriever;
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
+        this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
+
+    public IMdiRobot MdiRobot { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {

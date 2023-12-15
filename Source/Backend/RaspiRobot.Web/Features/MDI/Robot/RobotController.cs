@@ -1,19 +1,21 @@
 namespace RaspiRobot.Web.Features.MDI.Robot;
 
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
+using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 
 public class RobotController : MdiController
 {
-    private readonly IDeviceService deviceService;
+    private readonly IMdiRobot mdiRobot;
 
     public RobotController(IDeviceService deviceService)
     {
-        this.deviceService = deviceService;
+        this.mdiRobot = deviceService.RetrieveRobot().MdiRobot;
     }
 
-    public Task MoveToTransferPositionAsync()
+    [HttpPut("Step/{axis}/{direction}")]
+    public bool Step(Axis axis, AxisDirection direction)
     {
-        return Task.CompletedTask;
+        return this.mdiRobot.Step(axis, direction);
     }
 }

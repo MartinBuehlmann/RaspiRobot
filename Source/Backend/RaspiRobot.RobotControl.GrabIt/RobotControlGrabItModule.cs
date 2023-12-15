@@ -3,6 +3,7 @@ namespace RaspiRobot.RobotControl.GrabIt;
 using Autofac;
 using RaspiRobot.RobotControl.GrabIt.Devices.Machines;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
@@ -20,6 +21,7 @@ public class RobotControlGrabItModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterModule<DevicesMachinesModule>();
+        builder.RegisterModule<DevicesRobotMdiModule>();
         builder.RegisterModule<DevicesRobotModule>();
         builder.RegisterModule<DevicesRobotNativeModule>();
         //builder.RegisterModule<DevicesRobotSimulationModule>();
