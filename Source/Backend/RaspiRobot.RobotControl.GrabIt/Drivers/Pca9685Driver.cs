@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
+namespace RaspiRobot.RobotControl.GrabIt.Drivers;
 
 using System;
 using System.Device.I2c;

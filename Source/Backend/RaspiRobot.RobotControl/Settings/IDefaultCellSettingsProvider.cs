@@ -1,6 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.Devices;
-
-using RaspiRobot.RobotControl.Settings;
+﻿namespace RaspiRobot.RobotControl.Settings;
 
 public interface IDefaultCellSettingsProvider
 {

@@ -2,6 +2,7 @@ namespace RaspiRobot.RobotControl.GrabIt.Settings;
 
 using Autofac;
 using RaspiRobot.RobotControl.Devices;
+using RaspiRobot.RobotControl.Settings;
 
 internal class SettingsModule : Module
 {

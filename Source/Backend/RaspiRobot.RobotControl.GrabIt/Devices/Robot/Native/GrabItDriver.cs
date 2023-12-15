@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using RaspiRobot.Common.Logging;
+using RaspiRobot.RobotControl.GrabIt.Drivers;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
 internal class GrabItDriver : IGrabItDriver, IDisposable
