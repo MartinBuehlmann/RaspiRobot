@@ -1,4 +1,4 @@
 cd ..
 cd Source
-rm -r -d ../artifacts
-dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ./../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false
+rm -r -d ../../artifacts
+dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ./../../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false

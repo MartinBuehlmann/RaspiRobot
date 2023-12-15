@@ -1,10 +1,10 @@
 cd ..
-cd Source
-rm -r -d ../artifacts
-dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false
+cd Source/Backend
+rm -r -d ../../artifacts
+dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ../../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false
 ssh pi@192.168.1.25 sudo systemctl stop RaspiRobot
 ssh pi@192.168.1.25 mkdir /home/pi/RaspiRobot
 ssh pi@192.168.1.25 mkdir /home/pi/RaspiRobot/bin
-scp -r ../artifacts/publish/linux/* pi@192.168.1.25:/home/pi/RaspiRobot/bin
+scp -r ../../artifacts/publish/linux/* pi@192.168.1.25:/home/pi/RaspiRobot/bin
 ssh pi@192.168.1.25 chmod +x /home/pi/RaspiRobot/bin/RaspiRobot
 ssh pi@192.168.1.25 sudo systemctl start RaspiRobot
