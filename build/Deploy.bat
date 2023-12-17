@@ -26,7 +26,7 @@ echo Deploying to Raspberry PI at '%address%'...
 plink -ssh pi@%address% -pw %password% -no-antispoof "sudo systemctl stop %product%"
 plink -ssh pi@%address% -pw %password% -no-antispoof "mkdir /home/pi/%product%"
 plink -ssh pi@%address% -pw %password% -no-antispoof "mkdir /home/pi/%product%/bin"
-pscp -pw %password% -r ../../artifacts/publish/raspberry/* pi@%address%:/home/pi/%product%/bin
+pscp -pw %password% -r ../artifacts/publish/raspberry/* pi@%address%:/home/pi/%product%/bin/
 plink -ssh pi@%address% -pw %password% -no-antispoof "chmod +x /home/pi/%product%/bin/%product%"
 plink -ssh pi@%address% -pw %password% -no-antispoof "sudo systemctl start %product%"
 echo Finished.
