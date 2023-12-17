@@ -1,6 +1,12 @@
 @echo off
 cd ..\Source
-if exist ..\..\artifacts rd ..\..\artifacts /s /q
+if exist ..\artifacts rd ..\artifacts /s /q
+
+echo Build Angular frontend...
+cd Frontend\raspi-robot-app
+call ng build --output-path ../../../artifacts/frontend --delete-output-path
+cd ..\..
+echo Angular frontend built.
 
 echo Build .NET backend...
 cd Backend
