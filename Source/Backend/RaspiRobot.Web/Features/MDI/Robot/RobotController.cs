@@ -3,6 +3,7 @@ namespace RaspiRobot.Web.Features.MDI.Robot;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
+using RaspiRobot.RobotControl.Settings;
 
 public class RobotController : MdiController
 {
@@ -13,9 +14,11 @@ public class RobotController : MdiController
         this.mdiRobot = deviceService.RetrieveRobot().MdiRobot;
     }
 
+    // TODO: IPosition is not serialized as it should.
     [HttpPut("Step/{axis}/{direction}")]
-    public bool Step(Axis axis, AxisDirection direction)
+    public StepResponseInfo Step(Axis axis, AxisDirection direction)
     {
-        return this.mdiRobot.Step(axis, direction);
+        IPosition? newPosition = this.mdiRobot.Step(axis, direction);
+        return new StepResponseInfo(newPosition is not null, newPosition);
     }
 }

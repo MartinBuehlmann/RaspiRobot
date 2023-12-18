@@ -5,6 +5,7 @@ using RaspiRobot.Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItMdiRobot : IMdiRobot
 {
@@ -25,12 +26,12 @@ internal class GrabItMdiRobot : IMdiRobot
     private bool IsInMdiMode
         => this.operationModeRetriever.OperationMode == OperationMode.Mdi;
 
-    public bool Step(Axis axis, AxisDirection direction)
+    public IPosition? Step(Axis axis, AxisDirection direction)
     {
         if (!this.IsInMdiMode)
         {
             this.LogNotInMdiMode(nameof(this.Step));
-            return false;
+            return null;
         }
 
         var drive = (byte)axis;
@@ -39,11 +40,12 @@ internal class GrabItMdiRobot : IMdiRobot
 
         if (currentValue != newValue)
         {
-            this.grabItDriver.Execute(new[] { new GrabItPosition(drive, newValue) });
-            return true;
+            var position = new GrabItPosition(drive, newValue);
+            this.grabItDriver.Execute(new[] { position });
+            return position;
         }
 
-        return false;
+        return null;
     }
 
     private static int CalculateStepPosition(int currentValue, AxisDirection direction)

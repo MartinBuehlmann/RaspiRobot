@@ -1,6 +1,8 @@
 namespace RaspiRobot.RobotControl.Devices.Robot.Mdi;
 
+using RaspiRobot.RobotControl.Settings;
+
 public interface IMdiRobot
 {
-    bool Step(Axis axis, AxisDirection direction);
+    IPosition? Step(Axis axis, AxisDirection direction);
 }
