@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+
+main {
+    display: flex;
+}
+
+aside {
+    flex: 1;
+}
+  
+aside li {
+    padding-bottom: 10px;
+}
+
+article {
+    flex: 4;
+    padding: 20px 30px;
+    color: #E6EDF3;
+    background-color: #0D1117;
+    border-color: #21262D;
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+}

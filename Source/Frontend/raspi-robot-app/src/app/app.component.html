@@ -1,3 +1,17 @@
-<app-header></app-header>
+<header>
+    <app-header></app-header>
+</header>
 
-<router-outlet></router-outlet>
+<main>
+    <aside>
+        <app-navigation></app-navigation>
+    </aside>
+    
+    <article>
+        <router-outlet></router-outlet>
+    </article>
+</main>
+
+<footer>
+    <app-footer></app-footer>
+</footer>

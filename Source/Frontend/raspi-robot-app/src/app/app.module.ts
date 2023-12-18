@@ -8,6 +8,8 @@ import { DevicesComponent } from './devices/devices.component';
 import { MdiComponent } from './mdi/mdi.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HomeComponent } from './home/home.component';
     DevicesComponent,
     MdiComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    NavigationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
