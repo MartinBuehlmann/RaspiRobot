@@ -1,11 +1,15 @@
 namespace RaspiRobot.RobotControl.OperationMode;
 
 using System;
+using EventBroker;
 
 internal class OperationModeCache : IOperationModeRetriever, IOperationModeSetter
 {
-    public OperationModeCache()
+    private readonly IEventBroker eventBroker;
+
+    public OperationModeCache(IEventBroker eventBroker)
     {
+        this.eventBroker = eventBroker;
         // TODO: With a tri-state hardware switch, it should be by default off,
         //       respectively set by the hardware. With software only, we set it
         //       to Automatic and let it override by the web interface for Mdi mode.
@@ -23,6 +27,7 @@ internal class OperationModeCache : IOperationModeRetriever, IOperationModeSette
         {
             this.OperationMode = operationMode;
             this.OperationModeChanged?.Invoke(this, EventArgs.Empty);
+            this.eventBroker.Publish(new OperationModeChangedEvent());
         }
     }
 }

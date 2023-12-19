@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.Common.Logging;
+﻿namespace Common.Logging;
 
 using System;
 using Serilog;

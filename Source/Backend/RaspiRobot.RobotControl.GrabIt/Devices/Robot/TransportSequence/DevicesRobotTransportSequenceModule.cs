@@ -8,5 +8,6 @@ internal class DevicesRobotTransportSequenceModule : Module
     {
         builder.RegisterType<TransportSequenceBuilder>();
         builder.RegisterType<TransportSequenceExecutor>();
+        builder.RegisterType<TransportSequenceStepInterpolator>();
     }
 }

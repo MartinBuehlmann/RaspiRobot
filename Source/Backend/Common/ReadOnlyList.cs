@@ -1,4 +1,4 @@
-namespace RaspiRobot.Common;
+namespace Common;
 
 using System.Collections.Generic;
 

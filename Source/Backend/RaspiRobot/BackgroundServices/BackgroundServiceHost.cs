@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Common;
 using Microsoft.Extensions.Hosting;
-using RaspiRobot.Common;
 
 internal class BackgroundServiceHost : IHostedService
 {

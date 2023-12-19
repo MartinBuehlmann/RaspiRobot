@@ -1,7 +1,7 @@
 namespace RaspiRobot.RobotControl.Devices;
 
 using Autofac;
-using RaspiRobot.Common;
+using Common;
 
 internal class DevicesModule : Module
 {

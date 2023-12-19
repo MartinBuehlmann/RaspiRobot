@@ -13,7 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RaspiRobot.Common\RaspiRobot.Common.csproj" />
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\EventBroker.Autofac\EventBroker.Autofac.csproj" />
+      <ProjectReference Include="..\EventBroker\EventBroker.csproj" />
       <ProjectReference Include="..\RaspiRobot.RobotControl\RaspiRobot.RobotControl.csproj" />
     </ItemGroup>
 

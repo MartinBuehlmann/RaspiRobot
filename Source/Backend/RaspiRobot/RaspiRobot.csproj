@@ -18,7 +18,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DocumentStorage.FileBased\DocumentStorage.FileBased.csproj" />
-      <ProjectReference Include="..\RaspiRobot.Common\RaspiRobot.Common.csproj" />
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\EventBroker.Autofac\EventBroker.Autofac.csproj" />
       <ProjectReference Include="..\RaspiRobot.OpenApi\RaspiRobot.OpenApi.csproj" />
       <ProjectReference Include="..\RaspiRobot.RobotControl.GrabIt\RaspiRobot.RobotControl.GrabIt.csproj" />
       <ProjectReference Include="..\RaspiRobot.Web\RaspiRobot.Web.csproj" />

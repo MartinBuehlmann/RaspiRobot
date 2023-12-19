@@ -41,5 +41,4 @@ internal class TransportSequenceExecutor
             Thread.Sleep(150);
         }
     }
-
 }

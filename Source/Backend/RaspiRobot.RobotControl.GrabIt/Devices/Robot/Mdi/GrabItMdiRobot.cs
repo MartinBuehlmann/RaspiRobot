@@ -1,7 +1,7 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 
 using System;
-using RaspiRobot.Common.Logging;
+using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 using RaspiRobot.RobotControl.OperationMode;

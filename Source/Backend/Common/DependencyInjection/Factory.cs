@@ -1,4 +1,4 @@
-namespace RaspiRobot.Common.DependencyInjection;
+namespace Common.DependencyInjection;
 
 using System;
 using System.Collections.Generic;

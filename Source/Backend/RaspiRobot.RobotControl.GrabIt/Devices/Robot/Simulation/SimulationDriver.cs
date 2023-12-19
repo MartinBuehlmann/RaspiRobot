@@ -1,7 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
 
 using System.Collections.Generic;
-using RaspiRobot.Common.Logging;
+using Common.Logging;
 using RaspiRobot.RobotControl.GrabIt.Settings;
 
 internal class SimulationDriver : IGrabItDriver
