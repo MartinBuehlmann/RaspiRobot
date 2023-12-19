@@ -20,23 +20,26 @@ public class OperationModeController : WebController
     }
 
     [HttpPut("{operationMode}")]
-    public IActionResult SetOperationMode(OperationMode operationMode)
+    public IActionResult SetOperationMode(string operationMode)
     {
-        this.operationModeSetter.SetOperationMode(operationMode);
+        OperationMode newOperationMode = Enum.Parse<OperationMode>(operationMode);
+        this.operationModeSetter.SetOperationMode(newOperationMode);
         return this.Ok();
     }
 
     [HttpGet("All")]
-    public List<OperationModeInfo> GetOperationModes()
+    public List<string> GetOperationModes()
     {
         return Enum.GetValues<OperationMode>()
-            .Select(x => new OperationModeInfo(x.ToString(), x))
+            .Select(x => x.ToString())
             .ToList();
     }
 
     [HttpGet("Current")]
-    public OperationMode GetOperationMode()
+    public string GetOperationMode()
     {
-        return this.operationModeRetriever.OperationMode;
+        return this.operationModeRetriever
+            .OperationMode
+            .ToString();
     }
 }
