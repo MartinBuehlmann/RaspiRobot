@@ -1,6 +1,5 @@
 namespace RaspiRobot.Web.Features.MDI.Robot;
 
-using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;

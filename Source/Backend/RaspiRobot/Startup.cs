@@ -29,11 +29,12 @@ public class Startup
     {
         services.AddGrpc();
 
-        services.AddControllers().AddJsonOptions(o =>
-        {
-            var enumConverter = new JsonStringEnumConverter();
-            o.JsonSerializerOptions.Converters.Add(enumConverter);
-        });
+        services
+            .AddControllers()
+            .AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
         services.AddSwaggerGen(c =>
         {
