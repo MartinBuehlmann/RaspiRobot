@@ -1,0 +1,14 @@
+#container {
+    display: flex;
+    padding: 20px 30px;
+    background-color: black;
+    color: #E6EDF3;
+
+    #operationmode {
+        flex-grow: 1;
+        display: flex;
+        gap: 20px;
+        justify-content: right;
+        font-variant: small-caps;
+    }
+}

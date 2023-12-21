@@ -22,7 +22,7 @@ sudo nano /etc/nginx/sites-available/default
 Adapt location settings like this:
 ```
     location / {
-        proxy_pass         http://127.0.0.1:5000;
+        proxy_pass         http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header   Upgrade $http_upgrade;
         proxy_set_header   Connection keep-alive;
@@ -37,6 +37,9 @@ Adapt location settings like this:
 sudo nginx -t
 sudo nginx -s reload
 ```
+## Open Point
+
+gRpc connection is currently not configured to be proxied by nginx.
 
 ## Documentation on the Web
 You can find more information here:
