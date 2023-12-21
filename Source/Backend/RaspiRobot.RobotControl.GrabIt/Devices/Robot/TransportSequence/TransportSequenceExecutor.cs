@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using RaspiRobot.RobotControl.GrabIt.Settings;
 using RaspiRobot.RobotControl.Settings;
 
 internal class TransportSequenceExecutor
@@ -22,9 +21,7 @@ internal class TransportSequenceExecutor
             foreach (Step step in sequence.Steps)
             {
                 IReadOnlyDictionary<byte, int> currentDrivePositions = driver.CurrentDrivePositions;
-                IReadOnlyList<GrabItPosition> positions = step.Positions
-                    .OfType<GrabItPosition>()
-                    .ToList();
+                IReadOnlyList<Position> positions = step.Positions;
 
                 if (currentDrivePositions.Any())
                 {

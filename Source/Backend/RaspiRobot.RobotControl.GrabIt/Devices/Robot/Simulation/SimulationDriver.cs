@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using Common.Logging;
-using RaspiRobot.RobotControl.GrabIt.Settings;
+using RaspiRobot.RobotControl.Settings;
 
 internal class SimulationDriver : IGrabItDriver
 {
@@ -20,9 +20,9 @@ internal class SimulationDriver : IGrabItDriver
     {
     }
 
-    public void Execute(IReadOnlyList<GrabItPosition> positions)
+    public void Execute(IReadOnlyList<Position> positions)
     {
-        foreach (GrabItPosition position in positions)
+        foreach (Position position in positions)
         {
             this.log.Debug("Setting drive {Drive} to value {Value}", position.Drive, position.Value);
             this.currentDrivePositions[position.Drive] = position.Value;

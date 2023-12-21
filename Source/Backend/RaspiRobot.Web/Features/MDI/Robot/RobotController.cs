@@ -15,14 +15,13 @@ public class RobotController : MdiController
         this.mdiRobot = deviceService.RetrieveRobot().MdiRobot;
     }
 
-    // TODO: IPosition is not serialized as it should.
     [HttpPut("Step/{axis}/{direction}")]
     public StepResponseInfo Step(
-        [Range(0, 5, ErrorMessage = "Axis needs to be 0..5")] int axis,
+        [Range(0, 5)] int axis,
         AxisDirection direction)
     {
         var axisValue = (Axis)axis;
-        IPosition? newPosition = this.mdiRobot.Step(axisValue, direction);
+        Position? newPosition = this.mdiRobot.Step(axisValue, direction);
         return new StepResponseInfo(newPosition is not null, newPosition);
     }
 }

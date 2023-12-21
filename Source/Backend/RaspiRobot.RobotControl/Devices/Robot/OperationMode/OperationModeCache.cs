@@ -10,6 +10,7 @@ internal class OperationModeCache : IOperationModeRetriever, IOperationModeSette
     public OperationModeCache(IEventBroker eventBroker)
     {
         this.eventBroker = eventBroker;
+
         // TODO: With a tri-state hardware switch, it should be by default off,
         //       respectively set by the hardware. With software only, we set it
         //       to Automatic and let it override by the web interface for Mdi mode.

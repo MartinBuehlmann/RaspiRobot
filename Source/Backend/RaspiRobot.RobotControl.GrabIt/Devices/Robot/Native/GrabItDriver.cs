@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Common.Logging;
 using RaspiRobot.RobotControl.GrabIt.Driver;
-using RaspiRobot.RobotControl.GrabIt.Settings;
+using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItDriver : IGrabItDriver, IDisposable
 {
@@ -29,9 +29,9 @@ internal class GrabItDriver : IGrabItDriver, IDisposable
         this.driver.SetPwmFrequency(50);
     }
 
-    public void Execute(IReadOnlyList<GrabItPosition> positions)
+    public void Execute(IReadOnlyList<Position> positions)
     {
-        foreach (GrabItPosition position in positions)
+        foreach (Position position in positions)
         {
             if (!this.currentDrivePositions.ContainsKey(position.Drive) || this.currentDrivePositions[position.Drive] != position.Drive)
             {

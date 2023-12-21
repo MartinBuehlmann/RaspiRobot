@@ -2,4 +2,4 @@
 
 using RaspiRobot.RobotControl.Settings;
 
-public record StepResponseInfo(bool Executed, IPosition? NewPosition);
+public record StepResponseInfo(bool Executed, Position? NewPosition);
