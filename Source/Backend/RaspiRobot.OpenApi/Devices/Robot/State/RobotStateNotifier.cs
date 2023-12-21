@@ -27,10 +27,7 @@ internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync
     {
         Erowa.OpenAPI.Robot.RobotState robotState = this.robotStateConverter.Convert(state);
         await this.responseStream.WriteAsync(
-            new StateResponse
-            {
-                State = robotState,
-            });
+            new StateResponse { State = robotState, });
     }
 
     public async Task HandleAsync(RobotStateChangedEvent _)
