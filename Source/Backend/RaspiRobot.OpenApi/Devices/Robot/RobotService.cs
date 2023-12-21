@@ -3,17 +3,18 @@ namespace RaspiRobot.OpenApi.Devices.Robot;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.DependencyInjection;
 using Erowa.OpenAPI;
 using Erowa.OpenAPI.Robot;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
-using RaspiRobot.Common.DependencyInjection;
 using RaspiRobot.OpenApi.Devices.Shared;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
 
 public class RobotService : Robot.RobotBase

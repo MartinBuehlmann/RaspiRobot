@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    line-height: 1.5em;
+}
+
+a {
+    color: silver;
+
+    &:hover {
+        color: gray;
+    }
+}

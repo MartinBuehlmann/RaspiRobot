@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="..\RaspiRobot.Common\RaspiRobot.Common.csproj" />
+      <ProjectReference Include="..\DocumentStorage.FileBased\DocumentStorage.FileBased.csproj" />
+      <ProjectReference Include="..\Common\Common.csproj" />
       <ProjectReference Include="..\RaspiRobot.RobotControl\RaspiRobot.RobotControl.csproj" />
     </ItemGroup>
 

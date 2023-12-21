@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public class Step
 {
-    public List<IPosition> Positions { get; } = new();
+    public List<Position> Positions { get; } = new();
 }

@@ -3,7 +3,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using RaspiRobot.Common;
+using Common;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;

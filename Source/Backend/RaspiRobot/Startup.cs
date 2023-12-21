@@ -1,6 +1,7 @@
 ﻿namespace RaspiRobot;
 
 using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -28,7 +29,13 @@ public class Startup
     {
         services.AddGrpc();
 
-        services.AddControllers();
+        services
+            .AddControllers()
+            .AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("web", new OpenApiInfo { Title = "RaspiRobot WEB" });

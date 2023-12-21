@@ -1,9 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.Settings;
 
-using System.Linq;
 using System.Threading.Tasks;
 using DocumentStorage;
-using RaspiRobot.RobotControl.Devices;
 
 internal class CellSettingsLoader
 {
@@ -12,11 +10,9 @@ internal class CellSettingsLoader
 
     public CellSettingsLoader(
         IDocumentStorage documentStorage,
-        IJsonConverterProvider jsonConverterProvider,
         IDefaultCellSettingsProvider defaultCellSettingsProvider)
     {
         this.documentStorage = documentStorage;
-        this.documentStorage.RegisterConverter(jsonConverterProvider.JsonConverters.ToArray());
         this.defaultCellSettingsProvider = defaultCellSettingsProvider;
     }
 

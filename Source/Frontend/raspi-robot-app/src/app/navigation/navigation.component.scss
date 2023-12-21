@@ -1,0 +1,28 @@
+#container {
+    display: flex;
+    padding: 20px 30px;
+    color: #E6EDF3;
+    background-color: #0D1117;
+    border-color: #21262D;
+    border-width: 1px 1px 1px 0px;
+    border-style: solid;
+
+    #links {
+        flex-grow: 1;
+        display: flex;
+        gap: 20px;
+        justify-content: left;
+        font-variant: small-caps;
+
+        .link {
+            padding-bottom: 5px;
+            cursor: pointer;
+            &:hover {
+                color: silver;
+            }
+            &.active {
+                font-weight: bold;
+            }
+        }
+    }
+}

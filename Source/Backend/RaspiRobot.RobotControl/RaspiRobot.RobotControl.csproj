@@ -16,7 +16,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DocumentStorage\DocumentStorage.csproj" />
-      <ProjectReference Include="..\RaspiRobot.Common\RaspiRobot.Common.csproj" />
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\EventBroker\EventBroker.csproj" />
     </ItemGroup>
 
 </Project>

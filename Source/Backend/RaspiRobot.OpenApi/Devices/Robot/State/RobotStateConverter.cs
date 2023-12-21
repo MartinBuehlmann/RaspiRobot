@@ -1,19 +1,19 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.State;
 
 using System;
-using Erowa.OpenAPI.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.State;
 
 internal class RobotStateConverter
 {
-    public RobotState Convert(RobotControl.Devices.Robot.State state)
+    public Erowa.OpenAPI.Robot.RobotState Convert(RobotState state)
     {
         return state switch
         {
-            RobotControl.Devices.Robot.State.Disconnected => RobotState.Disconnected,
-            RobotControl.Devices.Robot.State.NotReady => RobotState.NotReady,
-            RobotControl.Devices.Robot.State.Ready => RobotState.Ready,
-            RobotControl.Devices.Robot.State.Busy => RobotState.Busy,
-            RobotControl.Devices.Robot.State.Error => RobotState.Error,
+            RobotState.Disconnected => Erowa.OpenAPI.Robot.RobotState.Disconnected,
+            RobotState.NotReady => Erowa.OpenAPI.Robot.RobotState.NotReady,
+            RobotState.Ready => Erowa.OpenAPI.Robot.RobotState.Ready,
+            RobotState.Busy => Erowa.OpenAPI.Robot.RobotState.Busy,
+            RobotState.Error => Erowa.OpenAPI.Robot.RobotState.Error,
             _ => throw new NotSupportedException($"Invalid robot state '{state}' detected."),
         };
     }

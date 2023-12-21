@@ -14,13 +14,16 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <PackageReference Include="System.Text.Json" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DocumentStorage.FileBased\DocumentStorage.FileBased.csproj" />
-      <ProjectReference Include="..\RaspiRobot.Common\RaspiRobot.Common.csproj" />
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\EventBroker.Autofac\EventBroker.Autofac.csproj" />
       <ProjectReference Include="..\RaspiRobot.OpenApi\RaspiRobot.OpenApi.csproj" />
       <ProjectReference Include="..\RaspiRobot.RobotControl.GrabIt\RaspiRobot.RobotControl.GrabIt.csproj" />
+      <ProjectReference Include="..\RaspiRobot.Web\RaspiRobot.Web.csproj" />
     </ItemGroup>
 
 </Project>

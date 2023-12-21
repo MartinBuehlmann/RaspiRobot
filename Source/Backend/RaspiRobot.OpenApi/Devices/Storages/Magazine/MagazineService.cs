@@ -2,11 +2,11 @@ namespace RaspiRobot.OpenApi.Devices.Storages.Magazine;
 
 using System.Threading;
 using System.Threading.Tasks;
+using Common.DependencyInjection;
 using Erowa.OpenAPI;
 using Erowa.OpenAPI.Storage;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
-using RaspiRobot.Common.DependencyInjection;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Storages.Magazine;

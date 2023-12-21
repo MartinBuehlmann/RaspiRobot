@@ -5,13 +5,14 @@ using System.IO;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Common;
 using DocumentStorage.FileBased;
+using EventBroker.Autofac;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.BackgroundServices;
-using RaspiRobot.Common;
 using RaspiRobot.OpenApi;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.GrabIt;
@@ -60,6 +61,7 @@ public class Program
     {
         builder.RegisterModule<CommonModule>();
         builder.RegisterModule<DocumentStorageFileBasedModule>();
+        builder.RegisterModule<EventBrokerModule>();
         builder.RegisterModule<OpenApiModule>();
         builder.RegisterModule<RobotControlGrabItModule>();
         builder.RegisterModule<RobotControlModule>();

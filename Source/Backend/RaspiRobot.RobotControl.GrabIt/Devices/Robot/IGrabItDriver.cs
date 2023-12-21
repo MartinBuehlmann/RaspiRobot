@@ -1,7 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
 using System.Collections.Generic;
-using RaspiRobot.RobotControl.GrabIt.Settings;
+using RaspiRobot.RobotControl.Settings;
 
 internal interface IGrabItDriver
 {
@@ -9,5 +9,5 @@ internal interface IGrabItDriver
 
     void Initialize();
 
-    void Execute(IReadOnlyList<GrabItPosition> positions);
+    void Execute(IReadOnlyList<Position> positions);
 }

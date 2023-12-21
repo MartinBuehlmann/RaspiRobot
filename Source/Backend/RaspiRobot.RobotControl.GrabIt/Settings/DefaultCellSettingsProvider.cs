@@ -1,6 +1,5 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Settings;
 
-using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation.Settings;
@@ -22,12 +21,12 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                         {
                             Positions =
                             {
-                                new GrabItPosition(2, 300),
-                                new GrabItPosition(4, 300),
-                                new GrabItPosition(5, 320),
-                                new GrabItPosition(0, 300),
-                                new GrabItPosition(1, 300),
-                                new GrabItPosition(3, 200),
+                                new Position(2, 300),
+                                new Position(4, 300),
+                                new Position(5, 320),
+                                new Position(0, 300),
+                                new Position(1, 300),
+                                new Position(3, 200),
                             },
                         },
                     },
@@ -40,10 +39,10 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                         {
                             Positions =
                             {
-                                new GrabItPosition(1, 300),
-                                new GrabItPosition(2, 300),
-                                new GrabItPosition(3, 200),
-                                new GrabItPosition(4, 300),
+                                new Position(1, 300),
+                                new Position(2, 300),
+                                new Position(3, 200),
+                                new Position(4, 300),
                             },
                         },
                     },
@@ -65,35 +64,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 510),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -106,35 +105,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 510),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 510),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -158,35 +157,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 95),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -199,35 +198,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 95),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 95),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -251,35 +250,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 160),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -292,35 +291,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 160),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 160),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -335,35 +334,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 250),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -376,35 +375,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 250),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 250),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -419,35 +418,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 350),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -460,35 +459,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 350),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 350),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -503,35 +502,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 320),
+                                            new Position(0, 440),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 280),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },
@@ -544,35 +543,35 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(0, 440),
-                                            new GrabItPosition(1, 300),
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(3, 200),
-                                            new GrabItPosition(4, 300),
-                                            new GrabItPosition(5, 280),
+                                            new Position(0, 440),
+                                            new Position(1, 300),
+                                            new Position(2, 300),
+                                            new Position(3, 200),
+                                            new Position(4, 300),
+                                            new Position(5, 280),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(1, 250),
-                                            new GrabItPosition(2, 230),
+                                            new Position(1, 250),
+                                            new Position(2, 230),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(5, 320),
+                                            new Position(5, 320),
                                         },
                                     },
                                     new Step
                                     {
                                         Positions =
                                         {
-                                            new GrabItPosition(2, 300),
-                                            new GrabItPosition(1, 300),
+                                            new Position(2, 300),
+                                            new Position(1, 300),
                                         },
                                     },
                                 },

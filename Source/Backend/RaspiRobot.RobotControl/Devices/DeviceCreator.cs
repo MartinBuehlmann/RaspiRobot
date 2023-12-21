@@ -3,8 +3,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RaspiRobot.Common.DependencyInjection;
-using RaspiRobot.Common.Logging;
+using Common.DependencyInjection;
+using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;

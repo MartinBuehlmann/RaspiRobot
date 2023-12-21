@@ -1,0 +1,24 @@
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+nav {
+    flex: 0 0 250px;
+}
+  
+nav li {
+    padding-bottom: 10px;
+}
+
+content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 30px;
+    color: #E6EDF3;
+    background-color: #0D1117;
+    border-color: #21262D;
+    border-width: 1px 0px 1px 1px;
+    border-style: solid;
+}
