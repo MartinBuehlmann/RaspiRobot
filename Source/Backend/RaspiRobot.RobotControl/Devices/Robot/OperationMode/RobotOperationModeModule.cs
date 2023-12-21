@@ -1,8 +1,8 @@
-namespace RaspiRobot.RobotControl.OperationMode;
+namespace RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 using Autofac;
 
-internal class OperationModeModule : Module
+internal class RobotOperationModeModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

@@ -1,8 +1,8 @@
-namespace RaspiRobot.RobotControl.GrabIt.OperationMode;
+namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.OperationMode;
 
 using System;
 using System.Device.Gpio;
-using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 internal class GrabItOperationModeByHardwareRetriever : IOperationModeByHardwareRetriever, IDisposable
 {

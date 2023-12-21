@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 public class OperationModeController : WebController
 {

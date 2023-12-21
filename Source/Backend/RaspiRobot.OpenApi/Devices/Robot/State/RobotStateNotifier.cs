@@ -6,7 +6,7 @@ using Erowa.OpenAPI.Robot;
 using EventBroker;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync<OperationModeChangedEvent>
 {

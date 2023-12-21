@@ -2,7 +2,7 @@ namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 
 using Autofac;
 
-internal class DevicesRobotTransportSequenceModule : Module
+internal class RobotTransportSequenceModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

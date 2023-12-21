@@ -3,8 +3,8 @@ namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 using System;
 using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.GrabIt.Settings;
-using RaspiRobot.RobotControl.OperationMode;
 using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItMdiRobot : IMdiRobot

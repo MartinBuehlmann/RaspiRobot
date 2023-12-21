@@ -3,7 +3,7 @@ namespace RaspiRobot.RobotControl.GrabIt.Devices.Storages.Magazine;
 using Autofac;
 using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
-internal class DevicesStoragesMagazineModule : Module
+internal class StoragesMagazineModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

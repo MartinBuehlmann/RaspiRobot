@@ -2,7 +2,7 @@ namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
 
 using Autofac;
 
-internal class DevicesRobotNativeModule : Module
+internal class RobotNativeModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

@@ -4,7 +4,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
-using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 public class RequiresOperationModeAttribute : ActionFilterAttribute
 {

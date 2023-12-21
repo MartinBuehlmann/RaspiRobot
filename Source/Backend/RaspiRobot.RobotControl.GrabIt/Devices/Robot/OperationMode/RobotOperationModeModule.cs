@@ -1,9 +1,9 @@
-namespace RaspiRobot.RobotControl.GrabIt.OperationMode;
+namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.OperationMode;
 
 using Autofac;
-using RaspiRobot.RobotControl.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
-internal class OperationModeModule : Module
+internal class RobotOperationModeModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

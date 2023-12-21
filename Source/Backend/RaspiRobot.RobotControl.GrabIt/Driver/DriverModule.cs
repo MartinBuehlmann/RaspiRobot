@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.GrabIt.Drivers;
+namespace RaspiRobot.RobotControl.GrabIt.Driver;
 
 using Autofac;
 

@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.OperationMode;
+namespace RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 
 using System;
 using EventBroker;
