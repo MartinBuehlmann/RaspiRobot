@@ -1,6 +1,6 @@
-namespace RaspiRobot.RobotControl.Devices.Robot;
+namespace RaspiRobot.RobotControl.Devices.Robot.State;
 
-public enum State
+public enum RobotState
 {
     Disconnected = 0,
     NotReady = 1,

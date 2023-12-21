@@ -2,7 +2,7 @@ namespace RaspiRobot.OpenApi.Devices.Robot.State;
 
 using Autofac;
 using EventBroker.Autofac;
-using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.State;
 
 internal class DevicesRobotStateModule : Module
 {

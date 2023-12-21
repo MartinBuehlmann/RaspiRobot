@@ -1,32 +1,31 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Robot.State;
 
-using System;
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Robot;
 using EventBroker;
 using Grpc.Core;
-using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
+using RaspiRobot.RobotControl.Devices.Robot.State;
+using RobotState = RaspiRobot.RobotControl.Devices.Robot.State.RobotState;
 
-internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync<OperationModeChangedEvent>
+internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync<RobotStateChangedEvent>
 {
     private readonly RobotStateConverter robotStateConverter;
     private readonly IServerStreamWriter<StateResponse> responseStream;
-    private readonly IOperationModeRetriever operationModeRetriever;
+    private readonly IRobotStateRetriever robotStateRetriever;
 
     public RobotStateNotifier(
         RobotStateConverter robotStateConverter,
         IServerStreamWriter<StateResponse> responseStream,
-        IOperationModeRetriever operationModeRetriever)
+        IRobotStateRetriever robotStateRetriever)
     {
         this.robotStateConverter = robotStateConverter;
         this.responseStream = responseStream;
-        this.operationModeRetriever = operationModeRetriever;
+        this.robotStateRetriever = robotStateRetriever;
     }
 
-    public async Task NotifyAsync(State state)
+    public async Task NotifyAsync(RobotState state)
     {
-        RobotState robotState = this.robotStateConverter.Convert(state);
+        Erowa.OpenAPI.Robot.RobotState robotState = this.robotStateConverter.Convert(state);
         await this.responseStream.WriteAsync(
             new StateResponse
             {
@@ -34,19 +33,8 @@ internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync
             });
     }
 
-    // TODO: This must be moved to the GrabItRobot, since this class here must not care about state logic.
-    public async Task HandleAsync(OperationModeChangedEvent data)
+    public async Task HandleAsync(RobotStateChangedEvent _)
     {
-        OperationMode currentOperationMode = this.operationModeRetriever.OperationMode;
-
-        State state = currentOperationMode switch
-        {
-            OperationMode.Automatic => State.Ready,
-            OperationMode.Mdi => State.NotReady,
-            OperationMode.NotReady => State.NotReady,
-            _ => throw new ArgumentOutOfRangeException($"Unsupported operation mode '{currentOperationMode}'"),
-        };
-
-        await this.NotifyAsync(state);
+        await this.NotifyAsync(this.robotStateRetriever.RobotState);
     }
 }

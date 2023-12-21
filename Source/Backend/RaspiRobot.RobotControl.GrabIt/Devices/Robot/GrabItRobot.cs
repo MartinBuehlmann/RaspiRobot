@@ -13,14 +13,16 @@ using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.State;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.Settings;
-using State = RaspiRobot.RobotControl.Devices.Robot.State;
 
 internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
     private readonly IGrabItDriver driver;
+    private readonly RobotStateCache robotStateCache;
     private readonly RobotSettings settings;
     private readonly ISettingsRetriever settingsRetriever;
     private readonly TransportSequenceBuilder transportSequenceBuilder;
@@ -33,6 +35,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         TransportSequenceBuilder transportSequenceBuilder,
         TransportSequenceExecutor transportSequenceExecutor,
         IGrabItDriver driver,
+        RobotStateCache robotStateCache,
         Factory factory)
     {
         this.settings = settings;
@@ -40,6 +43,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
+        this.robotStateCache = robotStateCache;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
@@ -63,7 +67,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         CancellationToken cancellationToken)
     {
         this.robotStateNotifiers.Add(robotStateNotifier);
-        await robotStateNotifier.NotifyAsync(State.Ready);
+        await robotStateNotifier.NotifyAsync(RobotState.Ready);
         cancellationToken.WaitHandle.WaitOne();
         this.robotStateNotifiers.Remove(robotStateNotifier);
     }
@@ -142,12 +146,12 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 
     private async Task ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
     {
-        await this.NotifyStateAsync(State.Busy);
+        await this.NotifyStateAsync(RobotState.Busy);
         this.transportSequenceExecutor.Execute(sequences, this.driver);
-        await this.NotifyStateAsync(State.Ready);
+        await this.NotifyStateAsync(RobotState.Ready);
     }
 
-    private async Task NotifyStateAsync(State state)
+    private async Task NotifyStateAsync(RobotState state)
     {
         foreach (IRobotStateNotifier robotStateNotifier in this.robotStateNotifiers)
         {
