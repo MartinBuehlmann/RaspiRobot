@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Settings;
 
 internal class TransportSequenceExecutor
@@ -14,7 +14,7 @@ internal class TransportSequenceExecutor
         this.interpolator = interpolator;
     }
 
-    public void Execute(IReadOnlyList<Sequence> sequences, IGrabItDriver driver)
+    public async Task ExecuteAsync(IReadOnlyList<Sequence> sequences, IGrabItDriver driver)
     {
         foreach (Sequence sequence in sequences)
         {
@@ -32,10 +32,10 @@ internal class TransportSequenceExecutor
 
                 driver.Execute(positions);
 
-                Thread.Sleep(10);
+                await Task.Delay(10);
             }
 
-            Thread.Sleep(150);
+            await Task.Delay(150);
         }
     }
 }

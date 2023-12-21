@@ -21,12 +21,12 @@ using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
-    private readonly IGrabItDriver driver;
-    private readonly RobotStateCache robotStateCache;
     private readonly RobotSettings settings;
     private readonly ISettingsRetriever settingsRetriever;
     private readonly TransportSequenceBuilder transportSequenceBuilder;
     private readonly TransportSequenceExecutor transportSequenceExecutor;
+    private readonly IGrabItDriver driver;
+    private readonly RobotStateCache robotStateCache;
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
@@ -113,9 +113,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                 chuckSettings,
                 robotSettings));
 
-        await this.ExecuteSequencesAsync(sequences);
-
-        return new SuccessResponse();
+        return await this.ExecuteSequencesAsync(sequences);
     }
 
     public async Task<ICommandResponse> UnloadChuckAsync(
@@ -127,9 +125,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        await this.ExecuteSequencesAsync(sequences);
-
-        return new SuccessResponse();
+        return await this.ExecuteSequencesAsync(sequences);
     }
 
     public async Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
@@ -139,23 +135,24 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        await this.ExecuteSequencesAsync(sequences);
-
-        return await Task.FromResult(new SuccessResponse());
+        return await this.ExecuteSequencesAsync(sequences);
     }
 
-    private async Task ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
+    private async Task<ICommandResponse> ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
     {
-        await this.NotifyStateAsync(RobotState.Busy);
-        this.transportSequenceExecutor.Execute(sequences, this.driver);
-        await this.NotifyStateAsync(RobotState.Ready);
-    }
-
-    private async Task NotifyStateAsync(RobotState state)
-    {
-        foreach (IRobotStateNotifier robotStateNotifier in this.robotStateNotifiers)
+        if (this.robotStateCache.RobotState == RobotState.Ready)
         {
-            await robotStateNotifier.NotifyAsync(state);
+            this.NotifyState(RobotState.Busy);
+            await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver);
+            this.NotifyState(RobotState.Ready);
+            return new SuccessResponse();
         }
+
+        return new ErrorResponse("Unable to execute a robot command when robot is not in Automatic mode.");
+    }
+
+    private void NotifyState(RobotState state)
+    {
+        this.robotStateCache.SetRobotState(state);
     }
 }

@@ -29,6 +29,16 @@ internal class RobotStateCache : IRobotStateRetriever, IDisposable
         this.operationModeRetriever.OperationModeChanged -= this.HandleOperationModeChanged;
     }
 
+    public void SetRobotState(RobotState robotState)
+    {
+        if (this.RobotState != robotState)
+        {
+            this.RobotState = robotState;
+            this.StateChangedChanged?.Invoke(this, EventArgs.Empty);
+            this.eventBroker.Publish(new RobotStateChangedEvent());
+        }
+    }
+
     private void HandleOperationModeChanged(object? sender, EventArgs e)
     {
         OperationMode operationMode = this.operationModeRetriever.OperationMode;
@@ -43,16 +53,6 @@ internal class RobotStateCache : IRobotStateRetriever, IDisposable
                 break;
             default:
                 throw new InvalidOperationException($"Illegal operation mode '{operationMode}'.");
-        }
-    }
-
-    private void SetRobotState(RobotState robotState)
-    {
-        if (this.RobotState != robotState)
-        {
-            this.RobotState = robotState;
-            this.StateChangedChanged?.Invoke(this, EventArgs.Empty);
-            this.eventBroker.Publish(new RobotStateChangedEvent());
         }
     }
 }

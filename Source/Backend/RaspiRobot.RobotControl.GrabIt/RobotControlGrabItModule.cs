@@ -7,6 +7,7 @@ using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Native;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
+using RaspiRobot.RobotControl.GrabIt.Devices.Robot.State;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
 using RaspiRobot.RobotControl.GrabIt.Devices.Storages.AutoLinkMagazine;
 using RaspiRobot.RobotControl.GrabIt.Devices.Storages.LoadingStation;
@@ -27,6 +28,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterModule<RobotNativeModule>();
         builder.RegisterModule<RobotOperationModeModule>();
         //builder.RegisterModule<RobotSimulationModule>();
+        builder.RegisterModule<RobotStateModule>();
         builder.RegisterModule<RobotTransportSequenceModule>();
         builder.RegisterModule<SettingsModule>();
         builder.RegisterModule<StoragesAutoLinkMagazineModule>();
