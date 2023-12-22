@@ -10,7 +10,7 @@ cd Backend
 dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ./../../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false
 cd ..
 
-cp ../artifacts/frontend/browser/* ../artifacts/publish/linux/wwwroot/
+cp ../artifacts/frontend/* ../artifacts/publish/linux/wwwroot/
 
 ssh pi@192.168.1.25 sudo systemctl stop RaspiRobot
 ssh pi@192.168.1.25 mkdir /home/pi/RaspiRobot
