@@ -5,4 +5,6 @@ using RaspiRobot.RobotControl.Settings;
 public interface IMdiRobot
 {
     Position? Step(Axis axis, AxisDirection direction);
+
+    int RetrievePosition(int axis);
 }

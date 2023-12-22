@@ -47,6 +47,12 @@ internal class GrabItMdiRobot : IMdiRobot
         return null;
     }
 
+    public int RetrievePosition(int axis)
+    {
+        var drive = (byte)axis;
+        return this.grabItDriver.CurrentDrivePositions[drive];
+    }
+
     private static int CalculateStepPosition(int currentValue, AxisDirection direction)
     {
         return direction switch
