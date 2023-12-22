@@ -12,6 +12,7 @@ using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
+using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
@@ -26,6 +27,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly TransportSequenceBuilder transportSequenceBuilder;
     private readonly TransportSequenceExecutor transportSequenceExecutor;
     private readonly IGrabItDriver driver;
+    private readonly IOperationModeRetriever operationModeRetriever;
     private readonly RobotStateCache robotStateCache;
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
@@ -35,6 +37,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         TransportSequenceBuilder transportSequenceBuilder,
         TransportSequenceExecutor transportSequenceExecutor,
         IGrabItDriver driver,
+        IOperationModeRetriever operationModeRetriever,
         RobotStateCache robotStateCache,
         Factory factory)
     {
@@ -44,6 +47,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
         this.robotStateCache = robotStateCache;
+        this.operationModeRetriever = operationModeRetriever;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
@@ -54,7 +58,8 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     {
         this.driver.Initialize();
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
-        await this.ExecuteSequencesAsync(new[] { robotSettings.HomingSequence });
+        this.InitializeState();
+        await this.ExecuteSequencesAsync(new[] {robotSettings.HomingSequence});
     }
 
     public Task ShutdownAsync(CancellationToken cancellationToken)
@@ -136,6 +141,40 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
         return await this.ExecuteSequencesAsync(sequences);
+    }
+
+    private void InitializeState()
+    {
+        var newRobotState = RobotState.NotReady;
+        if (this.IsRobotInAutomaticMode())
+        {
+            if (this.HasRobotAlarms())
+            {
+                newRobotState = RobotState.Error;
+            }
+            else
+            {
+                newRobotState = RobotState.Ready;
+            }
+        }
+        else
+        {
+            newRobotState = RobotState.NotReady;
+        }
+
+        this.robotStateCache.SetRobotState(newRobotState);
+    }
+
+    private bool HasRobotAlarms()
+    {
+        // TODO: Alarms not implemented yet.
+        return false;
+    }
+
+    private bool IsRobotInAutomaticMode()
+    {
+        return this.operationModeRetriever.OperationMode ==
+               RobotControl.Devices.Robot.OperationMode.OperationMode.Automatic;
     }
 
     private async Task<ICommandResponse> ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
