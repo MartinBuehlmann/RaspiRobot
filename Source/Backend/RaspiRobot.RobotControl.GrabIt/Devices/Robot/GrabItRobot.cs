@@ -59,7 +59,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.driver.Initialize();
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         this.InitializeState();
-        await this.ExecuteSequencesAsync(new[] {robotSettings.HomingSequence});
+        await this.ExecuteSequencesAsync(new[] { robotSettings.HomingSequence });
     }
 
     public Task ShutdownAsync(CancellationToken cancellationToken)
