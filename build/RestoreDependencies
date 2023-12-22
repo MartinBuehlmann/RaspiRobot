@@ -1,0 +1,10 @@
+cd ..
+cd Source
+
+cd Frontend/raspi-robot-app
+npm install
+cd ../..
+
+cd Backend
+dotnet restore
+cd ..
