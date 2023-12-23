@@ -1,6 +1,8 @@
 namespace RaspiRobot.Web.Features.MDI.Robot;
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
@@ -16,7 +18,7 @@ public class RobotController : MdiController
         this.mdiRobot = deviceService.RetrieveRobot().MdiRobot;
     }
 
-    [HttpPut("Step/{axis}/{direction}")]
+    [HttpPut("Axis/{axis}/Step/{direction}")]
     public StepResponseInfo Step(
         [Range(0, 5)] int axis,
         AxisDirection direction)
@@ -28,10 +30,20 @@ public class RobotController : MdiController
         return new StepResponseInfo(newPosition is not null, newPositionInfo);
     }
 
+    [HttpGet("Axis/All/CurrentPosition")]
+    public List<PositionInfo> RetrieveCurrentPosition()
+    {
+        return this.mdiRobot.RetrieveAxisPositions()
+            .Select(x => new PositionInfo(x.Drive, x.Value))
+            .ToList();
+    }
+
     [HttpGet("Axis/{axis}/CurrentPosition")]
     public PositionInfo RetrieveCurrentPosition([Range(0, 5)] int axis)
     {
-        int value = this.mdiRobot.RetrievePosition(axis);
-        return new PositionInfo(axis, value);
+        return this.mdiRobot.RetrieveAxisPositions()
+            .Where(x => x.Drive == axis)
+            .Select(x => new PositionInfo(x.Drive, x.Value))
+            .Single();
     }
 }

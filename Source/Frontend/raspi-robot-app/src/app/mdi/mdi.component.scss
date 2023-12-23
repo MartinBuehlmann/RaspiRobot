@@ -1,0 +1,21 @@
+.table {
+    display: table;
+}
+
+.header {
+    display: table-row;
+    font-weight: bold;
+}
+
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    padding: 5px 5px;
+}
+
+button {
+    padding: 5px 10px;
+}
