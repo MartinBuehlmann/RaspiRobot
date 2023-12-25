@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MdiRobotService } from '../services/mdi/mdi-robot.service';
 import { PositionModel } from '../services/mdi/position-model';
 import { RobotService } from '../services/robot/robot.service';
+import { AxisDirection } from '../services/mdi/axis-direction';
 
 @Component({
   selector: 'app-mdi',
@@ -13,7 +14,8 @@ export class MdiComponent implements OnInit {
 
   constructor(
     private mdiRobotService : MdiRobotService,
-    private robotService : RobotService) {
+    private robotService : RobotService,
+    private changeDetection : ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -22,6 +24,25 @@ export class MdiComponent implements OnInit {
       axisPositions
         .forEach(axisPosition => 
           this.axisPositions[axisPosition.axis] = axisPosition.position);
+    });
+  }
+
+  stepPlus(axisNumber: number) {
+    this.step(axisNumber, AxisDirection.Plus);
+  }
+
+  stepMinus(axisNumber: number) {
+    this.step(axisNumber, AxisDirection.Minus);
+  }
+
+  step(axisNumber: number, axisDirection: AxisDirection) {
+    this.mdiRobotService.stepSingleAxis(axisNumber, axisDirection)
+    .subscribe(response => {
+      if (response.executed) {
+        this.axisPositions[response.newPosition.axis] = response.newPosition.position;
+        this.changeDetection.detectChanges();
+        console.info("Vanue updated");
+      }
     });
   }
 }

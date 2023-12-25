@@ -1,3 +1,3 @@
 ﻿namespace RaspiRobot.Web.Features.MDI.Robot;
 
-public record StepResponseInfo(bool Executed, PositionInfo? Position);
+public record StepResponseInfo(bool Executed, PositionInfo? NewPosition);
