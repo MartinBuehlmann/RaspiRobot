@@ -1,6 +1,7 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
@@ -65,6 +66,15 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     public Task ShutdownAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
+    }
+
+    public IReadOnlyList<Position> RetrieveAxisPositions()
+    {
+        return this.driver.CurrentDrivePositions
+            .ToList()
+            .Select(x => new Position(x.Key, x.Value))
+            .OrderBy(x => x.Drive)
+            .ToList();
     }
 
     public async Task SubscribeForStateChangedAsync(
@@ -156,10 +166,6 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             {
                 newRobotState = RobotState.Ready;
             }
-        }
-        else
-        {
-            newRobotState = RobotState.NotReady;
         }
 
         this.robotStateCache.SetRobotState(newRobotState);

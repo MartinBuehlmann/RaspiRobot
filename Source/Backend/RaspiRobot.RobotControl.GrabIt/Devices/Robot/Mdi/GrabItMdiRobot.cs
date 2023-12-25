@@ -1,8 +1,6 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
@@ -47,13 +45,6 @@ internal class GrabItMdiRobot : IMdiRobot
         }
 
         return null;
-    }
-
-    public IReadOnlyList<Position> RetrieveAxisPositions()
-    {
-        return this.grabItDriver.CurrentDrivePositions
-            .Select(x => new Position(x.Key, x.Value))
-            .ToList();
     }
 
     private static int CalculateStepPosition(int currentValue, AxisDirection direction)

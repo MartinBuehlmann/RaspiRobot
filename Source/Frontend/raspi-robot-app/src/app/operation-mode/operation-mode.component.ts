@@ -11,7 +11,7 @@ export class OperationModeComponent implements OnInit {
   
   constructor(private operationModeService : OperationModeService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.operationModeService.getCurrentOperationMode()
     .subscribe(
       (currentOperationMode: string) => {

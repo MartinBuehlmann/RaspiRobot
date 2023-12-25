@@ -1,8 +1,6 @@
 namespace RaspiRobot.Web.Features.MDI.Robot;
 
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
@@ -28,22 +26,5 @@ public class RobotController : MdiController
         PositionInfo? newPositionInfo =
             newPosition is not null ? new PositionInfo(newPosition.Drive, newPosition.Value) : null;
         return new StepResponseInfo(newPosition is not null, newPositionInfo);
-    }
-
-    [HttpGet("Axis/All/CurrentPosition")]
-    public List<PositionInfo> RetrieveCurrentPosition()
-    {
-        return this.mdiRobot.RetrieveAxisPositions()
-            .Select(x => new PositionInfo(x.Drive, x.Value))
-            .ToList();
-    }
-
-    [HttpGet("Axis/{axis}/CurrentPosition")]
-    public PositionInfo RetrieveCurrentPosition([Range(0, 5)] int axis)
-    {
-        return this.mdiRobot.RetrieveAxisPositions()
-            .Where(x => x.Drive == axis)
-            .Select(x => new PositionInfo(x.Drive, x.Value))
-            .Single();
     }
 }
