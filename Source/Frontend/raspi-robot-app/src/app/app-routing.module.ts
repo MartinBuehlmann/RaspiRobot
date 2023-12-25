@@ -7,13 +7,14 @@ import { MdiComponent } from './mdi/mdi.component';
 
 const routes: Routes = [
   { path:'', component: HomeComponent },
+  { path:'home', component: HomeComponent },
   { path:'devices', component: DevicesComponent },
   { path:'mdi', component: MdiComponent },
   { path:'about', component: AboutComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -41,7 +41,6 @@ export class MdiComponent implements OnInit {
       if (response.executed) {
         this.axisPositions[response.newPosition.axis] = response.newPosition.position;
         this.changeDetection.detectChanges();
-        console.info("Vanue updated");
       }
     });
   }
