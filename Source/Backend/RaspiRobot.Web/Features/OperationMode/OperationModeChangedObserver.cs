@@ -26,6 +26,6 @@ internal class OperationModeChangedObserver :
         await this.operationModeChangedHub.Clients.All
             .SendAsync(
                 "UpdateOperationMode",
-                this.operationModeRetriever.OperationMode);
+                this.operationModeRetriever.OperationMode.ToString());
     }
 }

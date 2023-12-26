@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OperationModeService } from '../services/operation-mode/operation-mode.service';
+import { OperationModeChangedService } from '../services/operation-mode/operation-mode-changed.service';
 
 @Component({
   selector: 'app-operation-mode',
@@ -9,7 +10,9 @@ import { OperationModeService } from '../services/operation-mode/operation-mode.
 export class OperationModeComponent implements OnInit {
   operationMode: string | undefined;
   
-  constructor(private operationModeService : OperationModeService) {}
+  constructor(
+    private operationModeService : OperationModeService,
+    private operationModeChangedService : OperationModeChangedService) {}
 
   ngOnInit(): void {
     this.operationModeService.getCurrentOperationMode()
@@ -18,6 +21,8 @@ export class OperationModeComponent implements OnInit {
         this.operationMode = currentOperationMode;
       },
       (error) => console.error('Error fetching string: ', error)
-    )
+    );
+    
+    this.operationModeChangedService.updateOperationMode(operationMode => this.operationMode = operationMode);
   }
 }
