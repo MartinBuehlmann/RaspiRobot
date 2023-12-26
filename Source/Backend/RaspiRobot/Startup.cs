@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RaspiRobot.Logging;
 using RaspiRobot.OpenApi.Devices.Robot;
+using RaspiRobot.Web.Features.OperationMode;
 using Serilog;
 using AutoLinkMagazineService = RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine.AutoLinkMagazineService;
 using LoadingStationService = RaspiRobot.OpenApi.Devices.Storages.LoadingStation.LoadingStationService;
@@ -28,13 +29,11 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddGrpc();
+        services.AddSignalR();
 
         services
             .AddControllers()
-            .AddJsonOptions(o =>
-            {
-                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            });
+            .AddJsonOptions(o => { o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
 
         services.AddSwaggerGen(c =>
         {
@@ -92,6 +91,9 @@ public class Startup
             endpoints.MapGrpcService<LoadingStationService>();
             endpoints.MapGrpcService<MagazineService>();
             endpoints.MapGrpcService<RobotService>();
+
+            endpoints.MapHub<OperationModeChangedHub>($"/{nameof(OperationModeChangedHub)}");
+
             endpoints.MapControllers();
         });
     }

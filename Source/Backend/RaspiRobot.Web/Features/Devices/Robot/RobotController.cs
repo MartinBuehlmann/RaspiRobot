@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.Web.Features.Robot;
+﻿namespace RaspiRobot.Web.Features.Devices.Robot;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
