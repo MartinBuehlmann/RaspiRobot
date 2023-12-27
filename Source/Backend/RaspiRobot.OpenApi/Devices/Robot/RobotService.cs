@@ -14,6 +14,7 @@ using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
 

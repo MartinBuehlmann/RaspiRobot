@@ -1,16 +1,20 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using Common.DependencyInjection;
+using EventBroker;
 using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
@@ -29,6 +33,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly IGrabItDriver driver;
     private readonly IOperationModeRetriever operationModeRetriever;
     private readonly RobotStateCache robotStateCache;
+    private readonly IEventBroker eventBroker;
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
@@ -39,6 +44,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IGrabItDriver driver,
         IOperationModeRetriever operationModeRetriever,
         RobotStateCache robotStateCache,
+        IEventBroker eventBroker,
         Factory factory)
     {
         this.settings = settings;
@@ -47,6 +53,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
         this.robotStateCache = robotStateCache;
+        this.eventBroker = eventBroker;
         this.operationModeRetriever = operationModeRetriever;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
@@ -59,12 +66,21 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.driver.Initialize();
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         this.InitializeState();
-        await this.ExecuteSequencesAsync(new[] {robotSettings.HomingSequence});
+        await this.ExecuteSequencesAsync(new[] { robotSettings.HomingSequence });
     }
 
     public Task ShutdownAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
+    }
+
+    public IReadOnlyList<Position> RetrieveAxisPositions()
+    {
+        return this.driver.CurrentDrivePositions
+            .ToList()
+            .Select(x => new Position(x.Key, x.Value))
+            .OrderBy(x => x.Drive)
+            .ToList();
     }
 
     public async Task SubscribeForStateChangedAsync(
@@ -157,10 +173,6 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                 newRobotState = RobotState.Ready;
             }
         }
-        else
-        {
-            newRobotState = RobotState.NotReady;
-        }
 
         this.robotStateCache.SetRobotState(newRobotState);
     }
@@ -183,6 +195,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         {
             this.NotifyState(RobotState.Busy);
             await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver);
+            this.eventBroker.Publish(new RobotAxisPositionChangedEvent());
             this.NotifyState(RobotState.Ready);
             return new SuccessResponse();
         }

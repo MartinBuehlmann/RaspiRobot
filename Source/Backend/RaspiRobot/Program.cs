@@ -16,6 +16,7 @@ using RaspiRobot.BackgroundServices;
 using RaspiRobot.OpenApi;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.GrabIt;
+using RaspiRobot.Web;
 using Serilog;
 
 public class Program
@@ -65,5 +66,6 @@ public class Program
         builder.RegisterModule<OpenApiModule>();
         builder.RegisterModule<RobotControlGrabItModule>();
         builder.RegisterModule<RobotControlModule>();
+        builder.RegisterModule<WebModule>();
     }
 }

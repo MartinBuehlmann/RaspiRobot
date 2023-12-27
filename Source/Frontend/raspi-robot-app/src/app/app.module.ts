@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { OperationModeComponent } from './operation-mode/operation-mode.component';
 import { OperationModeService } from './services/operation-mode/operation-mode.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
   ],
   providers: [OperationModeService],

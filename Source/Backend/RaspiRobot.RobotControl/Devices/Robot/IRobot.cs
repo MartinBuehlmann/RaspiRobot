@@ -1,17 +1,22 @@
 ﻿namespace RaspiRobot.RobotControl.Devices.Robot;
 
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Settings;
 
 public interface IRobot : IDevice
 {
     IMdiRobot MdiRobot { get; }
+
+    IReadOnlyList<Position> RetrieveAxisPositions();
 
     Task SubscribeForStateChangedAsync(
         IRobotStateNotifier robotStateNotifier,

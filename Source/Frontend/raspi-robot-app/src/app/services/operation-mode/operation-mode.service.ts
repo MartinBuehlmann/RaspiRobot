@@ -18,6 +18,9 @@ export class OperationModeService {
   }
 
   setOperationMode(newOperationMode : string) {
-    this.http.put('web/OperationMode/' + newOperationMode, '');
+    this.http.put('web/OperationMode/' + newOperationMode, {})
+    .subscribe(
+      (response) => {},
+      (error) => console.error(error));
   }
 }

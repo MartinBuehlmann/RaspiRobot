@@ -10,4 +10,4 @@ cd Backend
 dotnet publish RaspiRobot -c Release -r linux-arm --self-contained -o ./../../artifacts/publish/linux /p:DebugType=None /p:DebugSymbols=false
 cd ..
 
-cp ../artifacts/frontend/browser/* ../artifacts/publish/linux/wwwroot/
+cp ../artifacts/frontend/* ../artifacts/publish/linux/wwwroot/

@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.RobotControl.Devices.Robot;
+﻿namespace RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;

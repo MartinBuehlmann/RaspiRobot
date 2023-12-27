@@ -1,1 +1,62 @@
-<p>mdi works!</p>
+<h2>Single Drive Stepping</h2>
+<div class="table">
+    <div class="header">
+        <div class="cell">Axis</div>
+        <div class="cell">Position</div>
+        <div class="cell">Stepping</div>
+    </div>
+    <div class="row">
+        <div class="cell">1</div>
+        <div class="cell">{{axisPositions[0]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(0)">&lt;&lt;</button><button (click)="stepPlus(0)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">2</div>
+        <div class="cell">{{axisPositions[1]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(1)">&lt;&lt;</button><button (click)="stepPlus(1)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">3</div>
+        <div class="cell">{{axisPositions[2]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(2)">&lt;&lt;</button><button (click)="stepPlus(2)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">4</div>
+        <div class="cell">{{axisPositions[3]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(3)">&lt;&lt;</button><button (click)="stepPlus(3)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">5</div>
+        <div class="cell">{{axisPositions[4]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(4)">&lt;&lt;</button><button (click)="stepPlus(4)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">6</div>
+        <div class="cell">{{axisPositions[5]}}</div>
+        <div class="cell">
+            <div class="steppingcontainer">
+                <button (click)="stepMinus(5)">&lt;&lt;</button><button (click)="stepPlus(5)">&gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+</div>

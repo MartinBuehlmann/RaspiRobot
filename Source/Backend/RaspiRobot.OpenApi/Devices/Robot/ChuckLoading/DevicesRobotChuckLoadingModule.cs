@@ -1,7 +1,7 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.ChuckLoading;
 
 using Autofac;
-using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 
 internal class DevicesRobotChuckLoadingModule : Module
 {

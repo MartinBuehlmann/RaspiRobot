@@ -1,4 +1,4 @@
-namespace RaspiRobot.RobotControl.Devices.Robot;
+namespace RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 
 using RaspiRobot.RobotControl.Devices.Storages;
 
