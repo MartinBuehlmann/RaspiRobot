@@ -17,4 +17,3 @@ used:
 | High    | Low     | Automatic                  |
 | Low     | High    | MDI                        |
 | High    | High    | Illegal state => Exception |
-|---------|---------|----------------------------| 

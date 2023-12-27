@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Robot;
 using Grpc.Core;
-using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using ChuckLoading = Erowa.OpenAPI.Robot.ChuckLoading;
 
 internal class ChuckLoadingsNotifier : IChuckLoadingsNotifier
@@ -21,7 +21,7 @@ internal class ChuckLoadingsNotifier : IChuckLoadingsNotifier
         this.responseStream = responseStream;
     }
 
-    public async Task NotifyAsync(IReadOnlyList<RobotControl.Devices.Robot.ChuckLoading> chuckLoadings)
+    public async Task NotifyAsync(IReadOnlyList<RobotControl.Devices.Robot.ChuckLoading.ChuckLoading> chuckLoadings)
     {
         IReadOnlyList<ChuckLoading> robotChuckLoadings = chuckLoadings.Select(x => this.chuckLoadingConverter.Convert(x)).ToList();
         await this.responseStream.WriteAsync(

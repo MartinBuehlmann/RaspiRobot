@@ -1,10 +1,10 @@
-﻿namespace RaspiRobot.Web.Features.OperationMode;
+﻿namespace RaspiRobot.Web.Features.OperationMode.LiveUpdate;
 
 using Autofac;
 using EventBroker.Autofac;
 using RaspiRobot.Web.LiveUpdate;
 
-internal class OperationModeModule : Module
+internal class OperationModeLiveUpdateModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

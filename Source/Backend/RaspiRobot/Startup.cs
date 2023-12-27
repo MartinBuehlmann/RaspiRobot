@@ -11,7 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RaspiRobot.Logging;
 using RaspiRobot.OpenApi.Devices.Robot;
-using RaspiRobot.Web.Features.OperationMode;
+using RaspiRobot.Web.Features.Devices.Robot.LiveUpdate;
+using RaspiRobot.Web.Features.OperationMode.LiveUpdate;
 using Serilog;
 using AutoLinkMagazineService = RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine.AutoLinkMagazineService;
 using LoadingStationService = RaspiRobot.OpenApi.Devices.Storages.LoadingStation.LoadingStationService;
@@ -92,6 +93,7 @@ public class Startup
             endpoints.MapGrpcService<MagazineService>();
             endpoints.MapGrpcService<RobotService>();
 
+            endpoints.MapHub<RobotAxisPositionChangedHub>($"/{nameof(RobotAxisPositionChangedHub)}");
             endpoints.MapHub<OperationModeChangedHub>($"/{nameof(OperationModeChangedHub)}");
 
             endpoints.MapControllers();

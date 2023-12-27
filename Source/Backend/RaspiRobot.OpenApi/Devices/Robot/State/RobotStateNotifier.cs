@@ -30,7 +30,7 @@ internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync
             new StateResponse { State = robotState, });
     }
 
-    public async Task HandleAsync(RobotStateChangedEvent _)
+    public async Task HandleAsync(RobotStateChangedEvent e)
     {
         await this.NotifyAsync(this.robotStateRetriever.RobotState);
     }

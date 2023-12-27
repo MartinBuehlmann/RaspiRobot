@@ -1,4 +1,4 @@
-﻿namespace RaspiRobot.Web.Features.OperationMode;
+﻿namespace RaspiRobot.Web.Features.OperationMode.LiveUpdate;
 
 using System.Threading.Tasks;
 using EventBroker;
