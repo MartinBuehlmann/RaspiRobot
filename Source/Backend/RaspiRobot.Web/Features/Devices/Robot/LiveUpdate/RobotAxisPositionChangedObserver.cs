@@ -47,7 +47,7 @@ public class RobotAxisPositionChangedObserver :
         {
             await this.robotAxisPositionChangedHub.Clients.All
                 .SendAsync(
-                    "UpdateOperationMode",
+                    "RobotAxisPositionChanged",
                     null);
 
             this.canTriggerEvent = true;

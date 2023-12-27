@@ -3,6 +3,7 @@ import { MdiRobotService } from '../services/mdi/mdi-robot.service';
 import { PositionModel } from '../services/mdi/position-model';
 import { RobotService } from '../services/robot/robot.service';
 import { AxisDirection } from '../services/mdi/axis-direction';
+import { RobotAxisPositionChangedService } from '../services/robot/robot-axis-position-changed.service';
 
 @Component({
   selector: 'app-mdi',
@@ -15,10 +16,19 @@ export class MdiComponent implements OnInit {
   constructor(
     private mdiRobotService : MdiRobotService,
     private robotService : RobotService,
+    private robotAxisChangedService : RobotAxisPositionChangedService,
     private changeDetection : ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.updateRobotAxisPositions();
+    
+    this.robotAxisChangedService
+      .robotAxisPositionChanged(
+        () => this.updateRobotAxisPositions());
+  }
+
+  updateRobotAxisPositions(): void {
     this.robotService.getAllAxisCurrentPositions()
     .subscribe((axisPositions: PositionModel[]) => {
       axisPositions

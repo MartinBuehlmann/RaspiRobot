@@ -23,6 +23,8 @@ export class OperationModeComponent implements OnInit {
       (error) => console.error('Error fetching string: ', error)
     );
     
-    this.operationModeChangedService.updateOperationMode(operationMode => this.operationMode = operationMode);
+    this.operationModeChangedService
+      .updateOperationMode(
+        operationMode => this.operationMode = operationMode);
   }
 }
