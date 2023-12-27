@@ -13,5 +13,4 @@ internal class RobotLiveUpdateModule : Module
             .As<ILiveUpdateEventObserver>()
             .RegisterOnEventBroker();
     }
-
 }
