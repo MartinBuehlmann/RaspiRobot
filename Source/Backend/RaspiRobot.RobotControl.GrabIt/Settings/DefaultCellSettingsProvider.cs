@@ -143,9 +143,10 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
             },
             LoadingStations =
             {
-                new LoadingStationSettings(1, "LS")
-                {
-                    Places =
+                new LoadingStationSettings(
+                    1,
+                    "LS",
+                    new[]
                     {
                         new PlaceSettings(
                             1,
@@ -231,14 +232,14 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     },
                                 },
                             }),
-                    },
-                },
+                    }),
             },
             Magazines =
             {
-                new MagazineSettings(2, "Mag")
-                {
-                    Places =
+                new MagazineSettings(
+                    2,
+                    "Mag",
+                    new[]
                     {
                         new PlaceSettings(
                             2,
@@ -576,8 +577,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                     },
                                 },
                             }),
-                    },
-                },
+                    }),
             },
         };
 }

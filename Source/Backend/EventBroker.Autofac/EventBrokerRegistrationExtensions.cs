@@ -1,5 +1,7 @@
-﻿using Autofac;
+﻿#pragma warning disable SA1200
+using Autofac;
 using Autofac.Builder;
+#pragma warning restore SA1200
 
 namespace EventBroker.Autofac;
 
