@@ -14,6 +14,7 @@ import { OperationModeComponent } from './operation-mode/operation-mode.componen
 import { OperationModeService } from './services/operation-mode/operation-mode.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RobotComponent } from './devices/robot/robot.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     NavigationComponent,
     FooterComponent,
     OperationModeComponent,
+    RobotComponent,
   ],
   imports: [
     BrowserModule,
