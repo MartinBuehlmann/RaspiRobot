@@ -17,8 +17,7 @@ export class MdiComponent implements OnInit {
     private mdiRobotService : MdiRobotService,
     private robotService : RobotService,
     private robotAxisChangedService : RobotAxisPositionChangedService,
-    private changeDetection : ChangeDetectorRef) {
-  }
+    private changeDetection : ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.updateRobotAxisPositions();

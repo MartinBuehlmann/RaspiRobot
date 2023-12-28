@@ -15,7 +15,7 @@ public class RobotAxisPositionChangedObserver :
     private readonly IHubContext<RobotAxisPositionChangedHub> robotAxisPositionChangedHub;
     private readonly SemaphoreSlim semaphore;
     private bool canTriggerEvent = true;
-    private Timer timer;
+    private Timer? timer;
 
     public RobotAxisPositionChangedObserver(
         IHubContext<RobotAxisPositionChangedHub> robotAxisPositionChangedHub)
@@ -41,7 +41,7 @@ public class RobotAxisPositionChangedObserver :
 #pragma warning restore VSTHRD100
     {
         await this.semaphore.WaitAsync();
-        await this.timer.DisposeAsync();
+        await this.timer!.DisposeAsync();
 
         try
         {

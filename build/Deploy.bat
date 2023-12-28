@@ -1,5 +1,5 @@
 @echo off
-set address=192.168.1.25
+set address=raspirobot
 set password=pocketpc2002
 set product=RaspiRobot
 

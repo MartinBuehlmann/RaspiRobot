@@ -1,0 +1,46 @@
+.container {
+    display: block;
+    position: relative;
+}
+
+.robot {
+    position: relative;
+    top: 0px;
+    left: 20px;
+}
+
+.axis0 {
+    position: absolute;
+    top: 400px;
+    left: 110px;
+}
+
+.axis1 {
+    position: absolute;
+    top: 310px;
+    left: 20px;
+}
+
+.axis2 {
+    position: absolute;
+    top: 180px;
+    left: 90px;
+}
+
+.axis3 {
+    position: absolute;
+    top: 80px;
+    left: 130px;
+}
+
+.axis4 {
+    position: absolute;
+    top: 70px;
+    left: 380px;
+}
+
+.axis5 {
+    position: absolute;
+    top: 250px;
+    left: 420px;
+}
