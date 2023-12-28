@@ -25,13 +25,15 @@ internal class EventBroker : IEventBroker
     public void Publish<T>(T data)
         where T : class
     {
-        foreach (IEventSubscriptionBase subscription in ((EventRegistration) this.registration).Retrieve(data))
+        foreach (IEventSubscriptionBase subscription in ((EventRegistration)this.registration).Retrieve(data))
         {
             this.FireAndForgetEvent(data, subscription);
         }
     }
 
-    [SuppressMessage("Microsoft.VisualStudio.Threading.Analyzers", "VSTHRD110",
+    [SuppressMessage(
+        "Microsoft.VisualStudio.Threading.Analyzers",
+        "VSTHRD110",
         Justification = "It's fire and forget")]
     private void FireAndForgetEvent<T>(T data, IEventSubscriptionBase subscription)
     {
@@ -39,7 +41,9 @@ internal class EventBroker : IEventBroker
         Task.Run(() => this.DispatchEvenAsync(data, subscription));
     }
 
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1031:DoNotCatchGeneralExceptionTypes",
         Justification = "This method is designed to catch all exceptions.")]
     private async Task DispatchEvenAsync<T>(T data, IEventSubscriptionBase subscription)
     {
@@ -51,7 +55,7 @@ internal class EventBroker : IEventBroker
             }
             else
             {
-                ((IEventSubscription<T>) subscription).Handle(data);
+                ((IEventSubscription<T>)subscription).Handle(data);
             }
         }
         catch (Exception exception)
