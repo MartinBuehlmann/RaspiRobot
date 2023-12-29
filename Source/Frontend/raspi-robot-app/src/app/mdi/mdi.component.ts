@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MdiRobotService } from '../services/mdi/mdi-robot.service';
-import { PositionModel } from '../services/mdi/position-model';
+import { PositionModel } from '../services/robot/position-model';
 import { RobotService } from '../services/robot/robot.service';
 import { AxisDirection } from '../services/mdi/axis-direction';
 import { RobotAxisPositionChangedService } from '../services/robot/robot-axis-position-changed.service';

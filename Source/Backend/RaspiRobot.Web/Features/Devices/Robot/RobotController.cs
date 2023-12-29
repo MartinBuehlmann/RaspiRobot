@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
-using RaspiRobot.Web.Features.MDI.Robot;
 
 public class RobotController : WebController
 {

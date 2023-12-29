@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RobotService } from '../../services/robot/robot.service';
 import { RobotAxisPositionChangedService } from '../../services/robot/robot-axis-position-changed.service';
-import { PositionModel } from '../../services/mdi/position-model';
+import { PositionModel } from '../../services/robot/position-model';
 
 @Component({
   selector: 'app-robot',
