@@ -8,7 +8,6 @@ import { AxisDirection } from './axis-direction';
   providedIn: 'root'
 })
 export class MdiRobotService {
-
   constructor(private http : HttpClient) { }
 
   stepSingleAxis(axisNumber : number, direction : AxisDirection) : Observable<SteppingResultModel> {

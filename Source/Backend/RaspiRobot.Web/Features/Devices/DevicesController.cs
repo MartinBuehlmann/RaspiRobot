@@ -3,11 +3,11 @@ namespace RaspiRobot.Web.Features.Devices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-public class DeviceController : WebController
+public class DevicesController : WebController
 {
     private readonly DevicesRetriever devicesRetriever;
 
-    public DeviceController(DevicesRetriever devicesRetriever)
+    public DevicesController(DevicesRetriever devicesRetriever)
     {
         this.devicesRetriever = devicesRetriever;
     }
