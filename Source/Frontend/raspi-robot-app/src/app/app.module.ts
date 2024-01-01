@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { DevicesComponent } from './devices/devices.component';
 import { MdiComponent } from './mdi/mdi.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
@@ -15,12 +14,12 @@ import { OperationModeService } from './services/operation-mode/operation-mode.s
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RobotComponent } from './devices/robot/robot.component';
+import { StorageComponent } from './devices/storage/storage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DevicesComponent,
     MdiComponent,
     AboutComponent,
     HomeComponent,
@@ -28,6 +27,7 @@ import { RobotComponent } from './devices/robot/robot.component';
     FooterComponent,
     OperationModeComponent,
     RobotComponent,
+    StorageComponent,
   ],
   imports: [
     BrowserModule,
