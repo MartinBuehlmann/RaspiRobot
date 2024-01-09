@@ -1,11 +1,8 @@
-﻿#pragma warning disable SA1200
-using Autofac;
-using Autofac.Builder;
-#pragma warning restore SA1200
-
-namespace EventBroker.Autofac;
+﻿namespace EventBroker.Autofac;
 
 using System;
+using global::Autofac;
+using global::Autofac.Builder;
 
 public static class EventBrokerRegistrationExtensions
 {
