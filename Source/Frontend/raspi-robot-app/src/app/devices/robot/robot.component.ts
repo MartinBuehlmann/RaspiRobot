@@ -34,8 +34,9 @@ export class RobotComponent implements OnInit {
     this.robotService.getAllAxisCurrentPositions()
     .subscribe((axisPositions: PositionModel[]) => {
       axisPositions
-        .forEach(axisPosition => 
+        .forEach(axisPosition =>
           this.axisPositions[axisPosition.axis] = axisPosition.position);
+      this.changeDetection.detectChanges();
     });
   }
 }
