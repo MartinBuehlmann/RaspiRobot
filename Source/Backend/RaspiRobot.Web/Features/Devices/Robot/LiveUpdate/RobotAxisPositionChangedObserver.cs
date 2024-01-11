@@ -3,6 +3,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Logging;
 using EventBroker;
 using Microsoft.AspNetCore.SignalR;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
@@ -13,14 +14,17 @@ public class RobotAxisPositionChangedObserver :
     ILiveUpdateEventObserver
 {
     private readonly IHubContext<RobotAxisPositionChangedHub> robotAxisPositionChangedHub;
+    private readonly Log log;
     private readonly SemaphoreSlim semaphore;
     private bool canTriggerEvent = true;
     private Timer? timer;
 
     public RobotAxisPositionChangedObserver(
-        IHubContext<RobotAxisPositionChangedHub> robotAxisPositionChangedHub)
+        IHubContext<RobotAxisPositionChangedHub> robotAxisPositionChangedHub,
+        Log log)
     {
         this.robotAxisPositionChangedHub = robotAxisPositionChangedHub;
+        this.log = log;
         this.semaphore = new SemaphoreSlim(1, 1);
     }
 
@@ -30,7 +34,7 @@ public class RobotAxisPositionChangedObserver :
         if (this.canTriggerEvent)
         {
             this.canTriggerEvent = false;
-            this.timer = new Timer(this.OnTimer, null, TimeSpan.FromSeconds(1), Timeout.InfiniteTimeSpan);
+            this.timer = new Timer(this.OnTimer, null, TimeSpan.FromMilliseconds(100), Timeout.InfiniteTimeSpan);
         }
 
         this.semaphore.Release();
@@ -45,6 +49,7 @@ public class RobotAxisPositionChangedObserver :
 
         try
         {
+            this.log.Debug("Notifying clients about robot axis position changed");
             await this.robotAxisPositionChangedHub.Clients.All
                 .SendAsync(
                     "RobotAxisPositionChanged",

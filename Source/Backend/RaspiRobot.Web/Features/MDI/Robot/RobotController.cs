@@ -23,7 +23,7 @@ public class RobotController : MdiController
         [Range(0, 5)] int axis,
         AxisDirection direction)
     {
-        var axisValue = (Axis) axis;
+        var axisValue = (Axis)axis;
         Position? newPosition = this.mdiRobot.Step(axisValue, direction);
         PositionInfo? newPositionInfo =
             newPosition is not null ? new PositionInfo(newPosition.Drive, newPosition.Value) : null;
