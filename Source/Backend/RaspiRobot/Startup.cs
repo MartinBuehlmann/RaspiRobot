@@ -38,6 +38,8 @@ public class Startup
 
         services.AddSwaggerGen(c =>
         {
+            c.EnableAnnotations();
+            c.CustomSchemaIds(type => type.ToString());
             c.SwaggerDoc("web", new OpenApiInfo { Title = "RaspiRobot WEB" });
             c.ResolveConflictingActions(x => x.First());
         });
