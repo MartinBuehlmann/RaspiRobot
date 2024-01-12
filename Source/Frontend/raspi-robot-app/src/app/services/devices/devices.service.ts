@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class DevicesService {
   constructor(private http : HttpClient) { }
 
-  getAllDevices() : Observable<DevicesModel> {
-    return this.http.get<DevicesModel>(`web/Devices/All`);
+  getDevices() : Observable<DevicesModel> {
+    return this.http.get<DevicesModel>(`web/Devices`);
   }
 }

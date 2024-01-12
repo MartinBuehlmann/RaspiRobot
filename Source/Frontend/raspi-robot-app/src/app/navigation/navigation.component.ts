@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
     private devicesService: DevicesService) { }
   
   ngOnInit(): void {
-    this.devicesService.getAllDevices()
+    this.devicesService.getDevices()
     .subscribe(
       (allDevices: DevicesModel) => {
         this.robot = allDevices.robot;

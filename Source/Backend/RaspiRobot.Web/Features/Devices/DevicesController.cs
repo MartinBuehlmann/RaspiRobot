@@ -12,8 +12,8 @@ public class DevicesController : WebController
         this.devicesRetriever = devicesRetriever;
     }
 
-    [HttpGet("All")]
-    public async Task<Devices> RetrieveAllDevicesAsync()
+    [HttpGet]
+    public async Task<Devices> RetrieveDevicesAsync()
     {
         return await this.devicesRetriever.RetrieveAllAsync();
     }

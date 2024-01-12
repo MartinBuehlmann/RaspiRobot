@@ -25,7 +25,7 @@ public class RobotController : WebController
             .ToList();
     }
 
-    [HttpGet("Axis/{axis}/CurrentPosition")]
+    [HttpGet("Axis/{axis:int}/CurrentPosition")]
     public PositionInfo RetrieveCurrentPosition([Range(0, 5)] int axis)
     {
         return this.deviceService
