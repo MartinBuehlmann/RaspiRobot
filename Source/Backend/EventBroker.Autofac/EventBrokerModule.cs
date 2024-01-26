@@ -1,6 +1,6 @@
-﻿using Autofac;
+﻿namespace EventBroker.Autofac;
 
-namespace EventBroker.Autofac;
+using global::Autofac;
 
 public class EventBrokerModule : Module
 {

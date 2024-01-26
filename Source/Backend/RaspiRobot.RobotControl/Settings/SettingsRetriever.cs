@@ -1,11 +1,15 @@
 ﻿namespace RaspiRobot.RobotControl.Settings;
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.LoadingStation.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
 using RaspiRobot.RobotControl.Devices.Storages.Settings;
 
 internal class SettingsRetriever : ISettingsRetriever
@@ -22,6 +26,24 @@ internal class SettingsRetriever : ISettingsRetriever
     {
         await this.EnsureCellSettingsLoadedAsync();
         return this.cellSettings!.Robot;
+    }
+
+    public async Task<IReadOnlyList<AutoLinkMagazineSettings>> RetrieveAutoLinkMagazineSettingsAsync()
+    {
+        await this.EnsureCellSettingsLoadedAsync();
+        return this.cellSettings!.AutoLinkMagazines;
+    }
+
+    public async Task<IReadOnlyList<MagazineSettings>> RetrieveMagazineSettingsAsync()
+    {
+        await this.EnsureCellSettingsLoadedAsync();
+        return this.cellSettings!.Magazines;
+    }
+
+    public async Task<IReadOnlyList<LoadingStationSettings>> RetrieveLoadingStationSettingsAsync()
+    {
+        await this.EnsureCellSettingsLoadedAsync();
+        return this.cellSettings!.LoadingStations;
     }
 
     public async Task<ChuckSettings> RetrieveByAsync(MachineChuck chuck)

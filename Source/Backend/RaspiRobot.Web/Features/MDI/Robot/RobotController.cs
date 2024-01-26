@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Settings;
+using Swashbuckle.AspNetCore.Annotations;
 
 [Route($"{WebConstants.Route}/Mdi/[controller]")]
 public class RobotController : MdiController
@@ -16,8 +17,9 @@ public class RobotController : MdiController
         this.mdiRobot = deviceService.RetrieveRobot().MdiRobot;
     }
 
+    [SwaggerOperation(Tags = [SwaggerTagConstants.Mdi])]
     [HttpPut("Axis/{axis}/Step/{direction}")]
-    public StepResponseInfo Step(
+    public SteppingResultInfo Step(
         [Range(0, 5)] int axis,
         AxisDirection direction)
     {
@@ -25,6 +27,6 @@ public class RobotController : MdiController
         Position? newPosition = this.mdiRobot.Step(axisValue, direction);
         PositionInfo? newPositionInfo =
             newPosition is not null ? new PositionInfo(newPosition.Drive, newPosition.Value) : null;
-        return new StepResponseInfo(newPosition is not null, newPositionInfo);
+        return new SteppingResultInfo(newPosition is not null, newPositionInfo);
     }
 }

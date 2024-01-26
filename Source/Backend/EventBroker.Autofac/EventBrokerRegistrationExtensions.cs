@@ -1,9 +1,8 @@
-﻿using Autofac;
-using Autofac.Builder;
-
-namespace EventBroker.Autofac;
+﻿namespace EventBroker.Autofac;
 
 using System;
+using global::Autofac;
+using global::Autofac.Builder;
 
 public static class EventBrokerRegistrationExtensions
 {

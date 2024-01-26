@@ -12,9 +12,9 @@ cd ..
 
 cp -r ../artifacts/frontend/* ../artifacts/publish/linux/wwwroot/
 
-ssh pi@raspirobot sudo systemctl stop RaspiRobot
-ssh pi@raspirobot mkdir /home/pi/RaspiRobot
-ssh pi@raspirobot mkdir /home/pi/RaspiRobot/bin
-scp -r ../artifacts/publish/linux/* pi@raspirobot:/home/pi/RaspiRobot/bin
-ssh pi@raspirobot chmod +x /home/pi/RaspiRobot/bin/RaspiRobot
-ssh pi@raspirobot sudo systemctl start RaspiRobot
+ssh pi@raspirobot.local sudo systemctl stop RaspiRobot
+ssh pi@raspirobot.local mkdir /home/pi/RaspiRobot
+ssh pi@raspirobot.local mkdir /home/pi/RaspiRobot/bin
+scp -r ../artifacts/publish/linux/* pi@raspirobot.local:/home/pi/RaspiRobot/bin
+ssh pi@raspirobot.local chmod +x /home/pi/RaspiRobot/bin/RaspiRobot
+ssh pi@raspirobot.local sudo systemctl start RaspiRobot

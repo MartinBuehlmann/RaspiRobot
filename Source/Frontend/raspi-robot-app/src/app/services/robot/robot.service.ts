@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PositionModel } from '../mdi/position-model';
+import { PositionModel } from './position-model';
 import { Observable } from 'rxjs';
 
 @Injectable({
