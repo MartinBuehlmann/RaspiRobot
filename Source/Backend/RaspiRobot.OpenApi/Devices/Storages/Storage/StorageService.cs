@@ -1,4 +1,4 @@
-namespace RaspiRobot.OpenApi.Devices.Storages.LoadingStation;
+namespace RaspiRobot.OpenApi.Devices.Storages.Storage;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,15 +9,15 @@ using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
-using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
+using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
-public class LoadingStationService : Erowa.OpenAPI.Storage.LoadingStationService.LoadingStationServiceBase
+public class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServiceBase
 {
     private readonly IDeviceService deviceService;
     private readonly IHostApplicationLifetime hostApplicationLifetime;
     private readonly Factory factory;
 
-    public LoadingStationService(
+    public StorageService(
         IDeviceService deviceService,
         IHostApplicationLifetime hostApplicationLifetime,
         Factory factory)
@@ -29,16 +29,16 @@ public class LoadingStationService : Erowa.OpenAPI.Storage.LoadingStationService
 
     public override async Task RetrieveStateAndStateChanged(
         StorageRequest request,
-        IServerStreamWriter<LoadingStationStateResponse> responseStream,
+        IServerStreamWriter<StorageStateResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var loadingStationStateNotifier = this.factory.Create<ILoadingStationStateNotifier>(responseStream);
-        ILoadingStation loadingStation = this.deviceService.RetrieveLoadingStation(request.Number);
-        await loadingStation.SubscribeForStateChangedAsync(loadingStationStateNotifier, cancellationTokenSource.Token);
+        var magazineStateNotifier = this.factory.Create<IMagazineStateNotifier>(responseStream);
+        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
+        await magazine.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
     }
 
     public override async Task RetrieveAlarmsAndAlarmsChanged(
@@ -51,7 +51,7 @@ public class LoadingStationService : Erowa.OpenAPI.Storage.LoadingStationService
             this.hostApplicationLifetime.ApplicationStopping);
 
         var alarmsNotifier = this.factory.Create<IAlarmsNotifier>(responseStream);
-        ILoadingStation loadingStation = this.deviceService.RetrieveLoadingStation(request.Number);
-        await loadingStation.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
+        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
+        await magazine.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
     }
 }

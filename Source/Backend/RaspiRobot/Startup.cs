@@ -14,9 +14,7 @@ using RaspiRobot.OpenApi.Devices.Robot;
 using RaspiRobot.Web.Features.Devices.Robot.LiveUpdate;
 using RaspiRobot.Web.Features.OperationMode.LiveUpdate;
 using Serilog;
-using AutoLinkMagazineService = RaspiRobot.OpenApi.Devices.Storages.AutoLinkMagazine.AutoLinkMagazineService;
-using LoadingStationService = RaspiRobot.OpenApi.Devices.Storages.LoadingStation.LoadingStationService;
-using MagazineService = RaspiRobot.OpenApi.Devices.Storages.Magazine.MagazineService;
+using StorageService = RaspiRobot.OpenApi.Devices.Storages.Storage.StorageService;
 
 public class Startup
 {
@@ -90,9 +88,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapGrpcService<AutoLinkMagazineService>();
-            endpoints.MapGrpcService<LoadingStationService>();
-            endpoints.MapGrpcService<MagazineService>();
+            endpoints.MapGrpcService<StorageService>();
             endpoints.MapGrpcService<RobotService>();
 
             endpoints.MapHub<RobotAxisPositionChangedHub>($"/{nameof(RobotAxisPositionChangedHub)}");
