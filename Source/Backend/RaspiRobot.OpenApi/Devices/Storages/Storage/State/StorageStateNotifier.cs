@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Erowa.OpenAPI.Storage;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Storages;
-using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 
-internal class StorageStateNotifier : IMagazineStateNotifier
+internal class StorageStateNotifier : IStorageStateNotifier
 {
     private readonly StorageStateConverter storageStateConverter;
     private readonly IServerStreamWriter<StorageStateResponse> responseStream;

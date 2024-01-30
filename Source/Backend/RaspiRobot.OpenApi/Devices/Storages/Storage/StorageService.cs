@@ -9,7 +9,7 @@ using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
-using RaspiRobot.RobotControl.Devices.Storages.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServiceBase
 {
@@ -36,9 +36,9 @@ public class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServic
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var magazineStateNotifier = this.factory.Create<IMagazineStateNotifier>(responseStream);
-        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
-        await magazine.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
+        var storageStateNotifier = this.factory.Create<IStorageStateNotifier>(responseStream);
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Number);
+        await storage.SubscribeForStateChangedAsync(storageStateNotifier, cancellationTokenSource.Token);
     }
 
     public override async Task RetrieveAlarmsAndAlarmsChanged(
@@ -51,7 +51,7 @@ public class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServic
             this.hostApplicationLifetime.ApplicationStopping);
 
         var alarmsNotifier = this.factory.Create<IAlarmsNotifier>(responseStream);
-        IMagazine magazine = this.deviceService.RetrieveMagazine(request.Number);
-        await magazine.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Number);
+        await storage.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
     }
 }
