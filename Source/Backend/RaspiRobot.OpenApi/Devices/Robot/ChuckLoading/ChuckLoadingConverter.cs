@@ -1,6 +1,7 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.ChuckLoading;
 
 using System;
+using Erowa.OpenAPI;
 using Erowa.OpenAPI.Robot;
 
 internal class ChuckLoadingConverter
