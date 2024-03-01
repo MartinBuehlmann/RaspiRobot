@@ -11,7 +11,7 @@ using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-public class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServiceBase
+internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServiceBase
 {
     private readonly IDeviceService deviceService;
     private readonly IHostApplicationLifetime hostApplicationLifetime;
