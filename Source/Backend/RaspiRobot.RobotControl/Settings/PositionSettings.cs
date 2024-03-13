@@ -1,6 +1,6 @@
 ﻿namespace RaspiRobot.RobotControl.Settings;
 
-public class Position(byte drive, int value)
+public class PositionSettings(byte drive, int value)
 {
     public byte Drive { get; } = drive;
 

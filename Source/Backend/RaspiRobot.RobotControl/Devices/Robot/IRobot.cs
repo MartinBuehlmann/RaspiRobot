@@ -16,7 +16,7 @@ public interface IRobot : IDevice
 {
     IMdiRobot MdiRobot { get; }
 
-    IReadOnlyList<Position> RetrieveAxisPositions();
+    IReadOnlyList<PositionSettings> RetrieveAxisPositions();
 
     Task SubscribeForStateChangedAsync(
         IRobotStateNotifier robotStateNotifier,

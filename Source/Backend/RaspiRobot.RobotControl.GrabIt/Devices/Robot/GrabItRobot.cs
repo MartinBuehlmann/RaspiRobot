@@ -17,6 +17,7 @@ using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.State;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.State;
 using RaspiRobot.RobotControl.GrabIt.Devices.Robot.TransportSequence;
@@ -61,7 +62,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.driver.Initialize();
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         this.InitializeState();
-        await this.ExecuteSequencesAsync(new[] { robotSettings.HomingSequence });
+        await this.ExecuteSequencesAsync(this.transportSequenceBuilder.HomingSequence(robotSettings));
     }
 
     public Task ShutdownAsync(CancellationToken cancellationToken)
@@ -69,11 +70,11 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         return Task.CompletedTask;
     }
 
-    public IReadOnlyList<Position> RetrieveAxisPositions()
+    public IReadOnlyList<PositionSettings> RetrieveAxisPositions()
     {
         return this.driver.CurrentDrivePositions
             .ToList()
-            .Select(x => new Position(x.Key, x.Value))
+            .Select(x => new PositionSettings(x.Key, x.Value))
             .OrderBy(x => x.Drive)
             .ToList();
     }

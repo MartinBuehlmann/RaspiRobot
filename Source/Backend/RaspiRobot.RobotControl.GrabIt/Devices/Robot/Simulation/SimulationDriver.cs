@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Common.Logging;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 internal class SimulationDriver : IGrabItDriver
 {
