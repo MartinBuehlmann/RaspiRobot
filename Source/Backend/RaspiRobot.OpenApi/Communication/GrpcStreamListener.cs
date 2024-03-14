@@ -32,15 +32,30 @@ internal class GrpcStreamListener
         using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             cancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
-        List<Task<TResponse>> requests = [];
 
+        using CancellationTokenSource taskCompletedSource = CancellationTokenSource.CreateLinkedTokenSource(
+            cancellationTokenSource.Token);
+
+        List<Task<TResponse>> requests = [];
         try
         {
-            await foreach (TRequest request in requestStream.ReadAllAsync(cancellationTokenSource.Token))
+            await foreach (TRequest request in requestStream.ReadAllAsync(taskCompletedSource.Token))
             {
                 this.logger.Info("{Method} received new request '{Request}'", method, request!);
-                requests.Add(Task.Run(async () => await handler(request), cancellationTokenSource.Token));
+                requests.Add(
+                    Task.Run(
+                        async () =>
+                        {
+                            TResponse response = await handler(request);
+                            await taskCompletedSource.CancelAsync();
+                            return response;
+                        },
+                        cancellationTokenSource.Token));
             }
+        }
+        catch (OperationCanceledException) when (taskCompletedSource.IsCancellationRequested)
+        {
+            // ignore expected cancellation
         }
         catch (OperationCanceledException ex)
         {

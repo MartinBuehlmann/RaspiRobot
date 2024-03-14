@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Robot;
+using EventBroker;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using ChuckLoading = Erowa.OpenAPI.Robot.ChuckLoading;
 
-internal class ChuckLoadingsNotifier : IChuckLoadingsNotifier
+internal class ChuckLoadingsNotifier : IChuckLoadingsNotifier, IEventSubscriptionAsync<ChuckLoadingChangedEvent>
 {
     private readonly ChuckLoadingConverter chuckLoadingConverter;
     private readonly IServerStreamWriter<ChuckLoadingsResponse> responseStream;
@@ -29,5 +30,10 @@ internal class ChuckLoadingsNotifier : IChuckLoadingsNotifier
             {
                 Loadings = { robotChuckLoadings },
             });
+    }
+
+    public async Task HandleAsync(ChuckLoadingChangedEvent data)
+    {
+        await this.NotifyAsync(data.ChuckLoadings);
     }
 }

@@ -4,16 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventBroker;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
 using RaspiRobot.RobotControl.Devices.Robot.Steps;
-using RaspiRobot.RobotControl.Settings;
 
 internal class TransportSequenceExecutor
 {
     private readonly TransportSequenceStepInterpolator interpolator;
+    private readonly IEventBroker eventBroker;
 
-    public TransportSequenceExecutor(TransportSequenceStepInterpolator interpolator)
+    public TransportSequenceExecutor(
+        TransportSequenceStepInterpolator interpolator,
+        IEventBroker eventBroker)
     {
         this.interpolator = interpolator;
+        this.eventBroker = eventBroker;
     }
 
     public async Task ExecuteAsync(IReadOnlyList<Sequence> sequences, IGrabItDriver driver)
@@ -65,7 +70,7 @@ internal class TransportSequenceExecutor
 
     private Task ExecuteAsync(ChuckLoadingChangedNotificationStep chuckLoadingChangedNotificationStep)
     {
-        // TODO: Implement chuck loading changed notification.
+        this.eventBroker.Publish(new ChuckLoadingChangedEvent(new[] { chuckLoadingChangedNotificationStep.ChuckLoading }));
         return Task.CompletedTask;
     }
 }

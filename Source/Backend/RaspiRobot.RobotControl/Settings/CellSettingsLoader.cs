@@ -14,6 +14,8 @@ internal class CellSettingsLoader
     {
         this.documentStorage = documentStorage;
         this.defaultCellSettingsProvider = defaultCellSettingsProvider;
+
+        this.documentStorage.RegisterConverter(new StepSettingsConverter());
     }
 
     public async Task<CellSettings> RetrieveOrCreateAsync(string cellSettingsFileName)
