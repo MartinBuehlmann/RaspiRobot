@@ -1,5 +1,6 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Robot;
 
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Erowa.OpenAPI.Robot;
@@ -23,7 +24,9 @@ internal class StartUnloadChuckRequestHandler
         this.logger = logger;
     }
 
-    public async Task<CommandResponse> HandleUnloadChuckAsync(StartUnloadChuck request)
+    public async Task<CommandResponse> HandleUnloadChuckAsync(
+        StartUnloadChuck request,
+        CancellationToken rollbackCancellationToken)
     {
         this.logger.Info(
             "Received request to unload chuck: '{ChuckNumber}' to place: '{PlaceNumber}'",
@@ -39,7 +42,8 @@ internal class StartUnloadChuckRequestHandler
 
         ICommandResponse response = await robot.UnloadChuckAsync(
             new MachineChuck(request.Chuck.Number),
-            new StoragePlace(request.PlaceToUnload.Number));
+            new StoragePlace(request.PlaceToUnload.Number),
+            rollbackCancellationToken);
 
         this.logger.Info("Unload chuck ended with result: {Response}", response);
 

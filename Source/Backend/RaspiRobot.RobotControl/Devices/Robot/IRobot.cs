@@ -31,14 +31,14 @@ public interface IRobot : IDevice
         IChuckLoadingsNotifier chuckLoadingsNotifier,
         CancellationToken cancellationToken);
 
-    Task<ICommandResponse> LoadChuckAsync(
-        StoragePlace sourcePlace,
+    Task<ICommandResponse> LoadChuckAsync(StoragePlace sourcePlace,
         MachineChuck chuck,
-        StoragePlace? destinationPlaceForPalletOnChuck);
+        StoragePlace? destinationPlaceForPalletOnChuck, CancellationToken rollbackCancellationToken);
 
     Task<ICommandResponse> UnloadChuckAsync(
         MachineChuck chuck,
-        StoragePlace destinationPlace);
+        StoragePlace destinationPlace,
+        CancellationToken rollbackCancellationToken);
 
     Task<ICommandResponse> ExchangePlaceAsync(
         StoragePlace sourcePlace,

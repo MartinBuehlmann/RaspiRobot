@@ -112,13 +112,18 @@ internal class RobotService : Robot.RobotBase
 
         async Task<CommandResponse> HandleLoadChuckRequestAsync(LoadChuckRequest loadChuckRequest)
         {
-            if (loadChuckRequest.RequestCase is not LoadChuckRequest.RequestOneofCase.Start
-                || loadChuckRequest.Start is not { } request)
+            var rollbackCancellationTokenSource = new CancellationTokenSource();
+            switch (loadChuckRequest.RequestCase)
             {
-                throw new NotSupportedException($"{nameof(this.LoadChuck)} cancellation is not yet supported.");
+                case LoadChuckRequest.RequestOneofCase.Start:
+                    return await this.startLoadChuckRequestHandler.HandleLoadChuckAsync(loadChuckRequest.Start, rollbackCancellationTokenSource.Token);
+                case LoadChuckRequest.RequestOneofCase.Rollback:
+                    await rollbackCancellationTokenSource.CancelAsync();
+                    return new CommandResponse { Successful = new Successful() };
+                default:
+                    throw new NotSupportedException(
+                        $"Load chuck request of type '{loadChuckRequest.RequestCase}' is not supported.");
             }
-
-            return await this.startLoadChuckRequestHandler.HandleLoadChuckAsync(request);
         }
     }
 
@@ -144,13 +149,18 @@ internal class RobotService : Robot.RobotBase
 
         async Task<CommandResponse> HandleUnloadChuckRequestAsync(UnloadChuckRequest unloadChuckRequest)
         {
-            if (unloadChuckRequest.RequestCase is not UnloadChuckRequest.RequestOneofCase.Start
-                || unloadChuckRequest.Start is not { } request)
+            var rollbackCancellationTokenSource = new CancellationTokenSource();
+            switch (unloadChuckRequest.RequestCase)
             {
-                throw new NotSupportedException($"{nameof(this.UnloadChuck)} cancellation is not yet supported.");
+                case UnloadChuckRequest.RequestOneofCase.Start:
+                    return await this.startUnloadChuckRequestHandler.HandleUnloadChuckAsync(unloadChuckRequest.Start, rollbackCancellationTokenSource.Token);
+                case UnloadChuckRequest.RequestOneofCase.Rollback:
+                    await rollbackCancellationTokenSource.CancelAsync();
+                    return new CommandResponse { Successful = new Successful() };
+                default:
+                    throw new NotSupportedException(
+                        $"Unload chuck request of type '{unloadChuckRequest.RequestCase}' is not supported.");
             }
-
-            return await this.startUnloadChuckRequestHandler.HandleUnloadChuckAsync(request);
         }
     }
 

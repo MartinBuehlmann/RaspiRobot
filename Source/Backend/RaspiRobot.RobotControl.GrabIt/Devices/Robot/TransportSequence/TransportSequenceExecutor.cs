@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
@@ -21,7 +22,13 @@ internal class TransportSequenceExecutor
         this.eventBroker = eventBroker;
     }
 
-    public async Task ExecuteAsync(IReadOnlyList<Sequence> sequences, IGrabItDriver driver)
+    // TODO: Handle rollbackCancellationToken
+    // Configure for each step if rollback is supported.
+    // If yes, stop execution and a higher instance needs to care about the rollback actions - if no, just continue.
+    public async Task ExecuteAsync(
+        IReadOnlyList<Sequence> sequences,
+        IGrabItDriver driver,
+        CancellationToken rollbackCancellationToken)
     {
         foreach (Sequence sequence in sequences)
         {

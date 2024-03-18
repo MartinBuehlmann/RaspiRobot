@@ -62,7 +62,9 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.driver.Initialize();
         RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         this.InitializeState();
-        await this.ExecuteSequencesAsync(this.transportSequenceBuilder.HomingSequence(robotSettings));
+        await this.ExecuteSequencesAsync(
+            this.transportSequenceBuilder.HomingSequence(robotSettings),
+            CancellationToken.None);
     }
 
     public Task ShutdownAsync(CancellationToken cancellationToken)
@@ -110,7 +112,8 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     public async Task<ICommandResponse> LoadChuckAsync(
         StoragePlace sourcePlace,
         MachineChuck chuck,
-        StoragePlace? destinationPlaceForPalletOnChuck)
+        StoragePlace? destinationPlaceForPalletOnChuck,
+        CancellationToken rollbackCancellationToken)
     {
         var sequences = new List<Sequence>();
         ChuckSettings chuckSettings = await this.settingsRetriever.RetrieveByAsync(chuck);
@@ -130,19 +133,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                 chuckSettings,
                 robotSettings));
 
-        return await this.ExecuteSequencesAsync(sequences);
+        return await this.ExecuteSequencesAsync(sequences, rollbackCancellationToken);
     }
 
     public async Task<ICommandResponse> UnloadChuckAsync(
         MachineChuck chuck,
-        StoragePlace destinationPlace)
+        StoragePlace destinationPlace,
+        CancellationToken rollbackCancellationToken)
     {
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.UnloadChuckSequence(
             await this.settingsRetriever.RetrieveByAsync(chuck),
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        return await this.ExecuteSequencesAsync(sequences);
+        return await this.ExecuteSequencesAsync(sequences, rollbackCancellationToken);
     }
 
     public async Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
@@ -152,7 +156,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
             await this.settingsRetriever.RetrieveRobotSettingsAsync());
 
-        return await this.ExecuteSequencesAsync(sequences);
+        return await this.ExecuteSequencesAsync(sequences, CancellationToken.None);
     }
 
     private void InitializeState()
@@ -185,12 +189,14 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                RobotControl.Devices.Robot.OperationMode.OperationMode.Automatic;
     }
 
-    private async Task<ICommandResponse> ExecuteSequencesAsync(IReadOnlyList<Sequence> sequences)
+    private async Task<ICommandResponse> ExecuteSequencesAsync(
+        IReadOnlyList<Sequence> sequences,
+        CancellationToken rollbackCancellationToken)
     {
         if (this.robotStateCache.RobotState == RobotState.Ready)
         {
             this.NotifyState(RobotState.Busy);
-            await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver);
+            await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver, rollbackCancellationToken);
             this.NotifyState(RobotState.Ready);
             return new SuccessResponse();
         }

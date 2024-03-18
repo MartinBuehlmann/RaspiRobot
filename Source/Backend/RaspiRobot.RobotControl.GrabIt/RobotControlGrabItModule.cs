@@ -27,7 +27,7 @@ public class RobotControlGrabItModule : Module
         builder.RegisterModule<RobotModule>();
         builder.RegisterModule<RobotNativeModule>();
         builder.RegisterModule<RobotOperationModeModule>();
-        // builder.RegisterModule<RobotSimulationModule>();
+        //builder.RegisterModule<RobotSimulationModule>();
         builder.RegisterModule<RobotStateModule>();
         builder.RegisterModule<RobotTransportSequenceModule>();
         builder.RegisterModule<SettingsModule>();
