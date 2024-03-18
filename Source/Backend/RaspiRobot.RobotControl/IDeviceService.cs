@@ -1,17 +1,12 @@
 namespace RaspiRobot.RobotControl;
 
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
-using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
-using RaspiRobot.RobotControl.Devices.Storages.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 public interface IDeviceService
 {
     IRobot RetrieveRobot();
 
-    IAutoLinkMagazine RetrieveAutoLinkMagazine(int number);
-
-    ILoadingStation RetrieveLoadingStation(int number);
-
-    IMagazine RetrieveMagazine(int number);
+    TStorage RetrieveStorage<TStorage>(int number)
+        where TStorage : IStorage;
 }

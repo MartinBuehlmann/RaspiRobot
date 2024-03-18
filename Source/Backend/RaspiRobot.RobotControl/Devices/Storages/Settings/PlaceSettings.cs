@@ -4,7 +4,7 @@ using RaspiRobot.RobotControl.Settings;
 
 public class PlaceSettings
 {
-    public PlaceSettings(int number, Sequence pickSequence, Sequence placeSequence)
+    public PlaceSettings(int number, SequenceSettings pickSequence, SequenceSettings placeSequence)
     {
         this.Number = number;
         this.PickSequence = pickSequence;
@@ -13,7 +13,7 @@ public class PlaceSettings
 
     public int Number { get; }
 
-    public Sequence PickSequence { get; }
+    public SequenceSettings PickSequence { get; }
 
-    public Sequence PlaceSequence { get; }
+    public SequenceSettings PlaceSequence { get; }
 }

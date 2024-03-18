@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 internal class TransportSequenceStepInterpolator
 {

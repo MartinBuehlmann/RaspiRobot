@@ -6,6 +6,7 @@ using System.Threading;
 using Common.Logging;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 using RaspiRobot.RobotControl.GrabIt.Driver;
 using RaspiRobot.RobotControl.Settings;
 

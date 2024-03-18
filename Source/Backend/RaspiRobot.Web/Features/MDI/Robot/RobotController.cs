@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 using RaspiRobot.RobotControl.Settings;
 using Swashbuckle.AspNetCore.Annotations;
 

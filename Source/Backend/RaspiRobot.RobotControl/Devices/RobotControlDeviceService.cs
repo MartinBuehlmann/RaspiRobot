@@ -5,9 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
-using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
-using RaspiRobot.RobotControl.Devices.Storages.Magazine;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 internal class RobotControlDeviceService : IBackgroundService, IDeviceService
 {
@@ -36,18 +34,9 @@ internal class RobotControlDeviceService : IBackgroundService, IDeviceService
         return this.deviceRegistry.Retrieve((IRobot _) => true);
     }
 
-    public IAutoLinkMagazine RetrieveAutoLinkMagazine(int number)
+    public TStorage RetrieveStorage<TStorage>(int number)
+        where TStorage : IStorage
     {
-        return this.deviceRegistry.Retrieve((IAutoLinkMagazine autoLinkMagazine) => autoLinkMagazine.Number == number);
-    }
-
-    public ILoadingStation RetrieveLoadingStation(int number)
-    {
-        return this.deviceRegistry.Retrieve((ILoadingStation loadingStation) => loadingStation.Number == number);
-    }
-
-    public IMagazine RetrieveMagazine(int number)
-    {
-        return this.deviceRegistry.Retrieve((IMagazine magazine) => magazine.Number == number);
+        return this.deviceRegistry.Retrieve((TStorage storage) => storage.Number == number);
     }
 }

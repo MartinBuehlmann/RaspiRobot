@@ -1,6 +1,6 @@
 namespace RaspiRobot.RobotControl.Devices.Robot.Mdi;
 
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 public interface IMdiRobot
 {

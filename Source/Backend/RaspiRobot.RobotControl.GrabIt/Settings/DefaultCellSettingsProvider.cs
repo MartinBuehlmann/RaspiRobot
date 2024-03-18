@@ -13,36 +13,36 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
         new CellSettings(
             new RobotSettings(
                 "GrabIt",
-                new Sequence
+                new SequenceSettings
                 {
                     Steps =
                     {
-                        new Step
+                        new MoveStepSettings
                         {
                             Positions =
                             {
-                                new Position(2, 300),
-                                new Position(4, 300),
-                                new Position(5, 320),
-                                new Position(0, 300),
-                                new Position(1, 300),
-                                new Position(3, 200),
+                                new PositionSettings(2, 300),
+                                new PositionSettings(4, 300),
+                                new PositionSettings(5, 320),
+                                new PositionSettings(0, 300),
+                                new PositionSettings(1, 300),
+                                new PositionSettings(3, 200),
                             },
                         },
                     },
                 },
-                new Sequence
+                new SequenceSettings
                 {
                     Steps =
                     {
-                        new Step
+                        new MoveStepSettings
                         {
                             Positions =
                             {
-                                new Position(1, 300),
-                                new Position(2, 300),
-                                new Position(3, 200),
-                                new Position(4, 300),
+                                new PositionSettings(1, 300),
+                                new PositionSettings(2, 300),
+                                new PositionSettings(3, 200),
+                                new PositionSettings(4, 300),
                             },
                         },
                     },
@@ -56,84 +56,86 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     {
                         new ChuckSettings(
                             1,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 510),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 510),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new ChuckLoadingChangedNotificationStepSettings(),
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 510),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 510),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new ChuckLoadingChangedNotificationStepSettings(),
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
@@ -150,84 +152,84 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     {
                         new PlaceSettings(
                             1,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 95),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 95),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 95),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 95),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
@@ -243,336 +245,336 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     {
                         new PlaceSettings(
                             2,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 160),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 160),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 160),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 160),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             }),
                         new PlaceSettings(
                             3,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 250),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 250),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 250),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 250),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             }),
                         new PlaceSettings(
                             4,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 350),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 350),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 350),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 350),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             }),
                         new PlaceSettings(
                             5,
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 440),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 320),
+                                            new PositionSettings(0, 440),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 280),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },
                             },
-                            new Sequence
+                            new SequenceSettings
                             {
                                 Steps =
                                 {
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(0, 440),
-                                            new Position(1, 300),
-                                            new Position(2, 300),
-                                            new Position(3, 200),
-                                            new Position(4, 300),
-                                            new Position(5, 280),
+                                            new PositionSettings(0, 440),
+                                            new PositionSettings(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(3, 200),
+                                            new PositionSettings(4, 300),
+                                            new PositionSettings(5, 280),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(1, 250),
-                                            new Position(2, 230),
+                                            new PositionSettings(1, 250),
+                                            new PositionSettings(2, 230),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(5, 320),
+                                            new PositionSettings(5, 320),
                                         },
                                     },
-                                    new Step
+                                    new MoveStepSettings
                                     {
                                         Positions =
                                         {
-                                            new Position(2, 300),
-                                            new Position(1, 300),
+                                            new PositionSettings(2, 300),
+                                            new PositionSettings(1, 300),
                                         },
                                     },
                                 },

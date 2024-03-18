@@ -4,7 +4,7 @@ using RaspiRobot.RobotControl.Settings;
 
 public class ChuckSettings
 {
-    public ChuckSettings(int number, Sequence pickSequence, Sequence placeSequence)
+    public ChuckSettings(int number, SequenceSettings pickSequence, SequenceSettings placeSequence)
     {
         this.Number = number;
         this.PickSequence = pickSequence;
@@ -13,7 +13,7 @@ public class ChuckSettings
 
     public int Number { get; }
 
-    public Sequence PickSequence { get; }
+    public SequenceSettings PickSequence { get; }
 
-    public Sequence PlaceSequence { get; }
+    public SequenceSettings PlaceSequence { get; }
 }

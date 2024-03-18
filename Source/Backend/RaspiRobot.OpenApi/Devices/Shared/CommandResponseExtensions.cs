@@ -10,14 +10,14 @@ internal static class CommandResponseExtensions
         return response is ErrorResponse errorResponse
             ? new CommandResponse
             {
-                Error = new Error
+                NotSuccessful = new NotSuccessful()
                 {
                     Message = errorResponse.Message,
                 },
             }
             : new CommandResponse
             {
-                Success = new Success(),
+                Successful = new Successful(),
             };
     }
 }

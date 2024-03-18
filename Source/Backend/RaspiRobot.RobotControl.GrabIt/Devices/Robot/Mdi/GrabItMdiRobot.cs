@@ -4,7 +4,7 @@ using System;
 using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
-using RaspiRobot.RobotControl.Settings;
+using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 internal class GrabItMdiRobot : IMdiRobot
 {
