@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using Common.DependencyInjection;
+using Common.Logging;
 using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
@@ -32,6 +33,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly IGrabItDriver driver;
     private readonly IOperationModeRetriever operationModeRetriever;
     private readonly RobotStateCache robotStateCache;
+    private readonly Log logger;
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
@@ -42,15 +44,17 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IGrabItDriver driver,
         IOperationModeRetriever operationModeRetriever,
         RobotStateCache robotStateCache,
-        Factory factory)
+        Factory factory,
+        Log logger)
     {
         this.settings = settings;
         this.settingsRetriever = settingsRetriever;
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.transportSequenceExecutor = transportSequenceExecutor;
         this.driver = driver;
-        this.robotStateCache = robotStateCache;
         this.operationModeRetriever = operationModeRetriever;
+        this.robotStateCache = robotStateCache;
+        this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
@@ -189,14 +193,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                RobotControl.Devices.Robot.OperationMode.OperationMode.Automatic;
     }
 
+    // TODO: Handle rollbackCancellationToken
+    // Configure for each step if rollback is supported.
+    // If yes, stop execution and a higher instance needs to care about the rollback actions - if no, just continue.
     private async Task<ICommandResponse> ExecuteSequencesAsync(
         IReadOnlyList<Sequence> sequences,
         CancellationToken rollbackCancellationToken)
     {
         if (this.robotStateCache.RobotState == RobotState.Ready)
         {
+            rollbackCancellationToken.Register(() =>
+                this.logger.Info(
+                    "Rollback of the current transport sequence has been detected, but is currently not implemented so the current transport sequence will continue to execute"));
             this.NotifyState(RobotState.Busy);
-            await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver, rollbackCancellationToken);
+            await this.transportSequenceExecutor.ExecuteAsync(sequences, this.driver);
             this.NotifyState(RobotState.Ready);
             return new SuccessResponse();
         }
