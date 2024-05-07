@@ -25,7 +25,7 @@ internal class GrabItMdiRobot : IMdiRobot
     private bool IsInMdiMode
         => this.operationModeRetriever.OperationMode == OperationMode.Mdi;
 
-    public Position? Step(Axis axis, AxisDirection direction)
+    public Position? Step(Axis axis, AxisDirection direction, int stepSize)
     {
         if (!this.IsInMdiMode)
         {
@@ -35,7 +35,7 @@ internal class GrabItMdiRobot : IMdiRobot
 
         var drive = (byte)axis;
         int currentValue = this.grabItDriver.CurrentDrivePositions[drive];
-        int newValue = CalculateStepPosition(currentValue, direction);
+        int newValue = CalculateStepPosition(currentValue, direction, stepSize);
 
         if (currentValue != newValue)
         {
@@ -47,12 +47,12 @@ internal class GrabItMdiRobot : IMdiRobot
         return null;
     }
 
-    private static int CalculateStepPosition(int currentValue, AxisDirection direction)
+    private static int CalculateStepPosition(int currentValue, AxisDirection direction, int stepSize)
     {
         return direction switch
         {
-            AxisDirection.Minus => currentValue - 1,
-            AxisDirection.Plus => currentValue + 1,
+            AxisDirection.Minus => currentValue - stepSize,
+            AxisDirection.Plus => currentValue + stepSize,
             _ => throw new InvalidOperationException($"Unknown axis direction '{direction}'."),
         };
     }

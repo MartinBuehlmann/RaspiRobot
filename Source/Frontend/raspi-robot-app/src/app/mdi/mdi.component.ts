@@ -37,15 +37,23 @@ export class MdiComponent implements OnInit {
   }
 
   stepPlus(axisNumber: number) {
-    this.step(axisNumber, AxisDirection.Plus);
+    this.step(axisNumber, AxisDirection.Plus, 1);
+  }
+
+  stepPlusFast(axisNumber: number) {
+    this.step(axisNumber, AxisDirection.Plus, 5);
   }
 
   stepMinus(axisNumber: number) {
-    this.step(axisNumber, AxisDirection.Minus);
+    this.step(axisNumber, AxisDirection.Minus, 1);
   }
 
-  step(axisNumber: number, axisDirection: AxisDirection) {
-    this.mdiRobotService.stepSingleAxis(axisNumber, axisDirection)
+  stepMinusFast(axisNumber: number) {
+    this.step(axisNumber, AxisDirection.Minus, 5);
+  }
+
+  step(axisNumber: number, axisDirection: AxisDirection, stepSize: number) {
+    this.mdiRobotService.stepSingleAxis(axisNumber, axisDirection, stepSize)
     .subscribe(response => {
       if (response.executed) {
         this.axisPositions[response.newPosition.axis] = response.newPosition.position;

@@ -18,7 +18,7 @@ using RaspiRobot.RobotControl.GrabIt.Settings;
 public class RobotControlGrabItModule : Module
 {
     // Depending on if the software is running on the Raspberry PI or on the Computer,
-    // DevicesRobotNativeModule or DevicesRobotSimulationModule needs to be loaded.
+    // RobotNativeModule or RobotSimulationModule needs to be loaded.
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterModule<DriverModule>();
