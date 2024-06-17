@@ -22,13 +22,9 @@ internal class TransportSequenceExecutor
         this.eventBroker = eventBroker;
     }
 
-    // TODO: Handle rollbackCancellationToken
-    // Configure for each step if rollback is supported.
-    // If yes, stop execution and a higher instance needs to care about the rollback actions - if no, just continue.
     public async Task ExecuteAsync(
         IReadOnlyList<Sequence> sequences,
-        IGrabItDriver driver,
-        CancellationToken rollbackCancellationToken)
+        IGrabItDriver driver)
     {
         foreach (Sequence sequence in sequences)
         {
@@ -37,7 +33,7 @@ internal class TransportSequenceExecutor
                 await this.ExecuteAsync(step, driver);
             }
 
-            await Task.Delay(150);
+            await Task.Delay(150, CancellationToken.None);
         }
     }
 
@@ -72,7 +68,7 @@ internal class TransportSequenceExecutor
 
         driver.Execute(positions);
 
-        await Task.Delay(10);
+        await Task.Delay(10, CancellationToken.None);
     }
 
     private Task ExecuteAsync(ChuckLoadingChangedNotificationStep chuckLoadingChangedNotificationStep)
