@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
 using RaspiRobot.RobotControl.Devices.Robot.Steps;
 using RaspiRobot.RobotControl.Devices.Storages;
@@ -68,7 +68,7 @@ internal class TransportSequenceBuilder
                         MoveStepSettings moveStepSettings => BuildMoveStep(moveStepSettings),
                         ChuckLoadingChangedNotificationStepSettings => ChuckLoadingChangedNotificationStep.Occupied(
                             new MachineChuck(chuck.Number),
-                            new PalletChuckLoading(new StoragePlace(place.Number), null)),
+                            new PalletChuckOccupancy(new StoragePlace(place.Number), null)),
                         _ => throw new NotSupportedException($"Step of type '{x.GetType()}' is not supported."),
                     };
                 })

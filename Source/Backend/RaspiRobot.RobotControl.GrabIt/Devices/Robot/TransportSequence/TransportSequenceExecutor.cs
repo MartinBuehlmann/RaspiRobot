@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EventBroker;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 internal class TransportSequenceExecutor
@@ -73,7 +73,7 @@ internal class TransportSequenceExecutor
 
     private Task ExecuteAsync(ChuckLoadingChangedNotificationStep chuckLoadingChangedNotificationStep)
     {
-        this.eventBroker.Publish(new ChuckLoadingChangedEvent(new[] { chuckLoadingChangedNotificationStep.ChuckLoading }));
+        this.eventBroker.Publish(new ChuckOccupancyChangedEvent(new[] { chuckLoadingChangedNotificationStep.ChuckOccupancy }));
         return Task.CompletedTask;
     }
 }
