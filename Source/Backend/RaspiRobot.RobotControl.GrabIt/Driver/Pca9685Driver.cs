@@ -59,7 +59,7 @@ internal class Pca9685Driver : IDisposable
         this.device!.Write(new byte[] { Mode1, AllCall });
         WaitForOscillator();
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
-        byte mode1 = (byte)(readBuffer[0] & ~Sleep);
+        var mode1 = (byte)(readBuffer[0] & ~Sleep);
         this.device.Write(new byte[] { Mode1, mode1 });
         mode1 = (byte)(mode1 | Sleep);
         this.device!.Write(new byte[] { Mode1, mode1 });
@@ -99,11 +99,11 @@ internal class Pca9685Driver : IDisposable
         preScaleValue /= 4096.0;
         preScaleValue /= frequency;
         preScaleValue -= 1.0;
-        byte preScale = (byte)Math.Floor(preScaleValue + 0.5);
+        var preScale = (byte)Math.Floor(preScaleValue + 0.5);
         var readBuffer = new byte[1];
         this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
         byte oldMode = readBuffer[0];
-        byte newMode = (byte)((oldMode & 0x7F) | 0x10);
+        var newMode = (byte)((oldMode & 0x7F) | 0x10);
         this.device.Write(new byte[] { Mode1, newMode });
         this.device.Write(new byte[] { PreScale, preScale });
         this.device.WriteRead(new byte[] { PreScale }, new byte[1]);
