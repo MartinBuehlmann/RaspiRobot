@@ -66,14 +66,14 @@ internal class TransportSequenceExecutor
                 currentDrivePositions);
         }
 
-        driver.Execute(positions);
+        await driver.ExecuteAsync(positions);
 
         await Task.Delay(10, CancellationToken.None);
     }
 
     private Task ExecuteAsync(ChuckLoadingChangedNotificationStep chuckLoadingChangedNotificationStep)
     {
-        this.eventBroker.Publish(new ChuckOccupancyChangedEvent(new[] { chuckLoadingChangedNotificationStep.ChuckOccupancy }));
+        this.eventBroker.Publish(new ChuckOccupancyChangedEvent([chuckLoadingChangedNotificationStep.ChuckOccupancy]));
         return Task.CompletedTask;
     }
 }

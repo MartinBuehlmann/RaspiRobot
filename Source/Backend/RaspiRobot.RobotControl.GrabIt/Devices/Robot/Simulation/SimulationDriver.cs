@@ -1,6 +1,7 @@
 ﻿namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Simulation;
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common.Logging;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
@@ -26,7 +27,7 @@ internal class SimulationDriver : IGrabItDriver
     {
     }
 
-    public void Execute(IReadOnlyList<Position> positions)
+    public Task ExecuteAsync(IReadOnlyList<Position> positions)
     {
         foreach (Position position in positions)
         {
@@ -34,5 +35,7 @@ internal class SimulationDriver : IGrabItDriver
             this.currentDrivePositions[position.Drive] = position.Value;
             this.eventBroker.Publish(new RobotAxisPositionChangedEvent());
         }
+
+        return Task.CompletedTask;
     }
 }
