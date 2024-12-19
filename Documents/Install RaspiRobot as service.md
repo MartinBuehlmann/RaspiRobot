@@ -2,6 +2,18 @@
 
 This document describes how to configure Raspberry PI to run RaspiRobot as a service.
 
+## Raspberry Pi Preparation
+
+To run RaspiRobot, both SPI and I2C must be enabled.
+
+```
+sudo raspi-config
+```
+
+Then navigate to _3 Interface Options_ and enable _I4 SPI_ and _I5 I2C_.
+
+Reboot the device.
+
 ## Step-By-Step
 The following section describes step-by-step how to setup RaspiRobot as a service:
 
