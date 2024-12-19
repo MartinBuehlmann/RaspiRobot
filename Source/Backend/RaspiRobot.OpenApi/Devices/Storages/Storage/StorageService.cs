@@ -27,7 +27,7 @@ internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServ
         this.factory = factory;
     }
 
-    public override async Task RetrieveStateAndStateChanged(
+    public override async Task RetrieveStateChanged(
         StorageRequest request,
         IServerStreamWriter<StorageStateResponse> responseStream,
         ServerCallContext context)
@@ -41,9 +41,9 @@ internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServ
         await storage.SubscribeForStateChangedAsync(storageStateNotifier, cancellationTokenSource.Token);
     }
 
-    public override async Task RetrieveAlarmsAndAlarmsChanged(
+    public override async Task RetrieveAlarmsChanged(
         StorageRequest request,
-        IServerStreamWriter<AlarmResponse> responseStream,
+        IServerStreamWriter<AlarmsResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(

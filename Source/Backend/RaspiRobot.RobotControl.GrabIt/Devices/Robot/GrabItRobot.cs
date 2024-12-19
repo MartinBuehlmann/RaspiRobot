@@ -13,7 +13,7 @@ using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
 using RaspiRobot.RobotControl.Devices.Robot.Settings;
@@ -105,11 +105,11 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 
     public async Task SubscribeForChuckLoadingsChangedAsync(
         int[] chuckNumbers,
-        IChuckLoadingsNotifier chuckLoadingsNotifier,
+        IChuckOccupancyNotifier chuckOccupancyNotifier,
         CancellationToken cancellationToken)
     {
         // As long as there is no real tracking, we just return an empty chuck loading and wait.
-        await chuckLoadingsNotifier.NotifyAsync(ReadOnlyList.Empty<ChuckLoading>());
+        await chuckOccupancyNotifier.NotifyAsync(ReadOnlyList.Empty<ChuckOccupancy>());
         cancellationToken.WaitHandle.WaitOne();
     }
 
@@ -153,7 +153,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         return await this.ExecuteSequencesAsync(sequences, rollbackCancellationToken);
     }
 
-    public async Task<ICommandResponse> ExchangePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
+    public async Task<ICommandResponse> ExchangeStoragePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
     {
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.ExchangePlaceSequence(
             await this.settingsRetriever.RetrieveByAsync(sourcePlace),

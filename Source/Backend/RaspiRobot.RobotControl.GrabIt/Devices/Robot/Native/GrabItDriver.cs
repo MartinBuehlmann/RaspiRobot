@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Common.Logging;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
@@ -35,7 +36,7 @@ internal class GrabItDriver : IGrabItDriver, IDisposable
         this.driver.SetPwmFrequency(50);
     }
 
-    public void Execute(IReadOnlyList<Position> positions)
+    public async Task ExecuteAsync(IReadOnlyList<Position> positions)
     {
         foreach (Position position in positions)
         {
@@ -48,7 +49,7 @@ internal class GrabItDriver : IGrabItDriver, IDisposable
 
                 if (position.Drive != 0)
                 {
-                    Thread.Sleep(5);
+                    await Task.Delay(5);
                 }
             }
         }

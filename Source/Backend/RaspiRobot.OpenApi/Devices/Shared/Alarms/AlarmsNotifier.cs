@@ -11,11 +11,11 @@ using Alarm = Erowa.OpenAPI.Alarm;
 internal class AlarmsNotifier : IAlarmsNotifier
 {
     private readonly AlarmConverter alarmConverter;
-    private readonly IServerStreamWriter<AlarmResponse> responseStream;
+    private readonly IServerStreamWriter<AlarmsResponse> responseStream;
 
     public AlarmsNotifier(
         AlarmConverter alarmConverter,
-        IServerStreamWriter<AlarmResponse> responseStream)
+        IServerStreamWriter<AlarmsResponse> responseStream)
     {
         this.alarmConverter = alarmConverter;
         this.responseStream = responseStream;
@@ -25,7 +25,7 @@ internal class AlarmsNotifier : IAlarmsNotifier
     {
         IReadOnlyList<Alarm> deviceAlarms = alarms.Select(x => this.alarmConverter.Convert(x)).ToList();
         await this.responseStream.WriteAsync(
-            new AlarmResponse
+            new AlarmsResponse
             {
                 Alarms = { deviceAlarms },
             });

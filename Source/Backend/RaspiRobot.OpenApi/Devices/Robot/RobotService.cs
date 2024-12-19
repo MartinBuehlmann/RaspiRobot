@@ -15,9 +15,9 @@ using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.State;
-using RaspiRobot.RobotControl.Devices.Storages;
+using StoragePlace = RaspiRobot.RobotControl.Devices.Storages.StoragePlace;
 
 internal class RobotService : Robot.RobotBase
 {
@@ -44,7 +44,7 @@ internal class RobotService : Robot.RobotBase
         this.factory = factory;
     }
 
-    public override async Task RetrieveStateAndStateChanged(
+    public override async Task RetrieveStateChanged(
         Empty request,
         IServerStreamWriter<StateResponse> responseStream,
         ServerCallContext context)
@@ -58,9 +58,9 @@ internal class RobotService : Robot.RobotBase
         await robot.SubscribeForStateChangedAsync(magazineStateNotifier, cancellationTokenSource.Token);
     }
 
-    public override async Task RetrieveAlarmsAndAlarmsChanged(
+    public override async Task RetrieveAlarmsChanged(
         Empty request,
-        IServerStreamWriter<AlarmResponse> responseStream,
+        IServerStreamWriter<AlarmsResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
@@ -72,16 +72,16 @@ internal class RobotService : Robot.RobotBase
         await robot.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
     }
 
-    public override async Task RetrieveChuckLoadingsAndChuckLoadingsChanged(
-        ChuckLoadingsRequest request,
-        IServerStreamWriter<ChuckLoadingsResponse> responseStream,
+    public override async Task RetrieveChuckOccupancyChanged(
+        ChuckOccupancyRequest request,
+        IServerStreamWriter<ChuckOccupancyResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var chuckLoadingsNotifier = this.factory.Create<IChuckLoadingsNotifier>(responseStream);
+        var chuckLoadingsNotifier = this.factory.Create<IChuckOccupancyNotifier>(responseStream);
         IRobot robot = this.deviceService.RetrieveRobot();
         int[] chuckNumbers = request.Chucks.Select(x => x.Number).ToArray();
         await robot.SubscribeForChuckLoadingsChangedAsync(
@@ -164,11 +164,11 @@ internal class RobotService : Robot.RobotBase
         }
     }
 
-    public override async Task<CommandResponse> ExchangePlace(ExchangePlaceRequest request, ServerCallContext context)
+    public override async Task<CommandResponse> ExchangeStoragePlace(ExchangeStoragePlaceRequest request, ServerCallContext context)
     {
         IRobot robot = this.deviceService.RetrieveRobot();
 
-        ICommandResponse response = await robot.ExchangePlaceAsync(
+        ICommandResponse response = await robot.ExchangeStoragePlaceAsync(
             new StoragePlace(request.SourcePlace.Number),
             new StoragePlace(request.DestinationPlace.Number));
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.State;
 using RaspiRobot.RobotControl.Devices.Storages;
@@ -28,7 +28,7 @@ public interface IRobot : IDevice
 
     Task SubscribeForChuckLoadingsChangedAsync(
         int[] chuckNumbers,
-        IChuckLoadingsNotifier chuckLoadingsNotifier,
+        IChuckOccupancyNotifier chuckOccupancyNotifier,
         CancellationToken cancellationToken);
 
     Task<ICommandResponse> LoadChuckAsync(
@@ -42,7 +42,7 @@ public interface IRobot : IDevice
         StoragePlace destinationPlace,
         CancellationToken rollbackCancellationToken);
 
-    Task<ICommandResponse> ExchangePlaceAsync(
+    Task<ICommandResponse> ExchangeStoragePlaceAsync(
         StoragePlace sourcePlace,
         StoragePlace destinationPlace);
 }

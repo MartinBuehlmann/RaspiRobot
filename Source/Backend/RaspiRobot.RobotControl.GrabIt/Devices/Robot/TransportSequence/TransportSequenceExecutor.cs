@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EventBroker;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckLoading;
+using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Steps;
 
 internal class TransportSequenceExecutor
@@ -66,14 +66,14 @@ internal class TransportSequenceExecutor
                 currentDrivePositions);
         }
 
-        driver.Execute(positions);
+        await driver.ExecuteAsync(positions);
 
         await Task.Delay(10, CancellationToken.None);
     }
 
     private Task ExecuteAsync(ChuckLoadingChangedNotificationStep chuckLoadingChangedNotificationStep)
     {
-        this.eventBroker.Publish(new ChuckLoadingChangedEvent(new[] { chuckLoadingChangedNotificationStep.ChuckLoading }));
+        this.eventBroker.Publish(new ChuckOccupancyChangedEvent([chuckLoadingChangedNotificationStep.ChuckOccupancy]));
         return Task.CompletedTask;
     }
 }

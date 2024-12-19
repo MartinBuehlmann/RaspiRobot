@@ -1,6 +1,7 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot.Mdi;
 
 using System;
+using System.Threading.Tasks;
 using Common.Logging;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
 using RaspiRobot.RobotControl.Devices.Robot.OperationMode;
@@ -25,11 +26,11 @@ internal class GrabItMdiRobot : IMdiRobot
     private bool IsInMdiMode
         => this.operationModeRetriever.OperationMode == OperationMode.Mdi;
 
-    public Position? Step(Axis axis, AxisDirection direction, int stepSize)
+    public async Task<Position?> StepAsync(Axis axis, AxisDirection direction, int stepSize)
     {
         if (!this.IsInMdiMode)
         {
-            this.LogNotInMdiMode(nameof(this.Step));
+            this.LogNotInMdiMode(nameof(this.StepAsync));
             return null;
         }
 
@@ -40,7 +41,7 @@ internal class GrabItMdiRobot : IMdiRobot
         if (currentValue != newValue)
         {
             var position = new Position(drive, newValue);
-            this.grabItDriver.Execute(new[] { position });
+            await this.grabItDriver.ExecuteAsync([position]);
             return position;
         }
 
