@@ -15,6 +15,7 @@ cd ..
 echo .NET backend built.
 
 echo Copying frontend to backend for delivery...
+if not exist ..\artifacts\publish\windows\wwwroot md ..\artifacts\publish\windows\wwwroot\
 copy ..\artifacts\frontend\*.* ..\artifacts\publish\windows\wwwroot
 echo Finished.
 
