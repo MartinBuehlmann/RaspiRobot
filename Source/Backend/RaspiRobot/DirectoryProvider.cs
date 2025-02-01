@@ -54,6 +54,6 @@ internal static class DirectoryProvider
     [Conditional("DEBUG")]
     private static void CheckForDebugBuild()
     {
-        IsDebugBuild = false;
+        IsDebugBuild = true;
     }
 }
