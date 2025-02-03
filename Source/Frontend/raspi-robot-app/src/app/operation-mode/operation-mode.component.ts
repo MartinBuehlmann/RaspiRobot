@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { OperationModeService } from '../services/operation-mode/operation-mode.service';
 import { OperationModeChangedService } from '../services/operation-mode/operation-mode-changed.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-operation-mode',
+  imports: [NgIf],
   templateUrl: './operation-mode.component.html',
   styleUrl: './operation-mode.component.scss'
 })

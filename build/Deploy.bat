@@ -19,7 +19,7 @@ cd ..
 echo .NET backend built.
 
 echo Copying frontend to backend for delivery...
-copy ..\artifacts\frontend\*.* ..\artifacts\publish\raspberry\wwwroot
+xcopy /e /k /i ..\artifacts\frontend\*.* ..\artifacts\publish\raspberry\wwwroot
 echo Frontend copied.
 
 echo Deploying to Raspberry PI at '%address%'...
