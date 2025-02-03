@@ -8,8 +8,8 @@ describe('MdiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MdiComponent]
-    })
+    imports: [MdiComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(MdiComponent);
