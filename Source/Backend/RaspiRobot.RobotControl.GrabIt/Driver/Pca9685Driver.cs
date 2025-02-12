@@ -54,11 +54,11 @@ internal class Pca9685Driver : IDisposable
 
         this.SetAllPwm(0, 0);
         var readBuffer = new byte[1];
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
-        this.device!.Write(new byte[] { Mode2, OutDrv });
-        this.device!.Write(new byte[] { Mode1, AllCall });
+        this.device!.WriteRead([Mode1], readBuffer);
+        this.device!.Write([Mode2, OutDrv]);
+        this.device!.Write([Mode1, AllCall]);
         WaitForOscillator();
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
+        this.device!.WriteRead([Mode1], readBuffer);
         var mode1 = (byte)(readBuffer[0] & ~Sleep);
         this.device.Write(new byte[] { Mode1, mode1 });
         mode1 = (byte)(mode1 | Sleep);
@@ -69,9 +69,9 @@ internal class Pca9685Driver : IDisposable
         WaitForOscillator();
         mode1 = (byte)(mode1 & ~Sleep);
         this.device!.Write(new byte[] { Mode1, mode1 });
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
+        this.device!.WriteRead([Mode1], readBuffer);
+        this.device!.WriteRead([Mode1], readBuffer);
+        this.device!.WriteRead([Mode1], readBuffer);
         WaitForOscillator();
     }
 
@@ -81,7 +81,7 @@ internal class Pca9685Driver : IDisposable
     public void SoftwareReset()
     {
         using I2cDevice i2CDevice = CreateI2CDevice(0x01);
-        i2CDevice.Write(new byte[] { 0x00, 0x06 });
+        i2CDevice.Write([0x00, 0x06]);
     }
 
     /// <summary>
@@ -101,12 +101,12 @@ internal class Pca9685Driver : IDisposable
         preScaleValue -= 1.0;
         var preScale = (byte)Math.Floor(preScaleValue + 0.5);
         var readBuffer = new byte[1];
-        this.device!.WriteRead(new byte[] { Mode1 }, readBuffer);
+        this.device!.WriteRead([Mode1], readBuffer);
         byte oldMode = readBuffer[0];
         var newMode = (byte)((oldMode & 0x7F) | 0x10);
         this.device.Write(new byte[] { Mode1, newMode });
         this.device.Write(new byte[] { PreScale, preScale });
-        this.device.WriteRead(new byte[] { PreScale }, new byte[1]);
+        this.device.WriteRead([PreScale], new byte[1]);
         this.device.Write(new byte[] { Mode1, oldMode });
         WaitForOscillator();
         this.device.Write(new byte[] { Mode1, (byte)(oldMode | 0x80) });
