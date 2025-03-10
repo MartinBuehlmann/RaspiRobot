@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 public class LoggingInterceptor : Interceptor
 {
-    private static long CurrentCorrelationId;
+    private static long currentCorrelationId;
     private readonly JsonSerializerOptions jsonSerializerOptions;
 
     private readonly ILogger<LoggingInterceptor> log;
@@ -27,7 +27,7 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref CurrentCorrelationId);
+        long correlationId = Interlocked.Increment(ref currentCorrelationId);
 
         this.log.LogDebug(
             "[{CorrelationId}] Method {FullName} called with parameter ({TypeName}: {SerializedMessage})",
@@ -51,7 +51,7 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         ClientStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref CurrentCorrelationId);
+        long correlationId = Interlocked.Increment(ref currentCorrelationId);
 
         this.log.LogDebug(
             "[{CorrelationId}] Async Method {FullName} called with parameter ({TypeName}: {SerializedMessage})",
@@ -69,7 +69,7 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         ServerStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref CurrentCorrelationId);
+        long correlationId = Interlocked.Increment(ref currentCorrelationId);
         this.log.LogDebug(
             "[{CorrelationId}] Opening server stream of method {FullName}",
             correlationId,
@@ -84,7 +84,7 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         DuplexStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref CurrentCorrelationId);
+        long correlationId = Interlocked.Increment(ref currentCorrelationId);
         this.log.LogDebug(
             "[{CorrelationId}] Opening duplex server stream of method {FullName}",
             correlationId,
