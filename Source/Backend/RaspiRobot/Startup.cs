@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using RaspiRobot.Logging;
 using RaspiRobot.OpenApi;
@@ -70,7 +71,7 @@ public class Startup
         app.UseSwagger(o =>
         {
             o.RouteTemplate = "swagger/{documentName}/swagger.json";
-            o.SerializeAsV2 = true;
+            o.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
         });
         app.UseSwaggerUI(c =>
         {
