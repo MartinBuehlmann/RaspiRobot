@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="8.3.0" />
-        <PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556">
+        <PackageReference Include="Autofac" />
+        <PackageReference Include="StyleCop.Analyzers.Unstable">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
