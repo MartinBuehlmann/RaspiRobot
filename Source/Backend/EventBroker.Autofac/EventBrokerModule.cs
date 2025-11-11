@@ -10,6 +10,7 @@ public class EventBrokerModule : Module
             .As<IEventBroker>()
             .SingleInstance();
         builder.RegisterType<EventRegistration>()
+            .As<EventRegistration>()
             .As<IEventRegistration>()
             .SingleInstance();
         builder.RegisterType<EventSubscriber>();

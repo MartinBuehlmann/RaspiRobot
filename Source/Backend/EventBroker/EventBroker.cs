@@ -8,12 +8,12 @@ using Common;
 
 internal class EventBroker : IEventBroker
 {
-    private readonly IEventRegistration registration;
+    private readonly EventRegistration registration;
     private readonly ApplicationCrasher applicationCrasher;
     private int eventCount;
 
     public EventBroker(
-        IEventRegistration registration,
+        EventRegistration registration,
         ApplicationCrasher applicationCrasher)
     {
         this.registration = registration;
@@ -25,7 +25,7 @@ internal class EventBroker : IEventBroker
     public void Publish<T>(T data)
         where T : class
     {
-        foreach (IEventSubscriptionBase subscription in ((EventRegistration)this.registration).Retrieve(data))
+        foreach (IEventSubscriptionBase subscription in this.registration.Retrieve(data))
         {
             this.FireAndForgetEvent(data, subscription);
         }
@@ -38,14 +38,14 @@ internal class EventBroker : IEventBroker
     private void FireAndForgetEvent<T>(T data, IEventSubscriptionBase subscription)
     {
         Interlocked.Increment(ref this.eventCount);
-        Task.Run(() => this.DispatchEvenAsync(data, subscription));
+        Task.Run(() => this.DispatchEventAsync(data, subscription));
     }
 
     [SuppressMessage(
         "Microsoft.Design",
         "CA1031:DoNotCatchGeneralExceptionTypes",
         Justification = "This method is designed to catch all exceptions.")]
-    private async Task DispatchEvenAsync<T>(T data, IEventSubscriptionBase subscription)
+    private async Task DispatchEventAsync<T>(T data, IEventSubscriptionBase subscription)
     {
         try
         {

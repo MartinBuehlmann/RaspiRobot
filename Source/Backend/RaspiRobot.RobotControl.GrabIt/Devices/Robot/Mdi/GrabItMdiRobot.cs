@@ -49,19 +49,15 @@ internal class GrabItMdiRobot : IMdiRobot
     }
 
     private static int CalculateStepPosition(int currentValue, AxisDirection direction, int stepSize)
-    {
-        return direction switch
+        => direction switch
         {
             AxisDirection.Minus => currentValue - stepSize,
             AxisDirection.Plus => currentValue + stepSize,
             _ => throw new InvalidOperationException($"Unknown axis direction '{direction}'."),
         };
-    }
 
     private void LogNotInMdiMode(string mdiFunctionName)
-    {
-        this.log.Warn(
+        => this.log.Warn(
             "Unable to execute MDI function {MdiFunctionName} (Robot is not in MDI mode)",
             mdiFunctionName);
-    }
 }
