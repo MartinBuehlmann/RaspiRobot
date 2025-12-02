@@ -14,7 +14,7 @@ echo Angular frontend built.
 
 echo Build .NET backend...
 cd Backend
-dotnet publish %product% -c Release -r linux-arm --self-contained -o ../../artifacts/publish/raspberry /p:DebugType=None /p:DebugSymbols=false
+dotnet publish %product% -c Release -r linux-arm64 --self-contained -o ../../artifacts/publish/raspberry /p:DebugType=None /p:DebugSymbols=false
 cd ..
 echo .NET backend built.
 

@@ -1,11 +1,13 @@
 <h2>RaspiRobot</h2>
 <div class="table">
-    <div class="row">
-        <div class="cell">Operation Mode:</div>
-        <div class="cell">
-            <select [(ngModel)]="selectedOperationMode" (change)="onOperationmodeChange()">
-                <option *ngFor="let operationMode of operationModes" [value]="operationMode">{{operationMode}}</option>
-             </select>
-        </div>
+  <div class="row">
+    <div class="cell">Operation Mode:</div>
+    <div class="cell">
+      <select [(ngModel)]="selectedOperationMode" (change)="onOperationmodeChange()">
+        @for (operationMode of operationModes; track operationMode) {
+          <option [value]="operationMode">{{operationMode}}</option>
+        }
+      </select>
     </div>
+  </div>
 </div>

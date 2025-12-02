@@ -26,7 +26,7 @@ using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
 {
-    private readonly RobotSettings settings;
+    private readonly RobotSettings robotSettings;
     private readonly ISettingsRetriever settingsRetriever;
     private readonly TransportSequenceBuilder transportSequenceBuilder;
     private readonly TransportSequenceExecutor transportSequenceExecutor;
@@ -37,7 +37,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
-        RobotSettings settings,
+        RobotSettings robotSettings,
         ISettingsRetriever settingsRetriever,
         TransportSequenceBuilder transportSequenceBuilder,
         TransportSequenceExecutor transportSequenceExecutor,
@@ -47,7 +47,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         Factory factory,
         Log logger)
     {
-        this.settings = settings;
+        this.robotSettings = robotSettings;
         this.settingsRetriever = settingsRetriever;
         this.transportSequenceBuilder = transportSequenceBuilder;
         this.transportSequenceExecutor = transportSequenceExecutor;
@@ -64,10 +64,9 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         this.driver.Initialize();
-        RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         this.InitializeState();
         await this.ExecuteSequencesAsync(
-            this.transportSequenceBuilder.HomingSequence(robotSettings),
+            this.transportSequenceBuilder.HomingSequence(this.robotSettings),
             CancellationToken.None);
     }
 
@@ -121,21 +120,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     {
         var sequences = new List<Sequence>();
         ChuckSettings chuckSettings = await this.settingsRetriever.RetrieveByAsync(chuck);
-        RobotSettings robotSettings = await this.settingsRetriever.RetrieveRobotSettingsAsync();
         if (destinationPlaceForPalletOnChuck is not null)
         {
             sequences.AddRange(
                 this.transportSequenceBuilder.UnloadChuckSequence(
                     chuckSettings,
                     await this.settingsRetriever.RetrieveByAsync(destinationPlaceForPalletOnChuck),
-                    robotSettings));
+                    this.robotSettings));
         }
 
         sequences.AddRange(
             this.transportSequenceBuilder.LoadChuckSequence(
                 await this.settingsRetriever.RetrieveByAsync(sourcePlace),
                 chuckSettings,
-                robotSettings));
+                this.robotSettings));
 
         return await this.ExecuteSequencesAsync(sequences, rollbackCancellationToken);
     }
@@ -148,17 +146,19 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.UnloadChuckSequence(
             await this.settingsRetriever.RetrieveByAsync(chuck),
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
-            await this.settingsRetriever.RetrieveRobotSettingsAsync());
+            this.robotSettings);
 
         return await this.ExecuteSequencesAsync(sequences, rollbackCancellationToken);
     }
 
-    public async Task<ICommandResponse> ExchangeStoragePlaceAsync(StoragePlace sourcePlace, StoragePlace destinationPlace)
+    public async Task<ICommandResponse> ExchangeStoragePlaceAsync(
+        StoragePlace sourcePlace,
+        StoragePlace destinationPlace)
     {
         IReadOnlyList<Sequence> sequences = this.transportSequenceBuilder.ExchangePlaceSequence(
             await this.settingsRetriever.RetrieveByAsync(sourcePlace),
             await this.settingsRetriever.RetrieveByAsync(destinationPlace),
-            await this.settingsRetriever.RetrieveRobotSettingsAsync());
+            this.robotSettings);
 
         return await this.ExecuteSequencesAsync(sequences, CancellationToken.None);
     }

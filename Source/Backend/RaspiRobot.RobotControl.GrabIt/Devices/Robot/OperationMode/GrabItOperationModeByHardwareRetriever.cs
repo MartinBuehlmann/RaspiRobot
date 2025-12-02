@@ -44,5 +44,6 @@ internal class GrabItOperationModeByHardwareRetriever : IOperationModeByHardware
     {
         this.controller.ClosePin(OperationModeAutomaticPin);
         this.controller.ClosePin(OperationModeMdiPin);
+        this.controller.Dispose();
     }
 }

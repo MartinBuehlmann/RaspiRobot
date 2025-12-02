@@ -7,7 +7,8 @@ public static class EventBrokerServiceCollectionExtensions
     public static IServiceCollection AddEventBroker(this IServiceCollection services)
     {
         services.AddSingleton<IEventBroker, EventBroker>();
-        services.AddSingleton<IEventRegistration, EventRegistration>();
+        services.AddSingleton<EventRegistration>();
+        services.AddSingleton<IEventRegistration>(sp => sp.GetRequiredService<EventRegistration>());
         services.AddTransient<EventSubscriber>();
         return services;
     }

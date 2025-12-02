@@ -1,2 +1,6 @@
-<div *ngIf="operationMode">{{ operationMode }}</div>
-<div *ngIf="!operationMode">loading...</div>
+@if (operationMode) {
+  <div>{{ operationMode }}</div>
+}
+@if (!operationMode) {
+  <div>loading...</div>
+}

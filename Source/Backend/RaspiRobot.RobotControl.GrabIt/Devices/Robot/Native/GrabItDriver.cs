@@ -2,14 +2,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using EventBroker;
 using RaspiRobot.RobotControl.Devices.Robot.AxisPosition;
 using RaspiRobot.RobotControl.Devices.Robot.Steps;
 using RaspiRobot.RobotControl.GrabIt.Driver;
-using RaspiRobot.RobotControl.Settings;
 
 internal class GrabItDriver : IGrabItDriver, IDisposable
 {

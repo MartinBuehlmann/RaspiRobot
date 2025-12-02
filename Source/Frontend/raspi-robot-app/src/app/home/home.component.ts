@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { OperationModeService } from '../services/operation-mode/operation-mode.service';
 import { forkJoin } from 'rxjs';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, FormsModule],
+  imports: [FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

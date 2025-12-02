@@ -3,19 +3,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Common;
 
 internal class EventRegistration : IEventRegistration
 {
-    private readonly object subscriptionLock;
+    private readonly Lock subscriptionLock = new();
 
     private readonly IDictionary<Type, List<IEventSubscriptionBase>> subscriptions =
         new Dictionary<Type, List<IEventSubscriptionBase>>();
-
-    public EventRegistration()
-    {
-        this.subscriptionLock = new object();
-    }
 
     public IReadOnlyList<IEventSubscriptionBase> Retrieve<TEventData>(TEventData data)
         where TEventData : class
@@ -41,7 +37,7 @@ internal class EventRegistration : IEventRegistration
             {
                 if (!this.subscriptions.ContainsKey(eventDataType))
                 {
-                    this.subscriptions.Add(eventDataType, new List<IEventSubscriptionBase>());
+                    this.subscriptions.Add(eventDataType, []);
                 }
 
                 this.subscriptions[eventDataType].Add(instance);

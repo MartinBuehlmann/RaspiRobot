@@ -1,17 +1,15 @@
 @echo off
-cd ..
-cd Source
 
 echo Installing npm packages...
-cd Frontend/raspi-robot-app
+pushd ..\Source\Frontend\raspi-robot-app
 call npm install
-cd ../..
+popd
 echo Done.
 
 echo Restoring NuGet packages...
-cd Backend/
+pushd ..\Source\Backend
 dotnet restore
-cd ..
+popd
 echo Done.
 
 PAUSE
