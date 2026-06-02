@@ -1,20 +1,26 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.State;
 
 using System;
+using Erowa.OpenAPI.Robot;
+using Google.Protobuf.WellKnownTypes;
 using RaspiRobot.RobotControl.Devices.Robot.State;
 
 internal class RobotStateConverter
 {
-    public Erowa.OpenAPI.Robot.RobotState Convert(RobotState state)
-    {
-        return state switch
+    public RetrieveStateChangedResponse Convert(RobotState robotState)
+        => robotState switch
         {
-            RobotState.Disconnected => Erowa.OpenAPI.Robot.RobotState.Disconnected,
-            RobotState.NotReady => Erowa.OpenAPI.Robot.RobotState.NotReady,
-            RobotState.Ready => Erowa.OpenAPI.Robot.RobotState.Ready,
-            RobotState.Busy => Erowa.OpenAPI.Robot.RobotState.Busy,
-            RobotState.Error => Erowa.OpenAPI.Robot.RobotState.Error,
-            _ => throw new NotSupportedException($"Invalid robot state '{state}' detected."),
+            RobotState.Ready => CreateReadyResponse(),
+            RobotState.Disconnected => CreateNotReadyResponse(),
+            RobotState.NotReady => CreateNotReadyResponse(),
+            RobotState.Busy => CreateNotReadyResponse(),
+            RobotState.Error => CreateNotReadyResponse(),
+            _ => throw new ArgumentOutOfRangeException(nameof(robotState), robotState, "Unknown robot state"),
         };
-    }
+
+    private static RetrieveStateChangedResponse CreateReadyResponse()
+        => new RetrieveStateChangedResponse { Ready = new Empty() };
+
+    private static RetrieveStateChangedResponse CreateNotReadyResponse()
+        => new RetrieveStateChangedResponse { NotReady = new Empty() };
 }

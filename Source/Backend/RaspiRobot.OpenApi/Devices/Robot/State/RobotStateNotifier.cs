@@ -10,12 +10,12 @@ using RobotState = RaspiRobot.RobotControl.Devices.Robot.State.RobotState;
 internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync<RobotStateChangedEvent>
 {
     private readonly RobotStateConverter robotStateConverter;
-    private readonly IServerStreamWriter<StateResponse> responseStream;
+    private readonly IServerStreamWriter<RetrieveStateChangedResponse> responseStream;
     private readonly IRobotStateRetriever robotStateRetriever;
 
     public RobotStateNotifier(
         RobotStateConverter robotStateConverter,
-        IServerStreamWriter<StateResponse> responseStream,
+        IServerStreamWriter<RetrieveStateChangedResponse> responseStream,
         IRobotStateRetriever robotStateRetriever)
     {
         this.robotStateConverter = robotStateConverter;
@@ -25,9 +25,8 @@ internal class RobotStateNotifier : IRobotStateNotifier, IEventSubscriptionAsync
 
     public async Task NotifyAsync(RobotState state)
     {
-        Erowa.OpenAPI.Robot.RobotState robotState = this.robotStateConverter.Convert(state);
         await this.responseStream.WriteAsync(
-            new StateResponse { State = robotState, });
+            this.robotStateConverter.Convert(state));
     }
 
     public async Task HandleAsync(RobotStateChangedEvent e)

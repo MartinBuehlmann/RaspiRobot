@@ -1,15 +1,17 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Robot;
 
+using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Erowa.OpenAPI.Robot;
-using RaspiRobot.OpenApi.Devices.Shared;
+using Google.Protobuf.WellKnownTypes;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Storages;
+using StoragePlace = RaspiRobot.RobotControl.Devices.Storages.StoragePlace;
 
 internal class StartUnloadChuckRequestHandler
 {
@@ -24,14 +26,14 @@ internal class StartUnloadChuckRequestHandler
         this.logger = logger;
     }
 
-    public async Task<CommandResponse> HandleUnloadChuckAsync(
+    public async Task<UnloadChuckResponse> HandleUnloadChuckAsync(
         StartUnloadChuck request,
         CancellationToken rollbackCancellationToken)
     {
         this.logger.Info(
             "Received request to unload chuck: '{ChuckNumber}' to place: '{PlaceNumber}'",
-            request.Chuck.Number,
-            request.PlaceToUnload.Number);
+            request.Chuck.Identifier,
+            request.PlaceToUnload.Identifier);
 
         IRobot robot = this.deviceService.RetrieveRobot();
 
@@ -41,12 +43,23 @@ internal class StartUnloadChuckRequestHandler
             request.PlaceToUnload);
 
         ICommandResponse response = await robot.UnloadChuckAsync(
-            new MachineChuck(request.Chuck.Number),
-            new StoragePlace(request.PlaceToUnload.Number),
+            new MachineChuck(int.Parse(request.Chuck.Identifier, CultureInfo.InvariantCulture)),
+            new StoragePlace(int.Parse(request.PlaceToUnload.Identifier, CultureInfo.InvariantCulture)),
             rollbackCancellationToken);
 
         this.logger.Info("Unload chuck ended with result: {Response}", response);
 
-        return response.ToCommandResponse();
+        return CreateResponse(response);
     }
+
+    private static UnloadChuckResponse CreateResponse(ICommandResponse response)
+        => response switch
+        {
+            ErrorResponse errorResponse => new UnloadChuckResponse
+                { Unsuccessful = new Unsuccessful { Message = errorResponse.Message } },
+
+            SuccessResponse => new UnloadChuckResponse { Successful = new Empty() },
+
+            _ => throw new ArgumentOutOfRangeException(nameof(response), response, "Unknown response type"),
+        };
 }

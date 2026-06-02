@@ -1,10 +1,12 @@
 namespace RaspiRobot.OpenApi.Devices.Robot.ChuckOccupancy;
 
 using System;
-using Erowa.OpenAPI;
-using Erowa.OpenAPI.Robot;
+using System.Globalization;
+using Erowa.OpenAPI.MachineLoading;
+using Google.Protobuf.WellKnownTypes;
 using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
-using ChuckOccupancy = Erowa.OpenAPI.Robot.ChuckOccupancy;
+using ChuckOccupancy = Erowa.OpenAPI.MachineLoading.ChuckOccupancy;
+using StoragePlace = Erowa.OpenAPI.MachineLoading.StoragePlace;
 
 internal class ChuckOccupancyConverter
 {
@@ -13,18 +15,25 @@ internal class ChuckOccupancyConverter
         {
             EmptyChuckOccupancy => new ChuckOccupancy
             {
-                Chuck = new Chuck { Number = chuckOccupancy.Chuck.Number },
+                Chuck = new Chuck
+                {
+                    Identifier = chuckOccupancy.Chuck.Number.ToString(CultureInfo.InvariantCulture),
+                },
                 Empty = new Empty(),
             },
             PalletChuckOccupancy palletChuckOccupancy => new ChuckOccupancy
             {
-                Chuck = new Chuck { Number = chuckOccupancy.Chuck.Number },
+                Chuck = new Chuck
+                {
+                    Identifier = chuckOccupancy.Chuck.Number.ToString(CultureInfo.InvariantCulture),
+                },
                 Pallet = new Pallet
                 {
-                    PalletOnChuckHomePlace = new StoragePlace { Number = palletChuckOccupancy.Place.Number },
-                    TagId = palletChuckOccupancy.TagId,
+                    SourcePlace = new StoragePlace
+                        { Identifier = palletChuckOccupancy.Place.Number.ToString(CultureInfo.InvariantCulture) },
                 },
             },
-            _ => throw new ArgumentOutOfRangeException($"Chuck occupancy of type '{chuckOccupancy.Occupancy}' is not supported."),
+            _ => throw new ArgumentOutOfRangeException(
+                $"Chuck occupancy of type '{chuckOccupancy.Occupancy}' is not supported."),
         };
 }

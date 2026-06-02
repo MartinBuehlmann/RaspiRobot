@@ -1,15 +1,17 @@
 namespace RaspiRobot.OpenApi.Devices.Robot;
 
+using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Erowa.OpenAPI.Robot;
-using RaspiRobot.OpenApi.Devices.Shared;
+using Google.Protobuf.WellKnownTypes;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Storages;
+using StoragePlace = RaspiRobot.RobotControl.Devices.Storages.StoragePlace;
 
 internal class StartLoadChuckRequestHandler
 {
@@ -24,19 +26,19 @@ internal class StartLoadChuckRequestHandler
         this.logger = logger;
     }
 
-    public async Task<CommandResponse> HandleLoadChuckAsync(
+    public async Task<LoadChuckResponse> HandleLoadChuckAsync(
         StartLoadChuck request,
         CancellationToken rollbackCancellationToken)
     {
         this.logger.Info(
             "Received request to load chuck: '{ChuckNumber}' from place: '{PlaceNumber}'",
-            request.Chuck.Number,
-            request.PlaceToLoad.Number);
+            request.Chuck.Identifier,
+            request.PlaceToLoad.Identifier);
 
         IRobot robot = this.deviceService.RetrieveRobot();
 
         StoragePlace? destinationPlaceForPalletOnChuck = request.PlaceToUnloadPalletOnChuck is not null
-            ? new StoragePlace(request.PlaceToUnloadPalletOnChuck.Number)
+            ? new StoragePlace(int.Parse(request.PlaceToUnloadPalletOnChuck.Identifier, CultureInfo.InvariantCulture))
             : null;
 
         this.logger.Info(
@@ -45,13 +47,24 @@ internal class StartLoadChuckRequestHandler
             request.PlaceToLoad);
 
         ICommandResponse response = await robot.LoadChuckAsync(
-            new StoragePlace(request.PlaceToLoad.Number),
-            new MachineChuck(request.Chuck.Number),
+            new StoragePlace(int.Parse(request.PlaceToLoad.Identifier)),
+            new MachineChuck(int.Parse(request.Chuck.Identifier)),
             destinationPlaceForPalletOnChuck,
             rollbackCancellationToken);
 
         this.logger.Info("Load chuck ended with result: {Response}", response);
 
-        return response.ToCommandResponse();
+        return CreateResponse(response);
     }
+
+    private static LoadChuckResponse CreateResponse(ICommandResponse response)
+        => response switch
+        {
+            ErrorResponse errorResponse => new LoadChuckResponse
+                { Unsuccessful = new Unsuccessful { Message = errorResponse.Message } },
+
+            SuccessResponse => new LoadChuckResponse { Successful = new Empty() },
+
+            _ => throw new ArgumentOutOfRangeException(nameof(response), response, "Unknown response type"),
+        };
 }

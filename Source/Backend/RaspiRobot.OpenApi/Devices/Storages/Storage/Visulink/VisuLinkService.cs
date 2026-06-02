@@ -1,23 +1,22 @@
-namespace RaspiRobot.OpenApi.Devices.Storages.Storage;
+namespace RaspiRobot.OpenApi.Devices.Storages.Storage.Visulink;
 
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.DependencyInjection;
-using Erowa.OpenAPI;
-using Erowa.OpenAPI.Storage;
+using Erowa.OpenAPI.Storage.VisuLink;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.RobotControl;
-using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServiceBase
+internal class VisuLinkService : Erowa.OpenAPI.Storage.VisuLink.VisuLinkService.VisuLinkServiceBase
 {
     private readonly IDeviceService deviceService;
     private readonly IHostApplicationLifetime hostApplicationLifetime;
     private readonly Factory factory;
 
-    public StorageService(
+    public VisuLinkService(
         IDeviceService deviceService,
         IHostApplicationLifetime hostApplicationLifetime,
         Factory factory)
@@ -28,8 +27,8 @@ internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServ
     }
 
     public override async Task RetrieveStateChanged(
-        StorageRequest request,
-        IServerStreamWriter<StorageStateResponse> responseStream,
+        RetrieveStateChangedRequest request,
+        IServerStreamWriter<RetrieveStateChangedResponse> responseStream,
         ServerCallContext context)
     {
         CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
@@ -37,21 +36,8 @@ internal class StorageService : Erowa.OpenAPI.Storage.StorageService.StorageServ
             this.hostApplicationLifetime.ApplicationStopping);
 
         var storageStateNotifier = this.factory.Create<IStorageStateNotifier>(responseStream);
-        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Number);
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(
+            int.Parse(request.Storage.Identifier, CultureInfo.InvariantCulture));
         await storage.SubscribeForStateChangedAsync(storageStateNotifier, cancellationTokenSource.Token);
-    }
-
-    public override async Task RetrieveAlarmsChanged(
-        StorageRequest request,
-        IServerStreamWriter<AlarmsResponse> responseStream,
-        ServerCallContext context)
-    {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-            context.CancellationToken,
-            this.hostApplicationLifetime.ApplicationStopping);
-
-        var alarmsNotifier = this.factory.Create<IAlarmsNotifier>(responseStream);
-        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Number);
-        await storage.SubscribeForAlarmsChangedAsync(alarmsNotifier, cancellationTokenSource.Token);
     }
 }

@@ -3,7 +3,7 @@ namespace RaspiRobot.OpenApi.Devices.Storages.Storage.State;
 using Autofac;
 using RaspiRobot.RobotControl.Devices.Storages;
 
-internal class DevicesStoragesStorageStateModule : Module
+internal class DevicesStorageStateModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {

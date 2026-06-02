@@ -3,20 +3,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Erowa.OpenAPI.Robot;
+using Erowa.OpenAPI.MachineLoading;
 using EventBroker;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
-using ChuckOccupancy = Erowa.OpenAPI.Robot.ChuckOccupancy;
+using ChuckOccupancy = Erowa.OpenAPI.MachineLoading.ChuckOccupancy;
 
 internal class ChuckOccupancyNotifier : IChuckOccupancyNotifier, IEventSubscriptionAsync<ChuckOccupancyChangedEvent>
 {
     private readonly ChuckOccupancyConverter chuckOccupancyConverter;
-    private readonly IServerStreamWriter<ChuckOccupancyResponse> responseStream;
+    private readonly IServerStreamWriter<RetrieveMachineLoadingChangedResponse> responseStream;
 
     public ChuckOccupancyNotifier(
         ChuckOccupancyConverter chuckOccupancyConverter,
-        IServerStreamWriter<ChuckOccupancyResponse> responseStream)
+        IServerStreamWriter<RetrieveMachineLoadingChangedResponse> responseStream)
     {
         this.chuckOccupancyConverter = chuckOccupancyConverter;
         this.responseStream = responseStream;
@@ -28,9 +28,9 @@ internal class ChuckOccupancyNotifier : IChuckOccupancyNotifier, IEventSubscript
         IReadOnlyList<ChuckOccupancy> robotChuckOccupancies =
             chuckOccupancies.Select(x => this.chuckOccupancyConverter.Convert(x)).ToList();
         await this.responseStream.WriteAsync(
-            new ChuckOccupancyResponse
+            new RetrieveMachineLoadingChangedResponse
             {
-                Occupancies = { robotChuckOccupancies },
+                Ready = new Ready { Chucks = { robotChuckOccupancies } },
             });
     }
 

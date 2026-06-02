@@ -2,17 +2,18 @@
 
 using System.Threading.Tasks;
 using Erowa.OpenAPI.Storage;
+using Erowa.OpenAPI.Storage.VisuLink;
 using Grpc.Core;
 using RaspiRobot.RobotControl.Devices.Storages;
 
 internal class StorageStateNotifier : IStorageStateNotifier
 {
     private readonly StorageStateConverter storageStateConverter;
-    private readonly IServerStreamWriter<StorageStateResponse> responseStream;
+    private readonly IServerStreamWriter<RetrieveStateChangedResponse> responseStream;
 
     public StorageStateNotifier(
         StorageStateConverter storageStateConverter,
-        IServerStreamWriter<StorageStateResponse> responseStream)
+        IServerStreamWriter<RetrieveStateChangedResponse> responseStream)
     {
         this.storageStateConverter = storageStateConverter;
         this.responseStream = responseStream;
@@ -20,11 +21,7 @@ internal class StorageStateNotifier : IStorageStateNotifier
 
     public async Task NotifyAsync(State state)
     {
-        var storageState = this.storageStateConverter.Convert(state);
         await this.responseStream.WriteAsync(
-            new StorageStateResponse
-            {
-                State = storageState,
-            });
+            this.storageStateConverter.Convert(state));
     }
 }
