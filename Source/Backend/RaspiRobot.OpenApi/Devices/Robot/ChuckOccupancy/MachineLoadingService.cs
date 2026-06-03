@@ -10,7 +10,6 @@ using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 
 internal class MachineLoadingService : Erowa.OpenAPI.MachineLoading.MachineLoadingService.MachineLoadingServiceBase
 {
@@ -37,7 +36,7 @@ internal class MachineLoadingService : Erowa.OpenAPI.MachineLoading.MachineLoadi
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var chuckLoadingsNotifier = this.factory.Create<IChuckOccupancyNotifier>(responseStream);
+        var chuckLoadingsNotifier = this.factory.Create<ChuckOccupancyNotifier>(responseStream);
         IRobot robot = this.deviceService.RetrieveRobot();
         int[] chuckNumbers = request.Chucks.Select(x => int.Parse(x.Identifier, CultureInfo.InvariantCulture)).ToArray();
         await robot.SubscribeForChuckLoadingsChangedAsync(

@@ -7,6 +7,7 @@ using Common.DependencyInjection;
 using Erowa.OpenAPI.Storage.VisuLink;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
+using RaspiRobot.OpenApi.Devices.Storages.Storage.State;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Storages;
 
@@ -35,7 +36,7 @@ internal class VisuLinkService : Erowa.OpenAPI.Storage.VisuLink.VisuLinkService.
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var storageStateNotifier = this.factory.Create<IStorageStateNotifier>(responseStream);
+        var storageStateNotifier = this.factory.Create<StorageStateNotifier>(responseStream);
         IStorage storage = this.deviceService.RetrieveStorage<IStorage>(
             int.Parse(request.Storage.Identifier, CultureInfo.InvariantCulture));
         await storage.SubscribeForStateChangedAsync(storageStateNotifier, cancellationTokenSource.Token);

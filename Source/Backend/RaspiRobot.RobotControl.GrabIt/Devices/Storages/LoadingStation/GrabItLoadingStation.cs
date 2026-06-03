@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Common;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Connection;
-using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation;
 using RaspiRobot.RobotControl.Devices.Storages.LoadingStation.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.State;
 
 internal class GrabItLoadingStation : ILoadingStation
 {

@@ -2,7 +2,6 @@ namespace RaspiRobot.OpenApi.Devices.Robot.ChuckOccupancy;
 
 using Autofac;
 using EventBroker.Autofac;
-using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 
 internal class DevicesRobotChuckOccupancyModule : Module
 {
@@ -10,7 +9,6 @@ internal class DevicesRobotChuckOccupancyModule : Module
     {
         builder.RegisterType<ChuckOccupancyConverter>();
         builder.RegisterType<ChuckOccupancyNotifier>()
-            .As<IChuckOccupancyNotifier>()
             .RegisterOnEventBroker();
     }
 }

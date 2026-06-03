@@ -35,7 +35,6 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly IOperationModeRetriever operationModeRetriever;
     private readonly RobotStateCache robotStateCache;
     private readonly Log logger;
-    private readonly List<IRobotStateNotifier> robotStateNotifiers;
 
     public GrabItRobot(
         RobotSettings robotSettings,
@@ -57,7 +56,6 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.robotStateCache = robotStateCache;
         this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
-        this.robotStateNotifiers = new List<IRobotStateNotifier>();
     }
 
     public IMdiRobot MdiRobot { get; }
@@ -89,10 +87,8 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IRobotStateNotifier robotStateNotifier,
         CancellationToken cancellationToken)
     {
-        this.robotStateNotifiers.Add(robotStateNotifier);
         await robotStateNotifier.NotifyAsync(RobotState.Ready);
         cancellationToken.WaitHandle.WaitOne();
-        this.robotStateNotifiers.Remove(robotStateNotifier);
     }
 
     public async Task SubscribeForAlarmsChangedAsync(

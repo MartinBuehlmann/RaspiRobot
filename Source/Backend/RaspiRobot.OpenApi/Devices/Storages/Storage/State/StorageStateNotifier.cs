@@ -1,10 +1,9 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Storages.Storage.State;
 
 using System.Threading.Tasks;
-using Erowa.OpenAPI.Storage;
 using Erowa.OpenAPI.Storage.VisuLink;
 using Grpc.Core;
-using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.State;
 
 internal class StorageStateNotifier : IStorageStateNotifier
 {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Common;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Connection;
-using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine;
 using RaspiRobot.RobotControl.Devices.Storages.AutoLinkMagazine.Settings;
+using RaspiRobot.RobotControl.Devices.Storages.State;
 
 internal class GrabItAutoLinkMagazine : IAutoLinkMagazine
 {

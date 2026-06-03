@@ -1,11 +1,9 @@
 namespace RaspiRobot.OpenApi.Devices.Storages.Storage.State;
 
 using System;
-using System.Data.SqlTypes;
-using Erowa.OpenAPI.Storage;
 using Erowa.OpenAPI.Storage.VisuLink;
 using Google.Protobuf.WellKnownTypes;
-using RaspiRobot.RobotControl.Devices.Storages;
+using RaspiRobot.RobotControl.Devices.Storages.State;
 
 internal class StorageStateConverter
 {
