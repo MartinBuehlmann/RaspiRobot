@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common;
 using RaspiRobot.RobotControl.Devices.Alarms;
+using RaspiRobot.RobotControl.Devices.Connection;
 using RaspiRobot.RobotControl.Devices.Storages;
 using RaspiRobot.RobotControl.Devices.Storages.Magazine;
 using RaspiRobot.RobotControl.Devices.Storages.Magazine.Settings;
@@ -32,6 +33,14 @@ internal class GrabItMagazine : IMagazine
         CancellationToken cancellationToken)
     {
         await alarmsNotifier.NotifyAsync(ReadOnlyList.Empty<Alarm>());
+        cancellationToken.WaitHandle.WaitOne();
+    }
+
+    public async Task SubscribeForConnectionStateChangedAsync(
+        IConnectionStateNotifier connectionStateNotifier,
+        CancellationToken cancellationToken)
+    {
+        await connectionStateNotifier.NotifyAsync(true);
         cancellationToken.WaitHandle.WaitOne();
     }
 }

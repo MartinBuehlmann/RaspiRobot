@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
+using RaspiRobot.RobotControl.Devices.Connection;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.RobotControl.Devices.Robot.Mdi;
@@ -45,4 +46,8 @@ public interface IRobot : IDevice
     Task<ICommandResponse> ExchangeStoragePlaceAsync(
         StoragePlace sourcePlace,
         StoragePlace destinationPlace);
+
+    Task SubscribeForConnectionStateChangedAsync(
+        IConnectionStateNotifier connectionStateNotifier,
+        CancellationToken cancellationToken);
 }

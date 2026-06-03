@@ -10,6 +10,7 @@ using Common.Logging;
 using RaspiRobot.RobotControl.Devices;
 using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.RobotControl.Devices.Commands;
+using RaspiRobot.RobotControl.Devices.Connection;
 using RaspiRobot.RobotControl.Devices.Machines;
 using RaspiRobot.RobotControl.Devices.Machines.Settings;
 using RaspiRobot.RobotControl.Devices.Robot;
@@ -163,6 +164,14 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         return await this.ExecuteSequencesAsync(sequences, CancellationToken.None);
     }
 
+    public async Task SubscribeForConnectionStateChangedAsync(
+        IConnectionStateNotifier connectionStateNotifier,
+        CancellationToken cancellationToken)
+    {
+        await connectionStateNotifier.NotifyAsync(true);
+        cancellationToken.WaitHandle.WaitOne();
+    }
+
     private void InitializeState()
     {
         var newRobotState = RobotState.NotReady;
@@ -193,9 +202,9 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
                RobotControl.Devices.Robot.OperationMode.OperationMode.Automatic;
     }
 
-    // TODO: Handle rollbackCancellationToken
-    // Configure for each step if rollback is supported.
-    // If yes, stop execution and a higher instance needs to care about the rollback actions - if no, just continue.
+// TODO: Handle rollbackCancellationToken
+// Configure for each step if rollback is supported.
+// If yes, stop execution and a higher instance needs to care about the rollback actions - if no, just continue.
     private async Task<ICommandResponse> ExecuteSequencesAsync(
         IReadOnlyList<Sequence> sequences,
         CancellationToken rollbackCancellationToken)

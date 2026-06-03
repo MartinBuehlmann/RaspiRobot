@@ -3,6 +3,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
+using RaspiRobot.RobotControl.Devices.Connection;
 
 public interface IStorage : IDevice
 {
@@ -14,5 +15,9 @@ public interface IStorage : IDevice
 
     Task SubscribeForAlarmsChangedAsync(
         IAlarmsNotifier alarmsNotifier,
+        CancellationToken cancellationToken);
+
+    Task SubscribeForConnectionStateChangedAsync(
+        IConnectionStateNotifier connectionStateNotifier,
         CancellationToken cancellationToken);
 }

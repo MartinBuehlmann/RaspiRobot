@@ -1,5 +1,6 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Storages.Storage.Alarms;
 
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.DependencyInjection;
@@ -7,7 +8,7 @@ using Erowa.OpenAPI.Storage.Alarm;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.RobotControl;
-using RaspiRobot.RobotControl.Devices.Robot;
+using RaspiRobot.RobotControl.Devices.Storages;
 
 internal class StorageAlarmService : Erowa.OpenAPI.Storage.Alarm.StorageAlarmService.StorageAlarmServiceBase
 {
@@ -35,7 +36,8 @@ internal class StorageAlarmService : Erowa.OpenAPI.Storage.Alarm.StorageAlarmSer
             this.hostApplicationLifetime.ApplicationStopping);
 
         var storageAlarmsNotifier = this.factory.Create<StorageAlarmsNotifier>(responseStream);
-        IRobot robot = this.deviceService.RetrieveRobot();
-        await robot.SubscribeForAlarmsChangedAsync(storageAlarmsNotifier, cancellationTokenSource.Token);
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(
+            int.Parse(request.Storage.Identifier, CultureInfo.InvariantCulture));
+        await storage.SubscribeForAlarmsChangedAsync(storageAlarmsNotifier, cancellationTokenSource.Token);
     }
 }
