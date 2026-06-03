@@ -4,6 +4,7 @@ using Autofac;
 using RaspiRobot.OpenApi.Communication;
 using RaspiRobot.OpenApi.Devices.Robot;
 using RaspiRobot.OpenApi.Devices.Robot.Alarms;
+using RaspiRobot.OpenApi.Devices.Robot.Busy;
 using RaspiRobot.OpenApi.Devices.Robot.ChuckOccupancy;
 using RaspiRobot.OpenApi.Devices.Robot.Connection;
 using RaspiRobot.OpenApi.Devices.Robot.State;
@@ -18,6 +19,7 @@ public class OpenApiModule : Module
         builder.RegisterModule<CommunicationModule>();
         builder.RegisterModule<DevicesRobotModule>();
         builder.RegisterModule<DevicesRobotAlarmsModule>();
+        builder.RegisterModule<DevicesRobotBusyStateModule>();
         builder.RegisterModule<DevicesRobotChuckOccupancyModule>();
         builder.RegisterModule<DevicesRobotConnectionModule>();
         builder.RegisterModule<DevicesRobotStateModule>();

@@ -11,10 +11,10 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using RaspiRobot.OpenApi.Communication;
+using RaspiRobot.OpenApi.Devices.Robot.State;
 using RaspiRobot.RobotControl;
 using RaspiRobot.RobotControl.Devices.Commands;
 using RaspiRobot.RobotControl.Devices.Robot;
-using RaspiRobot.RobotControl.Devices.Robot.State;
 using StoragePlace = RaspiRobot.RobotControl.Devices.Storages.StoragePlace;
 
 internal class RobotService : Erowa.OpenAPI.Robot.RobotService.RobotServiceBase
@@ -51,7 +51,7 @@ internal class RobotService : Erowa.OpenAPI.Robot.RobotService.RobotServiceBase
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
-        var robotStateNotifier = this.factory.Create<IRobotStateNotifier>(responseStream);
+        var robotStateNotifier = this.factory.Create<RobotStateNotifier>(responseStream);
         IRobot robot = this.deviceService.RetrieveRobot();
         await robot.SubscribeForStateChangedAsync(robotStateNotifier, cancellationTokenSource.Token);
     }

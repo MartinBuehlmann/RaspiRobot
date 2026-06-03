@@ -10,7 +10,6 @@ internal class DevicesRobotStateModule : Module
     {
         builder.RegisterType<RobotStateConverter>();
         builder.RegisterType<RobotStateNotifier>()
-            .As<IRobotStateNotifier>()
             .RegisterOnEventBroker();
     }
 }

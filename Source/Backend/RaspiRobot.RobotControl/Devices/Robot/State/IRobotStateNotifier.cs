@@ -4,5 +4,5 @@ using System.Threading.Tasks;
 
 public interface IRobotStateNotifier
 {
-    Task NotifyAsync(RobotState robotState);
+    Task NotifyAsync(RobotState state);
 }
