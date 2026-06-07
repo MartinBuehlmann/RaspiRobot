@@ -21,24 +21,24 @@ public class AutoLinkMagazinesController : WebController
     public async Task<AutoLinkMagazineSelectionInfo[]> RetrieveMagazineSelectionsAsync()
     {
         IReadOnlyList<AutoLinkMagazineSettings> settings = await this.settingsRetriever.RetrieveAutoLinkMagazineSettingsAsync();
-        return settings.Select(x => new AutoLinkMagazineSelectionInfo(x.Number, x.Name)).ToArray();
+        return settings.Select(x => new AutoLinkMagazineSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{number:int}")]
-    public async Task<AutoLinkMagazineInfo> RetrieveMagazineAsync(int number)
+    [HttpGet("{identifier:int}")]
+    public async Task<AutoLinkMagazineInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<AutoLinkMagazineSettings> settings = await this.settingsRetriever.RetrieveAutoLinkMagazineSettingsAsync();
-        AutoLinkMagazineSettings? autoLinkMagazineSettings = settings.SingleOrDefault(x => x.Number == number);
+        AutoLinkMagazineSettings? autoLinkMagazineSettings = settings.SingleOrDefault(x => x.Identifier == identifier);
         if (autoLinkMagazineSettings is not null)
         {
             return new AutoLinkMagazineInfo(
-                autoLinkMagazineSettings.Number,
+                autoLinkMagazineSettings.Identifier,
                 autoLinkMagazineSettings.Name,
                 autoLinkMagazineSettings.Places
-                    .Select(x => new AutoLinkMagazinePlaceInfo(x.Number))
+                    .Select(x => new AutoLinkMagazinePlaceInfo(x.Identifier))
                     .ToArray());
         }
 
-        throw new ResourceNotFoundException($"No autolink magazine found with number {number}.");
+        throw new ResourceNotFoundException($"No autolink magazine found with number {identifier}.");
     }
 }

@@ -1,7 +1,6 @@
 namespace RaspiRobot.OpenApi.Devices.Robot;
 
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,7 +46,7 @@ internal class RobotService : Erowa.OpenAPI.Robot.RobotService.RobotServiceBase
         IServerStreamWriter<RetrieveStateChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
@@ -141,8 +140,8 @@ internal class RobotService : Erowa.OpenAPI.Robot.RobotService.RobotServiceBase
         IRobot robot = this.deviceService.RetrieveRobot();
 
         ICommandResponse response = await robot.ExchangeStoragePlaceAsync(
-            new StoragePlace(int.Parse(request.SourcePlace.Identifier, CultureInfo.InvariantCulture)),
-            new StoragePlace(int.Parse(request.DestinationPlace.Identifier, CultureInfo.InvariantCulture)));
+            new StoragePlace(request.SourcePlace.Identifier),
+            new StoragePlace(request.DestinationPlace.Identifier));
 
         return CreateResponse(response);
     }

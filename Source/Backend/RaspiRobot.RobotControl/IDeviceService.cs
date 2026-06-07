@@ -7,6 +7,6 @@ public interface IDeviceService
 {
     IRobot RetrieveRobot();
 
-    TStorage RetrieveStorage<TStorage>(int number)
+    TStorage RetrieveStorage<TStorage>(string identifier)
         where TStorage : IStorage;
 }

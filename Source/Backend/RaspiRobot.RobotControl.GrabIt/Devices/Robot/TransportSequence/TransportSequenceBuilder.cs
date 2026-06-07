@@ -67,8 +67,8 @@ internal class TransportSequenceBuilder
                     {
                         MoveStepSettings moveStepSettings => BuildMoveStep(moveStepSettings),
                         ChuckLoadingChangedNotificationStepSettings => ChuckLoadingChangedNotificationStep.Occupied(
-                            new MachineChuck(chuck.Number),
-                            new PalletChuckOccupancy(new StoragePlace(place.Number), null)),
+                            new MachineChuck(chuck.Identifier),
+                            new PalletChuckOccupancy(new StoragePlace(place.Identifier), null)),
                         _ => throw new NotSupportedException($"Step of type '{x.GetType()}' is not supported."),
                     };
                 })
@@ -84,7 +84,7 @@ internal class TransportSequenceBuilder
                     {
                         MoveStepSettings moveStepSettings => BuildMoveStep(moveStepSettings),
                         ChuckLoadingChangedNotificationStepSettings => ChuckLoadingChangedNotificationStep.Empty(
-                            new MachineChuck(chuck.Number)),
+                            new MachineChuck(chuck.Identifier)),
                         _ => throw new NotSupportedException($"Step of type '{x.GetType()}' is not supported."),
                     };
                 })

@@ -21,25 +21,25 @@ public class LoadingStationsController : WebController
     public async Task<LoadingStationSelectionInfo[]> RetrieveMagazineSelectionsAsync()
     {
         IReadOnlyList<LoadingStationSettings> settings = await this.settingsRetriever.RetrieveLoadingStationSettingsAsync();
-        return settings.Select(x => new LoadingStationSelectionInfo(x.Number, x.Name)).ToArray();
+        return settings.Select(x => new LoadingStationSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{number:int}")]
-    public async Task<LoadingStationInfo> RetrieveMagazineAsync(int number)
+    [HttpGet("{identifier:int}")]
+    public async Task<LoadingStationInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<LoadingStationSettings> settings = await this.settingsRetriever.RetrieveLoadingStationSettingsAsync();
-        LoadingStationSettings? loadingStationSettings = settings.SingleOrDefault(x => x.Number == number);
+        LoadingStationSettings? loadingStationSettings = settings.SingleOrDefault(x => x.Identifier == identifier);
 
         if (loadingStationSettings is not null)
         {
             return new LoadingStationInfo(
-                loadingStationSettings.Number,
+                loadingStationSettings.Identifier,
                 loadingStationSettings.Name,
                 loadingStationSettings.Places
-                    .Select(x => new LoadingStationPlaceInfo(x.Number))
+                    .Select(x => new LoadingStationPlaceInfo(x.Identifier))
                     .ToArray());
         }
 
-        throw new ResourceNotFoundException($"No loading station found with number {number}.");
+        throw new ResourceNotFoundException($"No loading station found with number {identifier}.");
     }
 }

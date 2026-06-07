@@ -1,3 +1,3 @@
 ﻿namespace RaspiRobot.Web.Features.Devices.Storages.LoadingStations;
 
-public record LoadingStationSelectionInfo(int Number, string Name);
+public record LoadingStationSelectionInfo(string Identifier, string Name);

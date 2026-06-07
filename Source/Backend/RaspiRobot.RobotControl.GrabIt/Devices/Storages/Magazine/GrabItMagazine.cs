@@ -18,7 +18,7 @@ internal class GrabItMagazine : IMagazine
         this.settings = settings;
     }
 
-    public int Number => this.settings.Number;
+    public string Identifier => this.settings.Identifier;
 
     public async Task SubscribeForStateChangedAsync(
         IStorageStateNotifier magazineStateNotifier,

@@ -21,25 +21,25 @@ public class MagazinesController : WebController
     public async Task<MagazineSelectionInfo[]> RetrieveMagazineSelectionsAsync()
     {
         IReadOnlyList<MagazineSettings> settings = await this.settingsRetriever.RetrieveMagazineSettingsAsync();
-        return settings.Select(x => new MagazineSelectionInfo(x.Number, x.Name)).ToArray();
+        return settings.Select(x => new MagazineSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{number:int}")]
-    public async Task<MagazineInfo> RetrieveMagazineAsync(int number)
+    [HttpGet("{identifier:int}")]
+    public async Task<MagazineInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<MagazineSettings> settings = await this.settingsRetriever.RetrieveMagazineSettingsAsync();
-        MagazineSettings? magazineSettings = settings.SingleOrDefault(x => x.Number == number);
+        MagazineSettings? magazineSettings = settings.SingleOrDefault(x => x.Identifier == identifier);
 
         if (magazineSettings is not null)
         {
             return new MagazineInfo(
-                magazineSettings.Number,
+                magazineSettings.Identifier,
                 magazineSettings.Name,
                 magazineSettings.Places
-                    .Select(x => new MagazinePlaceInfo(x.Number))
+                    .Select(x => new MagazinePlaceInfo(x.Identifier))
                     .ToArray());
         }
 
-        throw new ResourceNotFoundException($"No magazine found with number {number}.");
+        throw new ResourceNotFoundException($"No magazine found with number {identifier}.");
     }
 }

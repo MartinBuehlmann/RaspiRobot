@@ -31,7 +31,7 @@ internal class RobotConnectionService : Erowa.OpenAPI.Robot.Connection.RobotConn
         IServerStreamWriter<RetrieveConnectionStateChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 

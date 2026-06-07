@@ -31,7 +31,7 @@ internal class RobotAlarmService : Erowa.OpenAPI.Robot.Alarm.RobotAlarmService.R
         IServerStreamWriter<RetrieveAlarmsChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 

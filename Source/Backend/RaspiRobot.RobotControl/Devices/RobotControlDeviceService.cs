@@ -34,9 +34,9 @@ internal class RobotControlDeviceService : IBackgroundService, IDeviceService
         return this.deviceRegistry.Retrieve((IRobot _) => true);
     }
 
-    public TStorage RetrieveStorage<TStorage>(int number)
+    public TStorage RetrieveStorage<TStorage>(string identifier)
         where TStorage : IStorage
     {
-        return this.deviceRegistry.Retrieve((TStorage storage) => storage.Number == number);
+        return this.deviceRegistry.Retrieve((TStorage storage) => storage.Identifier == identifier);
     }
 }

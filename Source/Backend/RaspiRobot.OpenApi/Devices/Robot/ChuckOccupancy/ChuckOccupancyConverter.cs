@@ -17,7 +17,7 @@ internal class ChuckOccupancyConverter
             {
                 Chuck = new Chuck
                 {
-                    Identifier = chuckOccupancy.Chuck.Number.ToString(CultureInfo.InvariantCulture),
+                    Identifier = chuckOccupancy.Chuck.Identifier.ToString(CultureInfo.InvariantCulture),
                 },
                 Empty = new Empty(),
             },
@@ -25,12 +25,12 @@ internal class ChuckOccupancyConverter
             {
                 Chuck = new Chuck
                 {
-                    Identifier = chuckOccupancy.Chuck.Number.ToString(CultureInfo.InvariantCulture),
+                    Identifier = chuckOccupancy.Chuck.Identifier.ToString(CultureInfo.InvariantCulture),
                 },
                 Pallet = new Pallet
                 {
                     SourcePlace = new StoragePlace
-                        { Identifier = palletChuckOccupancy.Place.Number.ToString(CultureInfo.InvariantCulture) },
+                        { Identifier = palletChuckOccupancy.Place.Identifier.ToString(CultureInfo.InvariantCulture) },
                 },
             },
             _ => throw new ArgumentOutOfRangeException(

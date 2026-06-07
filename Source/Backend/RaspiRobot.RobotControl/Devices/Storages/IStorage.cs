@@ -8,7 +8,7 @@ using RaspiRobot.RobotControl.Devices.Storages.State;
 
 public interface IStorage : IDevice
 {
-    int Number { get; }
+    string Identifier { get; }
 
     Task SubscribeForStateChangedAsync(
         IStorageStateNotifier storageStateNotifier,

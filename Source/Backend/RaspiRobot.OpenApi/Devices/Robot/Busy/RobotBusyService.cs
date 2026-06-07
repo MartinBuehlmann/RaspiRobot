@@ -31,7 +31,7 @@ internal class RobotBusyService : Erowa.OpenAPI.Robot.Busy.RobotBusyService.Robo
         IServerStreamWriter<RetrieveBusyStateChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 

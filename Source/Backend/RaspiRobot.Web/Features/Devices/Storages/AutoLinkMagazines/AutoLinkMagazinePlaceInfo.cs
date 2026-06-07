@@ -1,3 +1,3 @@
 ﻿namespace RaspiRobot.Web.Features.Devices.Storages.AutoLinkMagazines;
 
-public record AutoLinkMagazinePlaceInfo(int Number);
+public record AutoLinkMagazinePlaceInfo(string Identifier);

@@ -1,7 +1,6 @@
 namespace RaspiRobot.OpenApi.Devices.Robot;
 
 using System;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
@@ -38,7 +37,7 @@ internal class StartLoadChuckRequestHandler
         IRobot robot = this.deviceService.RetrieveRobot();
 
         StoragePlace? destinationPlaceForPalletOnChuck = request.PlaceToUnloadPalletOnChuck is not null
-            ? new StoragePlace(int.Parse(request.PlaceToUnloadPalletOnChuck.Identifier, CultureInfo.InvariantCulture))
+            ? new StoragePlace(request.PlaceToUnloadPalletOnChuck.Identifier)
             : null;
 
         this.logger.Info(
@@ -47,8 +46,8 @@ internal class StartLoadChuckRequestHandler
             request.PlaceToLoad);
 
         ICommandResponse response = await robot.LoadChuckAsync(
-            new StoragePlace(int.Parse(request.PlaceToLoad.Identifier)),
-            new MachineChuck(int.Parse(request.Chuck.Identifier)),
+            new StoragePlace(request.PlaceToLoad.Identifier),
+            new MachineChuck(request.Chuck.Identifier),
             destinationPlaceForPalletOnChuck,
             rollbackCancellationToken);
 

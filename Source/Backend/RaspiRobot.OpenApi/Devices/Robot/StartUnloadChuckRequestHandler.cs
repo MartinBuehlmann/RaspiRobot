@@ -1,7 +1,6 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Robot;
 
 using System;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
@@ -43,8 +42,8 @@ internal class StartUnloadChuckRequestHandler
             request.PlaceToUnload);
 
         ICommandResponse response = await robot.UnloadChuckAsync(
-            new MachineChuck(int.Parse(request.Chuck.Identifier, CultureInfo.InvariantCulture)),
-            new StoragePlace(int.Parse(request.PlaceToUnload.Identifier, CultureInfo.InvariantCulture)),
+            new MachineChuck(request.Chuck.Identifier),
+            new StoragePlace(request.PlaceToUnload.Identifier),
             rollbackCancellationToken);
 
         this.logger.Info("Unload chuck ended with result: {Response}", response);

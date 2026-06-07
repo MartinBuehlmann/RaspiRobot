@@ -1,6 +1,5 @@
 ﻿namespace RaspiRobot.OpenApi.Devices.Storages.Storage.Connection;
 
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.DependencyInjection;
@@ -32,13 +31,12 @@ internal class
         IServerStreamWriter<RetrieveConnectionStateChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
         var connectionStateNotifier = this.factory.Create<StorageConnectionStateNotifier>(responseStream);
-        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(
-            int.Parse(request.Storage.Identifier, CultureInfo.InvariantCulture));
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Storage.Identifier);
         await storage.SubscribeForConnectionStateChangedAsync(connectionStateNotifier, cancellationTokenSource.Token);
     }
 }

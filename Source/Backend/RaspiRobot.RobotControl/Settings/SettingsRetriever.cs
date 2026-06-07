@@ -51,7 +51,7 @@ internal class SettingsRetriever : ISettingsRetriever
         await this.EnsureCellSettingsLoadedAsync();
         return this.cellSettings!.Machines
             .SelectMany(x => x.Chucks)
-            .Single(c => c.Number == chuck.Number);
+            .Single(c => c.Identifier == chuck.Identifier);
     }
 
     public async Task<PlaceSettings> RetrieveByAsync(StoragePlace place)
@@ -60,7 +60,7 @@ internal class SettingsRetriever : ISettingsRetriever
         return this.cellSettings!.AutoLinkMagazines.SelectMany(x => x.Places)
             .Concat(this.cellSettings!.LoadingStations.SelectMany(x => x.Places))
             .Concat(this.cellSettings!.Magazines.SelectMany(x => x.Places))
-            .Single(p => p.Number == place.Number);
+            .Single(p => p.Identifier == place.Identifier);
     }
 
     private async Task EnsureCellSettingsLoadedAsync()

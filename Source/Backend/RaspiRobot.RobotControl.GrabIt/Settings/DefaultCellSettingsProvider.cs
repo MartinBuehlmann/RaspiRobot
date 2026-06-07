@@ -55,7 +55,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                     Chucks =
                     {
                         new ChuckSettings(
-                            1,
+                            "1",
                             new SequenceSettings
                             {
                                 Steps =
@@ -146,12 +146,12 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
             LoadingStations =
             {
                 new LoadingStationSettings(
-                    1,
+                    "1",
                     "LS",
                     new[]
                     {
                         new PlaceSettings(
-                            1,
+                            "1",
                             new SequenceSettings
                             {
                                 Steps =
@@ -239,12 +239,12 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
             Magazines =
             {
                 new MagazineSettings(
-                    2,
+                    "2",
                     "Mag",
                     new[]
                     {
                         new PlaceSettings(
-                            2,
+                            "2",
                             new SequenceSettings
                             {
                                 Steps =
@@ -328,7 +328,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            3,
+                            "3",
                             new SequenceSettings
                             {
                                 Steps =
@@ -412,7 +412,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            4,
+                            "4",
                             new SequenceSettings
                             {
                                 Steps =
@@ -496,7 +496,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                 },
                             }),
                         new PlaceSettings(
-                            5,
+                            "5",
                             new SequenceSettings
                             {
                                 Steps =

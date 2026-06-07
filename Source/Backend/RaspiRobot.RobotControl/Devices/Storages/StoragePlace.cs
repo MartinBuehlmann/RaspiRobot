@@ -1,3 +1,3 @@
 namespace RaspiRobot.RobotControl.Devices.Storages;
 
-public record StoragePlace(int Number);
+public record StoragePlace(string Identifier);

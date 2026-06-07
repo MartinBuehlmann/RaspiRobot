@@ -1,6 +1,5 @@
 namespace RaspiRobot.OpenApi.Devices.Storages.Storage.Visulink;
 
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.DependencyInjection;
@@ -32,13 +31,12 @@ internal class VisuLinkService : Erowa.OpenAPI.Storage.VisuLink.VisuLinkService.
         IServerStreamWriter<RetrieveStateChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
         var storageStateNotifier = this.factory.Create<StorageStateNotifier>(responseStream);
-        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(
-            int.Parse(request.Storage.Identifier, CultureInfo.InvariantCulture));
+        IStorage storage = this.deviceService.RetrieveStorage<IStorage>(request.Storage.Identifier);
         await storage.SubscribeForStateChangedAsync(storageStateNotifier, cancellationTokenSource.Token);
     }
 }

@@ -32,7 +32,7 @@ internal class MachineLoadingService : Erowa.OpenAPI.MachineLoading.MachineLoadi
         IServerStreamWriter<RetrieveMachineLoadingChangedResponse> responseStream,
         ServerCallContext context)
     {
-        CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+        using CancellationTokenSource cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
             context.CancellationToken,
             this.hostApplicationLifetime.ApplicationStopping);
 
