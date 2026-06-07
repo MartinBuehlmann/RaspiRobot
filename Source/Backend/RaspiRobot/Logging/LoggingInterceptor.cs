@@ -33,14 +33,14 @@ public class LoggingInterceptor : Interceptor
             "[{CorrelationId}] Method {FullName} called with parameter ({TypeName}: {SerializedMessage})",
             correlationId,
             context.Method,
-            request.GetType().Name,
+            typeof(TResponse).Name,
             JsonSerializer.Serialize(request));
         Task<TResponse> response = base.UnaryServerHandler(request, context, continuation);
         this.log.LogDebug(
             "[{CorrelationId}] Method {FullName} returned ({TypeName}: {SerializedMessage})",
             correlationId,
             context.Method,
-            response.GetType().Name,
+            typeof(TResponse).Name,
             this.SerializeMessage(response));
 
         return response;
