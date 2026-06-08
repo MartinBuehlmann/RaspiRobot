@@ -1,5 +1,7 @@
 ﻿namespace RaspiRobot.Logging;
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,45 +24,59 @@ public class LoggingInterceptor : Interceptor
         this.jsonSerializerOptions.Converters.Add(new ByteStringConverter());
     }
 
-    public override Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
+    public override async Task<TResponse> UnaryServerHandler<TRequest, TResponse>(
         TRequest request,
         ServerCallContext context,
         UnaryServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref currentCorrelationId);
-
+        using IDisposable? scope = this.BeginLoggingScope(context);
         this.log.LogDebug(
-            "[{CorrelationId}] Method {FullName} called with parameter ({TypeName}: {SerializedMessage})",
-            correlationId,
-            context.Method,
-            typeof(TResponse).Name,
-            JsonSerializer.Serialize(request));
-        Task<TResponse> response = base.UnaryServerHandler(request, context, continuation);
-        this.log.LogDebug(
-            "[{CorrelationId}] Method {FullName} returned ({TypeName}: {SerializedMessage})",
-            correlationId,
-            context.Method,
-            typeof(TResponse).Name,
-            this.SerializeMessage(response));
+            "Method called with parameter ({TypeName}: {SerializedMessage})",
+            typeof(TRequest).Name,
+            this.SerializeMessage(request));
 
-        return response;
+        try
+        {
+            TResponse response = await base.UnaryServerHandler(request, context, continuation);
+
+            this.log.LogDebug(
+                "Method returned ({TypeName}: {SerializedMessage})",
+                typeof(TResponse).Name,
+                this.SerializeMessage(response));
+
+            return response;
+        }
+        catch (Exception exception)
+        {
+            this.log.LogError(exception, "Method threw an exception");
+            throw;
+        }
     }
 
-    public override Task<TResponse> ClientStreamingServerHandler<TRequest, TResponse>(
+    public override async Task<TResponse> ClientStreamingServerHandler<TRequest, TResponse>(
         IAsyncStreamReader<TRequest> request,
         ServerCallContext context,
         ClientStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref currentCorrelationId);
+        using IDisposable? scope = this.BeginLoggingScope(context);
+        this.log.LogDebug("Client streaming method called");
 
-        this.log.LogDebug(
-            "[{CorrelationId}] Async Method {FullName} called with parameter ({TypeName}: {SerializedMessage})",
-            correlationId,
-            context.Method,
-            typeof(TResponse).Name,
-            JsonSerializer.Serialize(request));
+        try
+        {
+            TResponse response = await base.ClientStreamingServerHandler(request, context, continuation);
 
-        return base.ClientStreamingServerHandler(request, context, continuation);
+            this.log.LogDebug(
+                "Client streaming method returned ({TypeName}: {SerializedMessage})",
+                typeof(TResponse).Name,
+                this.SerializeMessage(response));
+
+            return response;
+        }
+        catch (Exception exception)
+        {
+            this.log.LogError(exception, "Client streaming method threw an exception");
+            throw;
+        }
     }
 
     public override Task ServerStreamingServerHandler<TRequest, TResponse>(
@@ -69,13 +85,21 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         ServerStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref currentCorrelationId);
+        using IDisposable? scope = this.BeginLoggingScope(context);
         this.log.LogDebug(
-            "[{CorrelationId}] Opening server stream of method {FullName}",
-            correlationId,
-            context.Method);
+            "Opening server stream with parameter ({TypeName}: {SerializedMessage})",
+            typeof(TRequest).Name,
+            this.SerializeMessage(request));
 
-        return base.ServerStreamingServerHandler(request, responseStream, context, continuation);
+        try
+        {
+            return base.ServerStreamingServerHandler(request, responseStream, context, continuation);
+        }
+        catch (Exception exception)
+        {
+            this.log.LogError(exception, "Server stream threw an exception");
+            throw;
+        }
     }
 
     public override Task DuplexStreamingServerHandler<TRequest, TResponse>(
@@ -84,13 +108,31 @@ public class LoggingInterceptor : Interceptor
         ServerCallContext context,
         DuplexStreamingServerMethod<TRequest, TResponse> continuation)
     {
-        long correlationId = Interlocked.Increment(ref currentCorrelationId);
-        this.log.LogDebug(
-            "[{CorrelationId}] Opening duplex server stream of method {FullName}",
-            correlationId,
-            context.Method);
+        using IDisposable? scope = this.BeginLoggingScope(context);
+        this.log.LogDebug("Opening duplex server stream");
 
-        return base.DuplexStreamingServerHandler(requestStream, responseStream, context, continuation);
+        try
+        {
+            return base.DuplexStreamingServerHandler(requestStream, responseStream, context, continuation);
+        }
+        catch (Exception exception)
+        {
+            this.log.LogError(exception, "Duplex server stream threw an exception");
+            throw;
+        }
+    }
+
+    private IDisposable? BeginLoggingScope(ServerCallContext context)
+    {
+        long correlationId = Interlocked.Increment(ref currentCorrelationId);
+
+        return this.log.BeginScope(
+            new Dictionary<string, object>
+            {
+                ["CorrelationId"] = correlationId,
+                ["GrpcMethod"] = context.Method,
+                ["Peer"] = context.Peer,
+            });
     }
 
     private string SerializeMessage<TResponse>(TResponse response)
