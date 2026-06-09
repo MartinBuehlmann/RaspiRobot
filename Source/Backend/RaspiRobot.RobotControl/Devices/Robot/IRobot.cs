@@ -17,6 +17,8 @@ public interface IRobot : IDevice
 {
     IMdiRobot MdiRobot { get; }
 
+    IAlarmsFacade Alarms { get; }
+
     IReadOnlyList<PositionSettings> RetrieveAxisPositions();
 
     Task SubscribeForStateChangedAsync(

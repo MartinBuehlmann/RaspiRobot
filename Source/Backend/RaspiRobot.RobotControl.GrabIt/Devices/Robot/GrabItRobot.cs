@@ -1,5 +1,6 @@
 namespace RaspiRobot.RobotControl.GrabIt.Devices.Robot;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -56,9 +57,13 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.robotStateCache = robotStateCache;
         this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
+        this.Alarms = factory.Create<IAlarmsFacade>();
+        this.Alarms.AddAlarm(new AlarmData("1", "Emergency Stop", RobotControl.Devices.Alarms.Severity.Error, DateTimeOffset.UtcNow, false));
     }
 
     public IMdiRobot MdiRobot { get; }
+
+    public IAlarmsFacade Alarms { get; }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
