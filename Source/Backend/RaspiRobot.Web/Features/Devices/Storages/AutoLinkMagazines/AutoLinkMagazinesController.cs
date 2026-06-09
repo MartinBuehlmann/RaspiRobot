@@ -24,7 +24,7 @@ public class AutoLinkMagazinesController : WebController
         return settings.Select(x => new AutoLinkMagazineSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{identifier:int}")]
+    [HttpGet("{identifier}")]
     public async Task<AutoLinkMagazineInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<AutoLinkMagazineSettings> settings = await this.settingsRetriever.RetrieveAutoLinkMagazineSettingsAsync();

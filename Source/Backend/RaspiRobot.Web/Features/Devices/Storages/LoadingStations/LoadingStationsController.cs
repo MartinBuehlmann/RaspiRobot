@@ -24,7 +24,7 @@ public class LoadingStationsController : WebController
         return settings.Select(x => new LoadingStationSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{identifier:int}")]
+    [HttpGet("{identifier}")]
     public async Task<LoadingStationInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<LoadingStationSettings> settings = await this.settingsRetriever.RetrieveLoadingStationSettingsAsync();

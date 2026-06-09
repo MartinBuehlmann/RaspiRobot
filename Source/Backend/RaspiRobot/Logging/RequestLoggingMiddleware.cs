@@ -35,13 +35,18 @@ internal class RequestLoggingMiddleware
                 "Request {Method} {Path} with Payload: {Payload}",
                 httpContext.Request.Method,
                 httpContext.Request.Path.Value,
-                !httpContext.Request.Path.Value.Contains(
-                    "Login",
-                    StringComparison.InvariantCultureIgnoreCase)
-                    ? payload
-                    : "[login data]");
+                GetPayloadExceptLoginData(httpContext, payload));
         }
 
         await this.next(httpContext);
+    }
+
+    private static string GetPayloadExceptLoginData(HttpContext httpContext, string payload)
+    {
+        PathString requestPath = httpContext.Request.Path;
+        return requestPath.Value != null &&
+               requestPath.Value.Contains("Login", StringComparison.InvariantCultureIgnoreCase)
+            ? "[login data]"
+            : payload;
     }
 }

@@ -20,8 +20,7 @@ public class RobotController : MdiController
 
     [SwaggerOperation(Tags = [SwaggerTagConstants.Mdi])]
     [HttpPut("Axis/{axis}/Step/{direction}/{stepSize}")]
-#pragma warning disable VSTHRD200
-    public async Task<SteppingResultInfo> Step(
+    public async Task<SteppingResultInfo> StepAsync(
         [Range(0, 5)] int axis,
         AxisDirection direction,
         [Range(1, 10)] int stepSize)
@@ -32,5 +31,4 @@ public class RobotController : MdiController
             newPosition is not null ? new PositionInfo(newPosition.Drive, newPosition.Value) : null;
         return new SteppingResultInfo(newPosition is not null, newPositionInfo);
     }
-#pragma warning restore VSTHRD200
 }

@@ -24,7 +24,7 @@ public class MagazinesController : WebController
         return settings.Select(x => new MagazineSelectionInfo(x.Identifier, x.Name)).ToArray();
     }
 
-    [HttpGet("{identifier:int}")]
+    [HttpGet("{identifier}")]
     public async Task<MagazineInfo> RetrieveMagazineAsync(string identifier)
     {
         IReadOnlyList<MagazineSettings> settings = await this.settingsRetriever.RetrieveMagazineSettingsAsync();

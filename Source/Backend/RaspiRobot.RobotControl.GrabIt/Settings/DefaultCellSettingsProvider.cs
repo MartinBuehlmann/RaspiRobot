@@ -10,7 +10,7 @@ using RaspiRobot.RobotControl.Settings;
 internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
 {
     public CellSettings DefaultCellSettings { get; } =
-        new CellSettings(
+        new(
             new RobotSettings(
                 "GrabIt",
                 new SequenceSettings
@@ -148,8 +148,7 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                 new LoadingStationSettings(
                     "1",
                     "LS",
-                    new[]
-                    {
+                    [
                         new PlaceSettings(
                             "1",
                             new SequenceSettings
@@ -233,16 +232,15 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                         },
                                     },
                                 },
-                            }),
-                    }),
+                            })
+                    ]),
             },
             Magazines =
             {
                 new MagazineSettings(
                     "2",
                     "Mag",
-                    new[]
-                    {
+                    [
                         new PlaceSettings(
                             "2",
                             new SequenceSettings
@@ -578,8 +576,8 @@ internal class DefaultCellSettingsProvider : IDefaultCellSettingsProvider
                                         },
                                     },
                                 },
-                            }),
-                    }),
+                            })
+                    ]),
             },
         };
 }
