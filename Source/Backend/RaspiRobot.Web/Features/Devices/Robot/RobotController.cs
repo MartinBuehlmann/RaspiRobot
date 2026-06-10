@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Common.Filters;
 using Microsoft.AspNetCore.Mvc;
 using RaspiRobot.RobotControl;
+using RaspiRobot.RobotControl.Devices.Alarms;
 using RaspiRobot.Web.Features.Devices.Robot.Alarms;
+using Severity = RaspiRobot.Web.Features.Devices.Robot.Alarms.Severity;
 
 public class RobotController : WebController
 {
@@ -52,8 +55,18 @@ public class RobotController : WebController
     [HttpPatch("Alarms/{code}/IsActive")]
     public IActionResult UpdateAlarmIsActive([Required] string code, [FromBody] bool isActive)
     {
-        return new NoContentResult();
+        IAlarmsFacade alarmsFacade = this.deviceService
+            .RetrieveRobot()
+            .Alarms;
+
+        if (!alarmsFacade.UpdateAlarmActivation(code, isActive))
+        {
+            throw new ResourceNotFoundException($"No alarm with code {code} found");
+        }
+
+        return this.Ok();
     }
+
 
     private static Severity ConvertToSeverity(RobotControl.Devices.Alarms.Severity severity)
     {

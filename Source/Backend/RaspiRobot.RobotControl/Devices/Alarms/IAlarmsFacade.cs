@@ -4,7 +4,7 @@ public interface IAlarmsFacade
 {
     AlarmData[] RetrieveAlarms();
 
-    void UpdateAlarmActivation(string code, bool isActive);
+    bool UpdateAlarmActivation(string code, bool isActive);
 
     void AddAlarm(AlarmData alarm);
 }

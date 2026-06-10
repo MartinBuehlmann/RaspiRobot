@@ -58,7 +58,10 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.Alarms = factory.Create<IAlarmsFacade>();
-        this.Alarms.AddAlarm(new AlarmData("1", "Emergency Stop", RobotControl.Devices.Alarms.Severity.Error, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(new AlarmData("1", "Emergency Stop", Severity.Error, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(new AlarmData("2", "Position error axis 1", Severity.Error, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(new AlarmData("10", "Annual maintenance overdue", Severity.Warning, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(new AlarmData("20", "Update available", Severity.Information, DateTimeOffset.UtcNow, false));
     }
 
     public IMdiRobot MdiRobot { get; }
@@ -100,7 +103,9 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         IAlarmsNotifier alarmsNotifier,
         CancellationToken cancellationToken)
     {
-        await alarmsNotifier.NotifyAsync(ReadOnlyList.Empty<Alarm>());
+        await alarmsNotifier.NotifyAsync(this.Alarms.RetrieveAlarms().Where(x => x.IsActive).ToArray());
+
+        // TODO: Extend to listen for alarms changes and continuously notify the alarms notifier.
         cancellationToken.WaitHandle.WaitOne();
     }
 
