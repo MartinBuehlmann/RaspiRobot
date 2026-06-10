@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using Common;
 using Common.DependencyInjection;
@@ -35,6 +36,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     private readonly IGrabItDriver driver;
     private readonly IOperationModeRetriever operationModeRetriever;
     private readonly RobotStateCache robotStateCache;
+    private readonly Factory factory;
     private readonly Log logger;
 
     public GrabItRobot(
@@ -55,6 +57,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.driver = driver;
         this.operationModeRetriever = operationModeRetriever;
         this.robotStateCache = robotStateCache;
+        this.factory = factory;
         this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.Alarms = factory.Create<IAlarmsFacade>();
@@ -99,14 +102,20 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         cancellationToken.WaitHandle.WaitOne();
     }
 
-    public async Task SubscribeForAlarmsChangedAsync(
+    public Task SubscribeForAlarmsChangedAsync(
         IAlarmsNotifier alarmsNotifier,
         CancellationToken cancellationToken)
     {
-        await alarmsNotifier.NotifyAsync(this.Alarms.RetrieveAlarms().Where(x => x.IsActive).ToArray());
-
-        // TODO: Extend to listen for alarms changes and continuously notify the alarms notifier.
-        cancellationToken.WaitHandle.WaitOne();
+        return this.factory
+            .Create<ChangeSubscriber>()
+            .RunAsync(
+                subscribe: handler => this.Alarms.AlarmChanged += handler,
+                unsubscribe: handler => this.Alarms.AlarmChanged -= handler,
+                onChanged: () => alarmsNotifier.NotifyAsync(
+                    this.Alarms.RetrieveAlarms()
+                        .Where(x => x.IsActive)
+                        .ToArray()),
+                cancellationToken);
     }
 
     public async Task SubscribeForChuckLoadingsChangedAsync(

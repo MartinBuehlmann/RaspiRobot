@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using RaspiRobot.RobotControl.Devices.Alarms;
 
 internal class AlarmsFacade : IAlarmsFacade
 {
     private readonly Lock lockObject = new();
     private readonly Dictionary<string, AlarmData> alarms = new();
+
+    public event Action? AlarmChanged;
 
     public AlarmData[] RetrieveAlarms()
     {
@@ -29,9 +32,10 @@ internal class AlarmsFacade : IAlarmsFacade
             }
 
             this.alarms[code] = this.alarms[code] with { IsActive = isActive, DateTime = DateTimeOffset.UtcNow };
-
-            return true;
         }
+
+        this.AlarmChanged?.Invoke();
+        return true;
     }
 
     public void AddAlarm(AlarmData alarm)
