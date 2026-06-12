@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MdiRobotService } from '../services/mdi/mdi-robot.service';
 import { PositionModel } from '../services/robot/position-model';
 import { RobotService } from '../services/robot/robot.service';
@@ -8,6 +8,7 @@ import { RobotAxisPositionChangedService } from '../services/robot/robot-axis-po
 @Component({
   selector: 'app-mdi',
   templateUrl: './mdi.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './mdi.component.scss'
 })
 export class MdiComponent implements OnInit {

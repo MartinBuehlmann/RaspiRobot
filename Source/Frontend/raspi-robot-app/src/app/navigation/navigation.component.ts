@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DevicesService } from '../services/devices/devices.service';
 import { DevicesModel } from '../services/devices/devices-model';
 import { DeviceModel } from '../services/devices/device-model';
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-navigation',
   imports: [RouterLink],
   templateUrl: './navigation.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit {

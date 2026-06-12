@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OperationModeService } from '../services/operation-mode/operation-mode.service';
 import { forkJoin } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-home',
   imports: [FormsModule],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {

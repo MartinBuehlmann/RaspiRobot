@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeviceModel } from '../../services/devices/device-model';
 import { StorageModel } from './storage-model';
@@ -6,6 +6,7 @@ import { StorageModel } from './storage-model';
 @Component({
   selector: 'app-storage',
   templateUrl: './storage.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './storage.component.scss'
 })
 export class StorageComponent implements OnInit {

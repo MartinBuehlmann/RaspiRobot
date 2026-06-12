@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OperationModeService } from '../services/operation-mode/operation-mode.service';
 import { OperationModeChangedService } from '../services/operation-mode/operation-mode-changed.service';
 
@@ -7,6 +7,7 @@ import { OperationModeChangedService } from '../services/operation-mode/operatio
   selector: 'app-operation-mode',
   imports: [],
   templateUrl: './operation-mode.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './operation-mode.component.scss'
 })
 export class OperationModeComponent implements OnInit {

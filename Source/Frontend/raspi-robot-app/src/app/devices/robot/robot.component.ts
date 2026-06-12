@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { RobotService } from '../../services/robot/robot.service';
 import { RobotAxisPositionChangedService } from '../../services/robot/robot-axis-position-changed.service';
 import { PositionModel } from '../../services/robot/position-model';
@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-robot',
   templateUrl: './robot.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './robot.component.scss'
 })
 export class RobotComponent implements OnInit {
