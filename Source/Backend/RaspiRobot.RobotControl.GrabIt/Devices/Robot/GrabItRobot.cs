@@ -99,7 +99,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         CancellationToken cancellationToken)
     {
         await robotStateNotifier.NotifyAsync(RobotState.Ready);
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 
     public Task SubscribeForAlarmsChangedAsync(
@@ -125,7 +125,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
     {
         // As long as there is no real tracking, we just return an empty chuck loading and wait.
         await chuckOccupancyNotifier.NotifyAsync(ReadOnlyList.Empty<ChuckOccupancy>());
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 
     public async Task<ICommandResponse> LoadChuckAsync(
@@ -184,7 +184,7 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         CancellationToken cancellationToken)
     {
         await connectionStateNotifier.NotifyAsync(true);
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 
     private void InitializeState()

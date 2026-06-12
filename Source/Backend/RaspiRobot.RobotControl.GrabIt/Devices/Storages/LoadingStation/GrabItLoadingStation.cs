@@ -25,7 +25,7 @@ internal class GrabItLoadingStation : ILoadingStation
         CancellationToken cancellationToken)
     {
         await magazineStateNotifier.NotifyAsync(State.Ready);
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 
     public async Task SubscribeForAlarmsChangedAsync(
@@ -33,7 +33,7 @@ internal class GrabItLoadingStation : ILoadingStation
         CancellationToken cancellationToken)
     {
         await alarmsNotifier.NotifyAsync(ReadOnlyList.Empty<Alarm>());
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 
     public async Task SubscribeForConnectionStateChangedAsync(
@@ -41,6 +41,6 @@ internal class GrabItLoadingStation : ILoadingStation
         CancellationToken cancellationToken)
     {
         await connectionStateNotifier.NotifyAsync(true);
-        cancellationToken.WaitHandle.WaitOne();
+        await Task.Delay(Timeout.Infinite, cancellationToken);
     }
 }
