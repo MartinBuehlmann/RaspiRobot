@@ -7,7 +7,8 @@ internal class RobotModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<GrabItRobot>().As<IRobot>();
+        builder.RegisterType<GrabItRobot>().As<IRobot>()
+            .OnActivated(e => e.Instance.Initialize());
         builder.RegisterType<ChangeSubscriber>();
     }
 }

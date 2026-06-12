@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using Common;
 using Common.DependencyInjection;
@@ -61,15 +60,23 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
         this.logger = logger;
         this.MdiRobot = factory.Create<IMdiRobot>(this.driver);
         this.Alarms = factory.Create<IAlarmsFacade>();
-        this.Alarms.AddAlarm(new AlarmData("1", "Emergency Stop", Severity.Error, DateTimeOffset.UtcNow, false));
-        this.Alarms.AddAlarm(new AlarmData("2", "Position error axis 1", Severity.Error, DateTimeOffset.UtcNow, false));
-        this.Alarms.AddAlarm(new AlarmData("10", "Annual maintenance overdue", Severity.Warning, DateTimeOffset.UtcNow, false));
-        this.Alarms.AddAlarm(new AlarmData("20", "Update available", Severity.Information, DateTimeOffset.UtcNow, false));
     }
 
     public IMdiRobot MdiRobot { get; }
 
     public IAlarmsFacade Alarms { get; }
+
+    public void Initialize()
+    {
+        this.Alarms.AddAlarm(
+            new AlarmData("1", "Emergency Stop", Severity.Error, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(
+            new AlarmData("2", "Position error axis 1", Severity.Error, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(
+            new AlarmData("10", "Annual maintenance overdue", Severity.Warning, DateTimeOffset.UtcNow, false));
+        this.Alarms.AddAlarm(
+            new AlarmData("20", "Update available", Severity.Information, DateTimeOffset.UtcNow, false));
+    }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {

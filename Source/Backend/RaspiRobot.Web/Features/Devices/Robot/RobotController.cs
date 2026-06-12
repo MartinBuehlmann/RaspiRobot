@@ -67,7 +67,6 @@ public class RobotController : WebController
         return this.Ok();
     }
 
-
     private static Severity ConvertToSeverity(RobotControl.Devices.Alarms.Severity severity)
     {
         return severity switch
