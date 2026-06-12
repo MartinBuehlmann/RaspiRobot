@@ -38,7 +38,7 @@ internal class GrabItDriver : IGrabItDriver, IDisposable
     {
         foreach (Position position in positions)
         {
-            if (!this.currentDrivePositions.ContainsKey(position.Drive) || this.currentDrivePositions[position.Drive] != position.Drive)
+            if (!this.currentDrivePositions.ContainsKey(position.Drive) || this.currentDrivePositions[position.Drive] != position.Value)
             {
                 this.log.Verbose("Moving drive '{Drive}' to value '{Value}'", position.Drive, position.Value);
                 this.driver.SetPwm(position.Drive, 0, position.Value);

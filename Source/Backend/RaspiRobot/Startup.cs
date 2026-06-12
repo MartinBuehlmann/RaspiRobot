@@ -79,7 +79,6 @@ public class Startup
             c.DisplayRequestDuration();
         });
 
-        app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
 
