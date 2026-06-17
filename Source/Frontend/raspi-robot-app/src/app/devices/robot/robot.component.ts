@@ -3,12 +3,14 @@ import { RobotService } from '../../services/robot/robot.service';
 import { RobotAxisPositionChangedService } from '../../services/robot/robot-axis-position-changed.service';
 import { PositionModel } from '../../services/robot/position-model';
 import { ActivatedRoute } from '@angular/router';
+import { AlarmsComponent } from "../alarms/alarms.component";
 
 @Component({
   selector: 'app-robot',
   templateUrl: './robot.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './robot.component.scss'
+  styleUrl: './robot.component.scss',
+  imports: [AlarmsComponent]
 })
 export class RobotComponent implements OnInit {
   axisPositions : number[] = [0, 0, 0, 0, 0, 0];

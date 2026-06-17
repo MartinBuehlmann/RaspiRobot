@@ -2,4 +2,4 @@
 
 using System;
 
-public record AlarmInfo(string Code, string Message, DateTimeOffset CreationTimeStamp, Severity Severity, bool IsActive);
+public record AlarmInfo(string Code, string Message, DateTimeOffset DateTime, Severity Severity, bool IsActive);

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AlarmModel } from './alarm-model';
 import { PositionModel } from './position-model';
 import { Observable } from 'rxjs';
 
@@ -16,5 +17,13 @@ export class RobotService {
 
   getAxisCurrentPositions(axisNumber : number) : Observable<PositionModel> {
     return this.http.get<PositionModel>(`web/Robot/Axis/${axisNumber}/CurrentPosition`);
+  }
+
+  getAllAlarms() : Observable<AlarmModel[]> {
+    return this.http.get<AlarmModel[]>('web/Robot/Alarms');
+  }
+
+  updateAlarmIsActive(alarmCode : string, isActive : boolean) : Observable<AlarmModel> {
+    return this.http.patch<AlarmModel>(`web/Robot/Alarms/${alarmCode}/IsActive`, { isActive });
   }
 }

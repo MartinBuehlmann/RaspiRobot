@@ -53,18 +53,23 @@ public class RobotController : WebController
     }
 
     [HttpPatch("Alarms/{code}/IsActive")]
-    public IActionResult UpdateAlarmIsActive([Required] string code, [FromBody] bool isActive)
+    public AlarmInfo UpdateAlarmIsActive([Required] string code, [FromBody] UpdataAlarmIsActiveInfo info)
     {
         IAlarmsFacade alarmsFacade = this.deviceService
             .RetrieveRobot()
             .Alarms;
 
-        if (!alarmsFacade.UpdateAlarmActivation(code, isActive))
+        if (!alarmsFacade.UpdateAlarmActivation(code, info.IsActive))
         {
             throw new ResourceNotFoundException($"No alarm with code {code} found");
         }
 
-        return this.Ok();
+        return this.deviceService
+            .RetrieveRobot()
+            .Alarms
+            .RetrieveAlarms()
+            .Select(x => new AlarmInfo(x.Code, x.Message, x.DateTime, ConvertToSeverity(x.Severity), x.IsActive))
+            .Single(x => x.Code == code);
     }
 
     private static Severity ConvertToSeverity(RobotControl.Devices.Alarms.Severity severity)

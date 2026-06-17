@@ -1,0 +1,15 @@
+.alarm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.alarm-table th,
+.alarm-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.actions {
+  margin-top: 15px;
+}

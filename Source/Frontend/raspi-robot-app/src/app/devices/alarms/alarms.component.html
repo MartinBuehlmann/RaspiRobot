@@ -1,0 +1,35 @@
+@if (loading) {
+<div>Loading alarms...</div>
+} @else {
+<table class="alarm-table">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Message</th>
+      <th>Severity</th>
+      <th>Date</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (alarm of alarms; track alarms) {
+    <tr>
+      <td>{{ alarm.code }}</td>
+      <td>{{ alarm.message }}</td>
+      <td>{{ alarm.severity }}</td>
+      <td>{{ alarm.dateTime | date:'short' }}</td>
+      <td>
+        <input type="checkbox" [(ngModel)]="alarm.isActive" />
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>
+
+<div class="actions">
+  <button (click)="save()" [disabled]="!hasChanges() || saving">
+    {{ saving ? 'Saving...' : 'Update' }}
+  </button>
+</div>
+}
