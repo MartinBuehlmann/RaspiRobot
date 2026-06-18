@@ -4,7 +4,7 @@ using System;
 
 public interface IRobotStateRetriever
 {
-    event EventHandler StateChangedChanged;
+    event Action? StateChangedChanged;
 
     RobotState RobotState { get; }
 }

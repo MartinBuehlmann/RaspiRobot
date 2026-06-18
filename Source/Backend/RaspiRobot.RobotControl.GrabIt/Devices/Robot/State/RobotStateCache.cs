@@ -20,7 +20,7 @@ internal class RobotStateCache : IRobotStateRetriever, IDisposable
         this.operationModeRetriever.OperationModeChanged += this.HandleOperationModeChanged;
     }
 
-    public event EventHandler? StateChangedChanged;
+    public event Action? StateChangedChanged;
 
     public RobotState RobotState { get; private set; }
 
@@ -34,7 +34,7 @@ internal class RobotStateCache : IRobotStateRetriever, IDisposable
         if (this.RobotState != robotState)
         {
             this.RobotState = robotState;
-            this.StateChangedChanged?.Invoke(this, EventArgs.Empty);
+            this.StateChangedChanged?.Invoke();
             this.eventBroker.Publish(new RobotStateChangedEvent());
         }
     }

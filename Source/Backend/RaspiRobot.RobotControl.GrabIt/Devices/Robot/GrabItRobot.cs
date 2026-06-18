@@ -101,12 +101,18 @@ internal class GrabItRobot : IRobot, IStartableDevice, IShutdownableDevice
             .ToList();
     }
 
-    public async Task SubscribeForStateChangedAsync(
+    public Task SubscribeForStateChangedAsync(
         IRobotStateNotifier robotStateNotifier,
         CancellationToken cancellationToken)
     {
-        await robotStateNotifier.NotifyAsync(RobotState.Ready);
-        await Task.Delay(Timeout.Infinite, cancellationToken);
+        return this.factory
+            .Create<ChangeSubscriber>()
+            .RunAsync(
+                subscribe: handler => this.robotStateCache.StateChangedChanged += handler,
+                unsubscribe: handler => this.robotStateCache.StateChangedChanged -= handler,
+                onChanged: () => robotStateNotifier.NotifyAsync(
+                    this.robotStateCache.RobotState),
+                cancellationToken);
     }
 
     public Task SubscribeForAlarmsChangedAsync(
