@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { RobotService } from '../../services/robot/robot.service';
 import { Observable, forkJoin } from 'rxjs';
 import { AlarmModel } from '../../services/robot/alarm-model';
+import { LocalDatePipe } from "../../utilities/local-date-pipe";
 
 @Component({
   selector: 'app-alarms',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LocalDatePipe],
   templateUrl: './alarms.component.html',
   styleUrls: ['./alarms.component.scss']
 })

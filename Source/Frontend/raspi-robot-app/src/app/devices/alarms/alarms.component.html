@@ -18,7 +18,7 @@
       <td>{{ alarm.code }}</td>
       <td>{{ alarm.message }}</td>
       <td>{{ alarm.severity }}</td>
-      <td>{{ alarm.dateTime | date:'short' }}</td>
+      <td>{{ alarm.dateTime | localDate }}</td>
       <td>
         <input type="checkbox" [(ngModel)]="alarm.isActive" />
       </td>
