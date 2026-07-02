@@ -10,8 +10,7 @@ internal class EventRegistration : IEventRegistration
 {
     private readonly Lock subscriptionLock = new();
 
-    private readonly IDictionary<Type, List<IEventSubscriptionBase>> subscriptions =
-        new Dictionary<Type, List<IEventSubscriptionBase>>();
+    private readonly Dictionary<Type, List<IEventSubscriptionBase>> subscriptions = new();
 
     public IReadOnlyList<IEventSubscriptionBase> Retrieve<TEventData>(TEventData data)
         where TEventData : class
@@ -35,12 +34,13 @@ internal class EventRegistration : IEventRegistration
         {
             foreach (Type eventDataType in eventDataTypes)
             {
-                if (!this.subscriptions.ContainsKey(eventDataType))
+                if (!this.subscriptions.TryGetValue(eventDataType, out List<IEventSubscriptionBase>? value))
                 {
-                    this.subscriptions.Add(eventDataType, []);
+                    value = [];
+                    this.subscriptions.Add(eventDataType, value);
                 }
 
-                this.subscriptions[eventDataType].Add(instance);
+                value.Add(instance);
             }
         }
     }
